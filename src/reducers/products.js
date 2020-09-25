@@ -1,10 +1,10 @@
 const products = (state = [], action) => {
   switch (action.type) {
-    case "GET_PRODUCTS":
+    case "PRODUCTS_SUCCESS":
       return action.payload
-    case "REQUEST_PRODUCTS":
+    case "PRODUCTS_REQUEST":
       return ["loading"]
-    case "ERROR_PRODUCTS":
+    case "PRODUCTS_ERROR":
       return action.payload
     default:
       return state;
