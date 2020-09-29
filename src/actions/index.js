@@ -40,6 +40,25 @@ export function loadFilteredProductsError(error) {
   }
 }
 
+export function filteredProductsClear() {
+  return {
+    type: "FILTERED_PRODUCTS_CLEAR"
+  }
+}
+
+// Shop menu
+
+export function showMenu() {
+  return {
+    type: "SHOW_MENU"
+  }
+}
+
+export function hideMenu() {
+  return {
+    type: "HIDE_MENU"
+  }
+}
 
 // Cart 
 export function showCart() {
@@ -73,7 +92,9 @@ export function loadFilteredProducts(filter) {
       method: "GET"
     })
     .then(res => res.json())
-    .then(products => dispatch(loadFilteredProductsSuccess(products)))
-    .catch(err => dispatch(loadFilteredProductsError(err)))
+    .then(products => {
+      dispatch(loadFilteredProductsSuccess(products))
+    })
+    .catch(err => dispatch(loadFilteredProductsError([err])))
   }
 }

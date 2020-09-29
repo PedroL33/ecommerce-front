@@ -1,27 +1,29 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/nav.module.css';
 import Cart from './cart';
 import SearchMenu from './searchmenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { showCart, hideCart } from '../actions';
+import { showCart, hideCart, showMenu, hideMenu, filteredProductsClear } from '../actions';
 
 function Nav() {
 
   const dispatch = useDispatch();
   const cart = useSelector(state => state.showCart);
+  const menu = useSelector(state => state.showMenu);
 
-  const [showShop, setShowShop] = useState(false);
-  const shopRef = useRef(null);
-  const menuRef = useRef(null);
+  const shopButtonRef = useRef(null);
+  const shopMenuRef = useRef(null);
   const cartButtonRef = useRef(null);
+  const cartMenuRef = useRef(null);
 
   useEffect(() => {
     function handleOutsideClick(e) {
-      if(shopRef.current && !shopRef.current.contains(e.target) && menuRef.current && !menuRef.current.contains(e.target)) {
-        setShowShop(false);
+      if(shopButtonRef.current && !shopButtonRef.current.contains(e.target) && shopMenuRef.current && !shopMenuRef.current.contains(e.target) && menu) {
+        dispatch(hideMenu());
+        dispatch(filteredProductsClear())
       }
-      if(cartButtonRef.current && !cartButtonRef.current.contains(e.target)) {
+      if(cartButtonRef.current && !cartButtonRef.current.contains(e.target) && cartMenuRef.current && !cartMenuRef.current.contains(e.target) && cart) {
         dispatch(hideCart());
       }
     }
@@ -34,8 +36,8 @@ function Nav() {
   return(
     <div className={styles.container}>
       <div className={styles.shop}>
-        <div className={styles.shopLink} ref={shopRef} onClick={()=> setShowShop(!showShop)}>Shop</div>
-        <div className={showShop ? `${styles.shopMenu} ${styles.active}` : styles.shopMenu} ref={menuRef}>
+        <div className={styles.shopLink} ref={shopButtonRef} onClick={()=> dispatch(showMenu())}>Shop</div>
+        <div className={menu ? `${styles.shopMenu} ${styles.active}` : styles.shopMenu} ref={shopMenuRef}>
           <SearchMenu />
         </div>
       </div>
@@ -52,10 +54,10 @@ function Nav() {
           </div>
         </div>
         <div className={styles.cart} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
-          <i class="fas fa-shopping-cart"></i>  
+          <i className="fas fa-shopping-cart"></i>  
         </div>   
       </div>
-      <div className={cart ? `${styles.cartContainer} ${styles.active}`: styles.cartContainer}>
+      <div className={cart ? `${styles.cartContainer} ${styles.active}`: styles.cartContainer} ref={cartMenuRef}>
         <Cart />
       </div>
     </div>

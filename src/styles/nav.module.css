@@ -81,7 +81,7 @@ a {
 }
 
 .shopMenu.active {
-  height: 100px;
+  height: 200px;
   opacity: 1;
   background: #a0d2eb;
   transform: translateY(0);

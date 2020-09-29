@@ -6,6 +6,8 @@ const filteredProducts = (state=[], action) => {
       return action.payload
     case "FILTERED_PRODUCTS_SUCCESS":
       return action.payload
+    case "FILTERED_PRODUCTS_CLEAR":
+      return [];
     default:
       return state
   }
