@@ -5,14 +5,28 @@ import { filteredProductsClear, loadFilteredProducts, hideMenu } from '../action
 import styles from '../styles/searchMenu.module.css';
 import useDebounce from '../functions/debounce';
 
-function SearchMenu() {
+function SearchMenu(props) {
 
   const dispatch = useDispatch();
   const results = useSelector(state => state.filteredProducts);
   const menu = useSelector(state => state.showMenu);
   const searchInputRef = useRef(null);
+  const shopMenuRef = useRef(null)
   const [searchQuerry, setSearchQuerry] = useState("");
   const debouncedSearchQuerry = useDebounce(searchQuerry, 1000);
+
+  useEffect(() => {
+    function handleOutsideClick(e) {
+      if(shopMenuRef.current && !shopMenuRef.current.contains(e.target) && menu && !props.button.current.contains(e.target)) {
+        dispatch(hideMenu());
+        dispatch(filteredProductsClear())
+      }
+    }
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    }
+  })
 
   useEffect(() => {
     if(!menu) {
@@ -38,7 +52,7 @@ function SearchMenu() {
   }
 
   return (
-    <div>
+    <div className={styles.container} ref={shopMenuRef}>
       <ul className={styles.categoryContainer}>
         <Link to="/things">Things</Link>
         <Link to="/items">Items</Link>
@@ -46,19 +60,19 @@ function SearchMenu() {
       </ul>
       <div className={styles.searchbarContainer}>
         <input className={styles.searchbar} placeholder="search..." type="text" ref={searchInputRef} onChange={(e)=>setSearchQuerry(e.target.value)} /> 
-        <Link to={ `/search/${searchQuerry}`} onClick={e => handleClick(e, searchQuerry)}>
+        <Link to={ `/search/${searchQuerry}`} onClick={(e) => handleClick(e, searchQuerry)}>
           <i className={styles.searchIcon +" fas fa-search"}></i>
         </Link>
         <div className={styles.resultsContainer}>
           {results[0]==="loading" ? 
             <div className={styles.result}>...loading</div>: 
-          results.length===0 && debouncedSearchQuerry.length > 1 ? 
+          results.length===0 && debouncedSearchQuerry.length > 1 && searchQuerry.length > 0 ? 
             <div className={styles.result}>No matching products.</div>:
           results.length > 0 ? 
             results.map(item => <div className={styles.result}>{item.name}</div>): null
           }
-          {results.length > 0 ? <div className={styles.seeAllContainer}>
-            <Link className={styles.seeAll} to="/search">See all results. </Link>  
+          {results.length > 0 && results[0] !== "loading" ? <div className={styles.seeAllContainer}>
+            <Link className={styles.seeAll} to={`/search/${debouncedSearchQuerry}`}>See all results. </Link>  
           </div>: null}
         </div>
       </div>

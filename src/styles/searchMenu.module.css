@@ -1,3 +1,12 @@
+.container {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  top: 100px;
+  height: 200px;
+  background: #a0d2eb;
+}
+
 .categoryContainer {
   display: flex;
   list-style-type: none;

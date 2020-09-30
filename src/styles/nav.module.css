@@ -70,23 +70,6 @@ a {
   border: 1px solid white;
 }
 
-.shopMenu {
-  height: 0;
-  left: 0;
-  opacity: 0;
-  transition: all .5s ease;
-  position: absolute;
-  width: 100%;
-  top: 100px;
-}
-
-.shopMenu.active {
-  height: 200px;
-  opacity: 1;
-  background: #a0d2eb;
-  transform: translateY(0);
-}
-
 .logo {
   position: absolute;
   width: 150px;
@@ -106,27 +89,42 @@ a {
   padding-top: 5px;
 }
 
-.cartContainer {
-  position: absolute;
-  width:0;
-  opacity: 0;
+:global(.shopMenu-enter) {
+  max-height: 0;
+  overflow: hidden;
 }
 
-.cartContainer {
-  width: 0;
-  height: 100vh;
-  right: 0;
-  top: 0;
-  opacity: 1;
-  transition: all .5s ease;
-  position: fixed;
-  z-index: 2;
-  background: #a0d2eb;
+:global(.shopMenu-enter-active) {
+  max-height: 200px;
+  transition: all 500ms ease-in-out;
 }
 
-.cartContainer.active {
-  width: 250px;
-  transform: translateX(0);
+:global(.shopMenu-exit) {
+  max-height: 200px;
+  overflow: hidden;
 }
 
+:global(.shopMenu-exit-active) {
+  max-height: 0;
+  transition: all 500ms ease-in-out;
+}
 
+:global(.cart-enter) {
+  max-width: 0;
+  overflow: hidden;
+}
+
+:global(.cart-enter-active) {
+  max-width: 100%;
+  transition: all 500ms ease-in-out;
+}
+
+:global(.cart-exit) {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+:global(.cart-exit-active) {
+  max-width: 0;
+  transition: all 500ms ease-in-out;
+}
