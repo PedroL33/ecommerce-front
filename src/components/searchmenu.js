@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { filteredProductsClear, loadFilteredProducts, hideMenu } from '../actions';
+import { searchProductsClear, loadSearchProducts, hideMenu } from '../actions';
 import styles from '../styles/searchMenu.module.css';
 import useDebounce from '../functions/debounce';
 
 function SearchMenu(props) {
 
+  const history = useHistory();
   const dispatch = useDispatch();
-  const results = useSelector(state => state.filteredProducts);
+  const results = useSelector(state => state.searchProducts);
   const menu = useSelector(state => state.showMenu);
   const searchInputRef = useRef(null);
   const shopMenuRef = useRef(null)
@@ -16,15 +17,29 @@ function SearchMenu(props) {
   const debouncedSearchQuerry = useDebounce(searchQuerry, 1000);
 
   useEffect(() => {
+
+    const search = searchInputRef.current;
+
     function handleOutsideClick(e) {
       if(shopMenuRef.current && !shopMenuRef.current.contains(e.target) && menu && !props.button.current.contains(e.target)) {
         dispatch(hideMenu());
-        dispatch(filteredProductsClear())
+        dispatch(searchProductsClear())
       }
     }
+
+    function handleEnterPress(e) {
+      if(e.keyCode===13 && searchQuerry.length !== 0) {
+        e.preventDefault();
+        dispatch(hideMenu());
+        dispatch(searchProductsClear())
+        history.push(`/search/${searchQuerry}`)
+      }
+    }
+    search.addEventListener('keyup', handleEnterPress)
     window.addEventListener('click', handleOutsideClick);
     return () => {
       window.removeEventListener('click', handleOutsideClick);
+      search.removeEventListener('keyup', handleEnterPress)
     }
   })
 
@@ -36,9 +51,9 @@ function SearchMenu(props) {
 
   useEffect(() => {
     if(debouncedSearchQuerry.length <= 1) {
-      dispatch(filteredProductsClear())
+      dispatch(searchProductsClear())
     }else if(debouncedSearchQuerry.length > 1) {
-      dispatch(loadFilteredProducts(debouncedSearchQuerry))
+      dispatch(loadSearchProducts("search", debouncedSearchQuerry))
     }
   }, [debouncedSearchQuerry])
 
@@ -47,16 +62,16 @@ function SearchMenu(props) {
       e.preventDefault()
     }else {
       dispatch(hideMenu());
-      dispatch(filteredProductsClear());
+      dispatch(searchProductsClear());
     }
   }
 
   return (
     <div className={styles.container} ref={shopMenuRef}>
       <ul className={styles.categoryContainer}>
-        <Link to="/things">Things</Link>
-        <Link to="/items">Items</Link>
-        <Link to="/gadgets">Gadgets</Link>
+        <Link onClick={(e)=> handleClick(e, "none")} to="/category/things">Things</Link>
+        <Link onClick={(e)=> handleClick(e, "none")} to="/category/items">Items</Link>
+        <Link onClick={(e)=> handleClick(e, "none")} to="/category/gadgets">Gadgets</Link>
       </ul>
       <div className={styles.searchbarContainer}>
         <input className={styles.searchbar} placeholder="search..." type="text" ref={searchInputRef} onChange={(e)=>setSearchQuerry(e.target.value)} /> 

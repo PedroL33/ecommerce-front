@@ -20,29 +20,65 @@ export function loadProductsError(error) {
 }
 
 // Filtered products for searchbar
-export function loadFilteredProductsSuccess(response) {
+export function searchProductsSuccess(response) {
   return {
-    type: "FILTERED_PRODUCTS_SUCCESS",
+    type: "SEARCH_PRODUCTS_SUCCESS",
     payload: response
   }
 }
 
-export function loadFilteredProductsRequest() {
+export function searchProductsRequest() {
   return {
-    type: "FILTERED_PRODUCTS_REQUEST"
+    type: "SEARCH_PRODUCTS_REQUEST"
   }
 }
 
-export function loadFilteredProductsError(error) {
+export function searchProductsError(error) {
   return {
-    type: "FILTERED_PRODUCTS_ERROR",
+    type: "SEARCH_PRODUCTS_ERROR",
     payload: error
   }
 }
 
-export function filteredProductsClear() {
+export function searchProductsClear() {
   return {
-    type: "FILTERED_PRODUCTS_CLEAR"
+    type: "SEARCH_PRODUCTS_CLEAR"
+  }
+}
+
+// Filtered products for results component
+
+export function resultsRequest() {
+  return {
+    type: "RESULTS_REQUEST"
+  }
+}
+
+export function resultsSuccess(products) {
+  return {
+    type: "RESULTS_SUCCESS",
+    payload: products
+  }
+}
+
+export function resultsError(error) {
+  return {
+    type: "RESULTS_ERROR",
+    payload: error
+  }
+}
+
+export function clearResults() {
+  return {
+    type: "CLEAR_RESULTS"
+  }
+}
+
+export function sortResults(field, order) {
+  return {
+    type: "SORT_RESULTS",
+    field: field,
+    order: order
   }
 }
 
@@ -85,16 +121,30 @@ export function loadProducts() {
   }
 }
 
-export function loadFilteredProducts(filter) {
+export function loadSearchProducts(type, filter) {
   return function(dispatch, getState) {
-    dispatch(loadFilteredProductsRequest())
-    fetch(`http://localhost:3000/products/filter/${filter}`, {
+    dispatch(searchProductsRequest())
+    fetch(`http://localhost:3000/products/${type}/${filter}`, {
       method: "GET"
     })
     .then(res => res.json())
     .then(products => {
-      dispatch(loadFilteredProductsSuccess(products))
+      dispatch(searchProductsSuccess(products))
     })
-    .catch(err => dispatch(loadFilteredProductsError([err])))
+    .catch(err => dispatch(searchProductsError([err])))
+  }
+}
+
+export function loadResults(type, filter) {
+  return function(dispatch, getState) {
+    dispatch(resultsRequest())
+    fetch(`http://localhost:3000/products/${type}/${filter}`, {
+      method: "GET"
+    })
+    .then(res => res.json())
+    .then(products => {
+      dispatch(resultsSuccess(products))
+    })
+    .catch(err => dispatch(resultsError(err)))
   }
 }

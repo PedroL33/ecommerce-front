@@ -1,0 +1,14 @@
+{
+  "things": {
+    "name": "Things",
+    "description": "Things to help you do things."
+  },
+  "items": {
+    "name": "Items",
+    "description": "Sometimes you just need some items."
+  },
+  "gadgets": {
+    "name": "Gadgets",
+    "description": "Gadgets that make life easier."
+  }
+}
