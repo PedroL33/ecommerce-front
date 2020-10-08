@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { loadResults, clearResults, sortResults } from '../../actions';
 import categories from '../../constants/categories.json';
 import styles from '../../styles/resultsDisplay.module.css';
+import AnimatedResults from './animatedResults';
 
 function ResultsDisplay() {
 
@@ -59,15 +60,17 @@ function ResultsDisplay() {
           <div>Loading</div> : 
         results.length===0 ? 
           null :
-        results.map((item) => 
-          <Link key={item._id} className={styles.result} to={`/item/${item._id}`}>
-            <img className={styles.resultImage} src={item.image ? item.image: window.location.origin + "/images/noImage.png"}></img>
-            <div className={styles.resultDetails}>
-              <div className={styles.resultTitle}>{item.name}</div>
-              <div>{item.price / 100}$</div>
-            </div>
-          </Link>
-        )}
+        <AnimatedResults>
+          {results.map((item) => 
+            <Link key={item._id} className={styles.result} ref={createRef()} to={`/item/${item._id}`}>
+              <img className={styles.resultImage} src={item.image ? item.image: window.location.origin + "/images/noImage.png"}></img>
+              <div className={styles.resultDetails}>
+                <div className={styles.resultTitle}>{item.name}</div>
+                <div>{item.price / 100}$</div>
+              </div>
+            </Link>
+          )}
+        </AnimatedResults>}
       </div>
     </div>
   )
