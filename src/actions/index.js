@@ -129,7 +129,7 @@ export function loadSearchProducts(type, filter) {
     })
     .then(res => res.json())
     .then(products => {
-      dispatch(searchProductsSuccess(products))
+      setTimeout(() => dispatch(searchProductsSuccess(products)), 500)
     })
     .catch(err => dispatch(searchProductsError([err])))
   }
@@ -143,7 +143,7 @@ export function loadResults(type, filter) {
     })
     .then(res => res.json())
     .then(products => {
-      dispatch(resultsSuccess(products))
+      setTimeout(() => dispatch(resultsSuccess(products)), 1000)
     })
     .catch(err => dispatch(resultsError(err)))
   }

@@ -40,7 +40,7 @@ function Nav() {
           <i className="fas fa-shopping-cart"></i>  
         </div>   
       </div>
-      <CSSTransition in={cart} mountOnEnter unmountOnExit classNames='cart' timeout={500} >
+      <CSSTransition in={cart} mountOnEnter unmountOnExit classNames='cart' timeout={300} >
         <Cart button={cartButtonRef} />
       </CSSTransition>
     </div>

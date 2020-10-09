@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { searchProductsClear, loadSearchProducts, hideMenu } from '../actions';
 import styles from '../styles/searchMenu.module.css';
 import useDebounce from '../functions/debounce';
+import Loader from './loader';
 
 function SearchMenu(props) {
 
@@ -14,7 +15,7 @@ function SearchMenu(props) {
   const searchInputRef = useRef(null);
   const shopMenuRef = useRef(null)
   const [searchQuerry, setSearchQuerry] = useState("");
-  const debouncedSearchQuerry = useDebounce(searchQuerry, 1000);
+  const debouncedSearchQuerry = useDebounce(searchQuerry, 500);
 
   useEffect(() => {
 
@@ -61,8 +62,8 @@ function SearchMenu(props) {
     if(querry.length===0) {
       e.preventDefault()
     }else {
-      dispatch(hideMenu());
       dispatch(searchProductsClear());
+      dispatch(hideMenu());
     }
   }
 
@@ -80,14 +81,19 @@ function SearchMenu(props) {
         </Link>
         <div className={styles.resultsContainer}>
           {results[0]==="loading" ? 
-            <div className={styles.result}>...loading</div>: 
+            <Loader height="100px" dotSize="small" />: 
           results.length===0 && debouncedSearchQuerry.length > 1 && searchQuerry.length > 0 ? 
-            <div className={styles.result}>No matching products.</div>:
+            <div className={styles.noResult}>No matching products.</div>:
           results.length > 0 ? 
-            results.map(item => <div className={styles.result}>{item.name}</div>): null
+            results.slice(0, 5).map(item => 
+            <Link onClick={(e)=> handleClick(e, "none")} className={styles.result} to={`/search/${item.name}`}>
+              <img src={item.image ? item.image : window.location.origin + "/images/noImage.png"} className={styles.resultImage}></img>
+              <div className={styles.resultName}>{item.name}</div>
+            </Link>)
+          : null
           }
           {results.length > 0 && results[0] !== "loading" ? <div className={styles.seeAllContainer}>
-            <Link className={styles.seeAll} to={`/search/${debouncedSearchQuerry}`}>See all results. </Link>  
+            <Link className={styles.seeAll} onClick={(e)=> handleClick(e, "none")} to={`/search/${debouncedSearchQuerry}`}>See all results. </Link>  
           </div>: null}
         </div>
       </div>
