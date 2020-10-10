@@ -42,7 +42,7 @@ function ResultsDisplay() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {type==="category" ? categories[querry].description : results.length===0 ? `We couldn't find anything related to '${querry}'.` : `We found ${results.length} items related to '${querry}'`}
+        {type==="category" ? categories[querry].description : results.length===0 ? `We couldn't find anything related to '${querry}'.` : results[0] !=="loading" ? `We found ${results.length} items related to '${querry}'`: null}
       </div>
       {
         results[0] === "loading" ? <Loader height="400px" dotSize="large" /> : 

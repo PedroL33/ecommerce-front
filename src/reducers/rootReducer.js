@@ -4,13 +4,15 @@ import showCart from '../reducers/showCart';
 import searchProducts from '../reducers/searchProducts';
 import showMenu from '../reducers/showMenu';
 import results from './results';
+import singleProduct from './singleProduct';
 
 const rootReducer = combineReducers({
   products,
   showCart,
   showMenu,
   searchProducts,
-  results
+  results,
+  singleProduct
 });
 
 export default rootReducer;

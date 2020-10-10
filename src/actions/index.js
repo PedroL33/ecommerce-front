@@ -82,6 +82,34 @@ export function sortResults(field, order) {
   }
 }
 
+// Single product for product detail component
+
+export function singleProductRequest() {
+  return {
+    type: "SINGLE_PRODUCT_REQUEST"
+  }
+}
+
+export function singleProductSuccess(product) {
+  return {
+    type: "SINGLE_PRODUCT_SUCCESS",
+    payload: product
+  }
+}
+
+export function singleProductError(error) {
+  return {
+    type: "SINGLE_PRODUCT_ERROR",
+    payload: error
+  }
+}
+
+export function singleProductClear() {
+  return {
+    type: "SINGLE_PRODUCT_CLEAR"
+  }
+}
+
 // Shop menu
 
 export function showMenu() {
@@ -146,5 +174,19 @@ export function loadResults(type, filter) {
       setTimeout(() => dispatch(resultsSuccess(products)), 1000)
     })
     .catch(err => dispatch(resultsError(err)))
+  }
+}
+
+export function loadProductById(id) {
+  return function(dispatch, getState) {
+    dispatch(singleProductRequest());
+    fetch(`http://localhost:3000/products/${id}`, {
+      method: "GET"
+    })
+    .then(res => res.json())
+    .then(product => {
+      setTimeout(() => dispatch(singleProductSuccess(product)), 1000);
+    })
+    .catch(err => dispatch(singleProductError(err)), 1000);
   }
 }
