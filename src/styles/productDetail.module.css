@@ -1,0 +1,107 @@
+.container {
+  background: #d0bdf4;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #494d5f;
+}
+
+.itemContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.itemInfo {
+  width: 400px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+}
+
+.itemImage {
+  width: 400px;
+  height: 400px;
+  margin: 50px;
+  background-position: center;
+  background-size: cover;
+}
+
+.name {
+  font-size: 30px;
+  padding: 10px;
+}
+
+.price {
+  font-size: 24px;
+  padding: 10px;
+}
+
+.description {
+  font-size: 16px;
+  text-indent: 25px;
+  line-height: 25px;
+  padding: 10px 0;
+}
+
+.itemButtons {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.button {
+  padding: 15px 30px;
+  margin: 10px;
+  background: #8458b3;
+  border: 1px solid #8458b3;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 25px;
+  transition: all 500ms ease;
+  font-weight: 800;
+}
+
+.button:hover {
+  background: #e5eaf5;
+  color: #8458b3;
+  border: 1px solid  #8458b3;
+}
+
+@media screen and (max-width: 1000px) {
+  .itemInfo {
+    margin: auto;
+    width: 80%;
+    padding-top: 20px;
+  }
+
+  .itemButtons {
+    padding: 0;
+    width: 100%;
+  }
+
+  .button {
+    font-size: 14px;
+    padding: 9px 18px;
+  }
+
+  .imageContainer {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .itemImage {
+    width: 300px;
+    height: 300px;
+    margin: 40px 0 0 0;
+  }
+}
