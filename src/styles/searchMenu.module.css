@@ -5,6 +5,7 @@
   top: 100px;
   height: 200px;
   background: #a0d2eb;
+  z-index: 2;
 }
 
 .categoryContainer {

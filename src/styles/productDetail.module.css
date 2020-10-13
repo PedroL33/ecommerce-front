@@ -50,49 +50,13 @@
   padding: 10px 0;
 }
 
-.itemButtons {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-}
-
-.button {
-  padding: 15px 30px;
-  margin: 10px;
-  background: #8458b3;
-  border: 1px solid #8458b3;
-  color: white;
-  border-radius: 10px;
-  font-size: 16px;
-  text-align: center;
-  line-height: 25px;
-  transition: all 500ms ease;
-  font-weight: 800;
-}
-
-.button:hover {
-  background: #e5eaf5;
-  color: #8458b3;
-  border: 1px solid  #8458b3;
-}
-
 @media screen and (max-width: 1000px) {
   .itemInfo {
     margin: auto;
     width: 80%;
     padding-top: 20px;
   }
-
-  .itemButtons {
-    padding: 0;
-    width: 100%;
-  }
-
-  .button {
-    font-size: 14px;
-    padding: 9px 18px;
-  }
-
+  
   .imageContainer {
     justify-content: center;
     align-items: center;

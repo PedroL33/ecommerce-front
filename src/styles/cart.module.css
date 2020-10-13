@@ -3,8 +3,27 @@
   right: 0;
   top: 0;
   opacity: 1;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   background: #a0d2eb;
   width: 250px;
+  overflow: hidden
+}
+
+:global(.cart-enter) {
+  width: 0px;
+}
+
+:global(.cart-enter-active) {
+  width: 250px;
+  transition: all 500ms ease-in-out;
+}
+
+:global(.cart-exit) {
+  width: 250px;
+}
+
+:global(.cart-exit-active) {
+  width: 0px;
+  transition: all 500ms ease-in-out;
 }

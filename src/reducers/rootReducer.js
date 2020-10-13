@@ -5,6 +5,9 @@ import searchProducts from '../reducers/searchProducts';
 import showMenu from '../reducers/showMenu';
 import results from './results';
 import singleProduct from './singleProduct';
+import cart from './cart';
+import notification from './notification';
+import showNotification from './showNotification';
 
 const rootReducer = combineReducers({
   products,
@@ -12,7 +15,10 @@ const rootReducer = combineReducers({
   showMenu,
   searchProducts,
   results,
-  singleProduct
+  singleProduct,
+  cart,
+  notification,
+  showNotification
 });
 
 export default rootReducer;

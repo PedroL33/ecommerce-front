@@ -26,12 +26,7 @@
   height: 300px;
 }
 
-.result:hover {
-  background: rgba(150, 101, 202, 0.9);
-}
-
 .result:hover .resultTitle {
-  text-decoration: underline;
   font-weight: 800;
 }
 

@@ -11,6 +11,7 @@ function Cart(props) {
 
   useEffect(() => {
     function handleOutsideClick(e) {
+      if(e.defaultPrevented) return;
       if(cartRef.current && !cartRef.current.contains(e.target) && showCart && !props.button.current.contains(e.target)) {
         dispatch(hideCart());
       }

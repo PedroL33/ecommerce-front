@@ -36,7 +36,7 @@ function Nav() {
             <Link to="/Signup" className={styles.accountLink}>Signup</Link>
           </div>
         </div>
-        <div className={styles.cart} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
+        <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
           <i className="fas fa-shopping-cart"></i>  
         </div>   
       </div>

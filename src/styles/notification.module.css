@@ -1,0 +1,8 @@
+.message {
+  padding: 20px;
+}
+
+.container:hover {
+  background: #a8dcf6;
+  cursor: pointer;
+}

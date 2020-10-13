@@ -1,0 +1,33 @@
+.itemButtons {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.button {
+  padding: 15px 30px;
+  background: #e5eaf5;
+  color: #494d5f;
+  border-radius: 10px;
+  border: 1px solid #494d5f;
+  font-size: 16px;
+  text-align: center;
+  line-height: 25px;
+  transition: all 200ms ease;
+  font-weight: 800;
+}
+
+.button:hover {
+  color: white;
+  background: #d0bdf4;
+  border: 1px solid #e5eaf5;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 1000px) {
+
+  .button {
+    padding: 15px 15px;
+  }
+}

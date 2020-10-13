@@ -137,6 +137,54 @@ export function hideCart() {
   }
 }
 
+export function addCart(product) {
+  return {
+    type: "ADD_CART", 
+    payload: product
+  }
+}
+
+export function removeCart(product) {
+  return {
+    type: "REMOVE_CART",
+    payload: product
+  }
+}
+
+export function clearCart() {
+  return {
+    type: "CLEAR_CART"
+  }
+}
+
+// Notifications
+
+export function addCartNotification(product, message) {
+  return {
+    type: "ADD_CART_NOTIFICATION",
+    payload: product, 
+    message: message
+  }
+}
+
+export function clearNotification() {
+  return {
+    type: "CLEAR_NOTIFICATION"
+  }
+}
+
+export function showNotification() {
+  return {
+    type: "SHOW_NOTIFICATION"
+  }
+}
+
+export function hideNotification() {
+  return {
+    type: "HIDE_NOTIFICATION"
+  }
+}
+
 export function loadProducts() {
   return function(dispatch, getState) {
     dispatch(loadProductsRequest())
