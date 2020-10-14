@@ -158,9 +158,10 @@ export function removeAllCart(product) {
   }
 }
 
-export function clearCart() {
+export function setCart(cart) {
   return {
-    type: "CLEAR_CART"
+    type: "SET_CART", 
+    payload: cart
   }
 }
 

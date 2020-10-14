@@ -1,13 +1,20 @@
 const cart = (state=[], action) => {
+  let updatedCart;
   switch(action.type) {
     case "ADD_CART":
-      return updateCart(state, action.payload, "add");
+      updatedCart = updateCart(state, action.payload, "add");
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
     case "REMOVE_CART":
-      return updateCart(state, action.payload, "remove");
+      updatedCart = updateCart(state, action.payload, "remove");
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
     case "REMOVE_ALL_CART":
-      return updateCart(state, action.payload, "remove-all")
-    case "CLEAR_CART":
-      return [];
+      updatedCart = updateCart(state, action.payload, "remove-all");
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    case "SET_CART":
+      return action.payload;
     default:
       return state;
   }

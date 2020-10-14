@@ -5,7 +5,7 @@ import Dashboard from './components/dashboard';
 function App() {
 
   return (
-    <div style={{position: "relative"}}>
+    <div>
       <Dashboard />
     </div>
   );
