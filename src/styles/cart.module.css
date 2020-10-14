@@ -6,24 +6,143 @@
   position: fixed;
   z-index: 2;
   background: #a0d2eb;
-  width: 250px;
-  overflow: hidden
+  width: 300px;
+  overflow: hidden;
+  color: #494d5f;
+}
+
+.content {
+  height: 100%;
+}
+
+.header {
+  height: 10%;
+  font-size: 24px;
+  border-bottom: 1px solid white;
+  font-weight: 800;
+  color: white;
+}
+
+.itemDetail {
+  padding: 40px 10px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  border-bottom: 1px solid white;
+}
+
+.removeAll {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 16px;
+  color: rgb(158, 68, 68);
+}
+
+.removeAll:hover {
+  cursor: pointer;
+}
+
+.itemImage {
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+}
+
+.itemPrice, .itemCount, .itemName, .header, .checkout, .nameAndCount {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.itemCount {
+  width: 100%;
+}
+
+.nameAndCount {
+  flex-direction: column;
+}
+
+.itemName {
+  font-size: 16px;
+  width: 100px;
+  text-align: center;
+}
+
+.itemsContainer {
+  overflow: auto;
+  max-height: 60%;
+}
+
+.total {
+  height: 15%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end
+}
+
+.checkout {
+  height: 15%;
+}
+
+.checkoutButton {
+  background: linear-gradient(to bottom right, #b0db7d 40%, #99dbb4 100%);
+  padding: 15px 30px;
+  font-size: 20px;  
+  border-radius: 10px;
+  color: #494d5f;
+}
+
+.checkoutButton:hover {
+  opacity: 0.8;
+}
+
+.isEmpty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.countControl {
+  color: white;
+  padding: 5px;
+  font-size: 12px;
 }
 
 :global(.cart-enter) {
-  width: 0px;
+  right: -300px;
 }
 
 :global(.cart-enter-active) {
-  width: 250px;
+  right: 0px;
   transition: all 500ms ease-in-out;
 }
 
 :global(.cart-exit) {
-  width: 250px;
+  right: 0px;
 }
 
 :global(.cart-exit-active) {
-  width: 0px;
+  right: -300px;
+  transition: all 500ms ease-in-out;
+}
+
+:global(.cartItem-enter) {
+  opacity: 0;
+}
+
+:global(.cartItem-enter-active) {
+  opacity: 1;
+  transition: all 500ms ease-in-out;
+}
+
+:global(.cartItem-exit) {
+  opacity: 1;
+}
+
+:global(.cartItem-exit-active) {
+  opacity: 0;
   transition: all 500ms ease-in-out;
 }

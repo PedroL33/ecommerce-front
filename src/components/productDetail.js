@@ -6,6 +6,7 @@ import Loader from './loader';
 import styles from '../styles/productDetail.module.css';
 import Fade from 'react-reveal/Fade';
 import PurchaseButtons from './purchaseButtons';
+import toPrice from '../functions/toPrice';
 
 function ProductDetail() {
 
@@ -19,14 +20,6 @@ function ProductDetail() {
       dispatch(singleProductClear())
     }
   }, [id])
-
-  function toPrice(cents) {
-    if(cents%100 === 0) {
-      return `$${cents/100}.00`
-    }else {
-      return `$${Math.round(cents/100)}.${cents%100}`
-    }
-  }
 
   return (
     <div className={styles.container}>

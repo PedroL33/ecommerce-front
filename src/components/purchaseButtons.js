@@ -23,9 +23,9 @@ function PurchaseButtons(props) {
 
   return (
     <div className={styles.itemButtons}>
-      <button className={styles.button} onClick={(e)=> handleClick(e)}>
+      <Link className={styles.button} onClick={(e)=> handleClick(e)}>
         {disableButtons ? <Loader dotSize="small" height="16px" background="rgba(0,0,0,0.01)" /> : "Add to cart"}
-      </button>
+      </Link>
       <Link to={`/purchase/${props.product._id}`} className={styles.button}>Buy Now</Link>
     </div>
   )

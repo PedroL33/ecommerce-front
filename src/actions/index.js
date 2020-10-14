@@ -151,6 +151,13 @@ export function removeCart(product) {
   }
 }
 
+export function removeAllCart(product) {
+  return {
+    type: "REMOVE_ALL_CART",
+    payload: product
+  }
+}
+
 export function clearCart() {
   return {
     type: "CLEAR_CART"

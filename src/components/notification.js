@@ -7,13 +7,14 @@ import styles from '../styles/notification.module.css';
 const Container = styled.div`
   position: fixed;
   height: 100px;
+  width: 300px;
   bottom: ${props => props.top ? "25px": "-150px"};
   right: 0px;
   transition: bottom   700ms ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #a0d2eb;
+  background: linear-gradient(to bottom right, #b0db7d 40%, #99dbb4 100%);
   color: #494d5f;
   margin: 20px;
   border-radius: 20px;

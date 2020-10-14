@@ -90,6 +90,21 @@ a {
   padding-top: 5px;
 }
 
+.cartCount {
+  position: absolute;
+  top: 25px;
+  right: 0px;
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #a0d2eb;
+  border-radius: 50%;
+  color: #494d5f;
+}
+
 :global(.shopMenu-enter) {
   max-height: 0;
   overflow: hidden;

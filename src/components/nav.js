@@ -4,14 +4,15 @@ import styles from '../styles/nav.module.css';
 import Cart from './cart';
 import SearchMenu from './searchmenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { showCart, showMenu } from '../actions';
+import { showMenu, showCart } from '../actions';
 import { CSSTransition } from "react-transition-group";
 
 function Nav() {
 
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.showCart);
+  const displayCart = useSelector(state => state.showCart);
   const menu = useSelector(state => state.showMenu);
+  const cart = useSelector(state => state.cart);
 
   const shopButtonRef = useRef(null);
   const cartButtonRef = useRef(null);
@@ -38,9 +39,10 @@ function Nav() {
         </div>
         <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
           <i className="fas fa-shopping-cart"></i>  
+          {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.count).reduce((x,y) => x+y)}</div>}
         </div>   
       </div>
-      <CSSTransition in={cart} mountOnEnter unmountOnExit classNames='cart' timeout={300} >
+      <CSSTransition in={displayCart} mountOnEnter unmountOnExit classNames='cart' timeout={300} >
         <Cart button={cartButtonRef} />
       </CSSTransition>
     </div>

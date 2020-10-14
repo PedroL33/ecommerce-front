@@ -1,11 +1,10 @@
 .itemButtons {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
 }
 
 .button {
-  padding: 15px 30px;
+  padding: 15px 20px;
   background: #e5eaf5;
   color: #494d5f;
   border-radius: 10px;
@@ -15,6 +14,7 @@
   line-height: 25px;
   transition: all 200ms ease;
   font-weight: 800;
+  width: 100px;
 }
 
 .button:hover {
@@ -26,7 +26,6 @@
 
 
 @media screen and (max-width: 1000px) {
-
   .button {
     padding: 15px 15px;
   }
