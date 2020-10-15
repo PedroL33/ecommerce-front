@@ -5,6 +5,7 @@ import { hideCart, removeAllCart, addCart, removeCart } from '../actions';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import toPrice from '../functions/toPrice';
 import { Link } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
 
 function Cart(props) {
 
@@ -30,34 +31,37 @@ function Cart(props) {
     <div className={styles.container} ref={cartRef}>
       {
         cartItems.length > 0 ?
-        <div className={styles.content}>
-          <div className={styles.header}>
-            Your cart{` (${cartItems.map(item => item.count).reduce((x,y) => x+y)})`}
-          </div>
-          <TransitionGroup className={styles.itemsContainer}>
-            {cartItems.map(item => (
-              <CSSTransition key={item._id} timeout={500} classNames={"cartItem"}>
-                <div className={styles.itemDetail}>
-                  <i onClick={() => dispatch(removeAllCart(item))} className={`${styles.removeAll} fas fa-times`}></i>
-                  <div className={styles.itemImage} style={{backgroundImage: `url(${item.image ? item.image: window.location.origin + "/images/noImage.png"})`}}></div>
-                  <div className={styles.nameAndCount}>
-                    <div className={styles.itemName}>{item.name}</div>
-                    <div className={styles.itemCount}>
-                      <i onClick={() => dispatch(removeCart(item))} className={`${styles.countControl} fas fa-minus`}></i>
-                      <div>{item.count}</div>
-                      <i onClick={() => dispatch(addCart(item))} className={`${styles.countControl} fas fa-plus`}></i>
+        <Fade>
+          <div className={styles.content}>
+            <div className={styles.header}>
+              Your cart{` (${cartItems.map(item => item.count).reduce((x,y) => x+y)})`}
+              <i onClick={() => dispatch(hideCart())} className={`${styles.closeCart} fas fa-times`}></i>
+            </div>
+            <TransitionGroup className={styles.itemsContainer}>
+              {cartItems.map(item => (
+                <CSSTransition key={item._id} timeout={500} classNames={"cartItem"}>
+                  <div className={styles.itemDetail}>
+                    <i onClick={() => dispatch(removeAllCart(item))} className={`${styles.removeAll} fas fa-minus`}></i>
+                    <div className={styles.itemImage} style={{backgroundImage: `url(${item.image ? item.image: window.location.origin + "/images/noImage.png"})`}}></div>
+                    <div className={styles.nameAndCount}>
+                      <div className={styles.itemName}>{item.name}</div>
+                      <div className={styles.itemCount}>
+                        <i onClick={() => dispatch(removeCart(item))} className={`${styles.countRemove} fas fa-minus`}></i>
+                        <div>{item.count}</div>
+                        <i onClick={() => dispatch(addCart(item))} className={`${styles.countAdd} fas fa-plus`}></i>
+                      </div>
                     </div>
+                    <div className={styles.itemPrice}>{toPrice(item.price)}</div>
                   </div>
-                  <div className={styles.itemPrice}>{toPrice(item.price)}</div>
-                </div>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-          <div className={styles.total}>Subtotal: {toPrice(cartItems.map(item => item.price*item.count).reduce((x, y) => x+y))}</div>
-          <div className={styles.checkout}>
-            <Link className={styles.checkoutButton} to="/checkout">Checkout</Link>
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+            <div className={styles.total}>Subtotal: {toPrice(cartItems.map(item => item.price*item.count).reduce((x, y) => x+y))}</div>
+            <div className={styles.checkout}>
+              <Link className={styles.checkoutButton} to="/checkout">Checkout</Link>
+            </div>
           </div>
-        </div> :
+        </Fade> :
         <div className={styles.isEmpty}>
           Your cart is empty.
         </div>

@@ -21,6 +21,7 @@
   border-bottom: 1px solid white;
   font-weight: 800;
   color: white;
+  position: relative;
 }
 
 .itemDetail {
@@ -41,6 +42,18 @@
 
 .removeAll:hover {
   cursor: pointer;
+}
+
+.closeCart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: color 300ms ease;
+}
+
+.closeCart:hover {
+  cursor: pointer;
+  color: red;
 }
 
 .itemImage {
@@ -105,10 +118,23 @@
   height: 100%;
 }
 
-.countControl {
-  color: white;
-  padding: 5px;
+.countAdd, .countRemove {
+  color: #494d5f;
+  padding: 7px;
   font-size: 12px;
+  transition: color 300ms ease;
+  background: white;
+  border-radius: 5px;
+}
+
+.countAdd:hover {
+  color: green;
+  cursor: pointer;
+}
+
+.countRemove:hover {
+  cursor: pointer;
+  color: red;
 }
 
 :global(.cart-enter) {
@@ -117,7 +143,7 @@
 
 :global(.cart-enter-active) {
   right: 0px;
-  transition: all 500ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
 :global(.cart-exit) {
@@ -126,7 +152,7 @@
 
 :global(.cart-exit-active) {
   right: -300px;
-  transition: all 500ms ease-in-out;
+  transition: all 300ms ease-in-out;
 }
 
 :global(.cartItem-enter) {

@@ -47,9 +47,9 @@
   width: calc(50% + 40px);
   left: 25%;
   margin-left: -20px;
-  background: #d0bdf4;
+  background: #e5eaf5;
   color: #494d5f;
-  padding: 0;
+  padding: 0; 
 }
 
 .noResult {
@@ -60,13 +60,12 @@
   padding: 10px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid white;
   color: #494d5f;
   transition: background 300ms ease;
 }
 
 .result:hover {
-  background: #e5eaf5;
+  background: #a0d2eb;
 }
 
 .resultName {
@@ -87,16 +86,38 @@
 }
 
 .seeAll {
-  width: 150px;
+  width: 90%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #8458b3;
+  color: #494d5f;
+  background: #a0d2eb;
+  border-radius: 10px;
   padding: 5px 15px;
-  border-radius: 5px;
 }
 
 .seeAll:hover {
-  background: #9060c3;
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 1000px) {
+  .categoryContainer {
+    width: 80%;
+    padding: 40px 20px;
+  }
+
+  .searchbar {
+    width: 70%;
+  }
+
+  .searchIcon {
+    left: 70%;
+    margin-left: 30px;
+  }
+
+  .resultsContainer {
+    width: calc(70% + 40px);
+    left: 15%;
+  }
 }

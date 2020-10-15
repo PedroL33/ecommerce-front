@@ -8,6 +8,7 @@ import singleProduct from './singleProduct';
 import cart from './cart';
 import notification from './notification';
 import showNotification from './showNotification';
+import showAccount from './showAccount';
 
 const rootReducer = combineReducers({
   products,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   singleProduct,
   cart,
   notification,
-  showNotification
+  showNotification, 
+  showAccount
 });
 
 export default rootReducer;

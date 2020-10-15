@@ -31,7 +31,7 @@ function Notification() {
 
   useEffect(() => {
     function handleOutsideClick(e) {
-      if(!notificationRef.current.contains(e.target)) {
+      if(!notificationRef.current.contains(e.target) && notification.msg) {
         dispatch(hideNotification())
         if(e.defaultPrevented) return
         setTimeout(() => dispatch(clearNotification()), 700);

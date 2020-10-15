@@ -193,6 +193,20 @@ export function hideNotification() {
   }
 }
 
+// Account buttons
+
+export function showAccount() {
+  return {
+    type: "SHOW_ACCOUNT"
+  }
+}
+
+export function hideAccount() {
+  return {
+    type: "HIDE_ACCOUNT"
+  }
+}
+
 export function loadProducts() {
   return function(dispatch, getState) {
     dispatch(loadProductsRequest())

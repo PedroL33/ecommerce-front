@@ -40,7 +40,7 @@
 
 .price {
   font-size: 24px;
-  padding: 10px;
+  padding: 20px;
 }
 
 .description {
@@ -54,7 +54,7 @@
   .itemInfo {
     margin: auto;
     width: 80%;
-    padding-top: 20px;
+    padding: 20px;
   }
   
   .imageContainer {
@@ -67,5 +67,9 @@
     width: 300px;
     height: 300px;
     margin: 40px 0 0 0;
+  }
+
+  .description {
+    padding: 20px 0;
   }
 }
