@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from '../styles/nav.module.css';
 import Cart from './cart';
 import SearchMenu from './searchmenu';
@@ -34,6 +34,7 @@ function Nav() {
   const shopButtonRef = useRef(null);
   const cartButtonRef = useRef(null);
   const accountButtonRef = useRef(null);
+  const currentLocation = useLocation();
 
   useEffect(() => {
     function handleOutsideClick(e) {
@@ -51,7 +52,7 @@ function Nav() {
     <div className={styles.container}>
       <div className={styles.shop}>
         <div className={styles.shopLink} ref={shopButtonRef} onClick={()=> dispatch(showMenu())}>
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </div>
         <CSSTransition in={menu} mountOnEnter unmountOnExit classNames='shopMenu' timeout={500} >
           <SearchMenu button={shopButtonRef} />
@@ -70,10 +71,12 @@ function Nav() {
             <Link to="/Signup" className={styles.accountLink}>Signup</Link>
           </AccountLinks>
         </div>
-        <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
-          <i className="fas fa-shopping-cart"></i>  
-          {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.count).reduce((x,y) => x+y)}</div>}
-        </div>   
+        {currentLocation.pathname !== "/checkout" && 
+          <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
+            <i className="fas fa-shopping-cart"></i>  
+            {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.count).reduce((x,y) => x+y)}</div>}
+          </div>  
+        } 
       </div>
       <CSSTransition in={displayCart} mountOnEnter unmountOnExit classNames='cart' timeout={300} >
         <Cart button={cartButtonRef} />

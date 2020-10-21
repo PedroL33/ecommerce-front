@@ -207,6 +207,29 @@ export function hideAccount() {
   }
 }
 
+// Checkout information
+
+export function setContact(info) {
+  return{
+    type: "SET_CONTACT",
+    payload: info
+  }
+}
+
+export function setShipping(info) {
+  return{
+    type:'SET_SHIPPING',
+    payload: info
+  }
+}
+
+export function setOrder(info) {
+  return{
+    type:'SET_ORDER',
+    payload: info
+  }
+}
+
 export function loadProducts() {
   return function(dispatch, getState) {
     dispatch(loadProductsRequest())

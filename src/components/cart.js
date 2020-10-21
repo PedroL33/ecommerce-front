@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../styles/cart.module.css';
-import { hideCart, removeAllCart, addCart, removeCart } from '../actions';
+import { hideCart, removeAllCart, addCart, removeCart, setOrder } from '../actions';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import toPrice from '../functions/toPrice';
+import { centsToPrice, getSubtotal } from '../functions/priceHelpers';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 
@@ -17,7 +17,7 @@ function Cart(props) {
   useEffect(() => {
     function handleOutsideClick(e) {
       if(e.defaultPrevented) return;
-      if(cartRef.current && !cartRef.current.contains(e.target) && showCart && !props.button.current.contains(e.target)) {
+      if(cartRef.current && !cartRef.current.contains(e.target) && showCart && props.button.current && !props.button.current.contains(e.target)) {
         dispatch(hideCart());
       }
     }
@@ -26,6 +26,11 @@ function Cart(props) {
       window.removeEventListener('click', handleOutsideClick);
     }
   })
+
+  function handleClick() {
+    dispatch(setOrder(cartItems));
+    dispatch(hideCart());
+  }
 
   return(
     <div className={styles.container} ref={cartRef}>
@@ -51,14 +56,14 @@ function Cart(props) {
                         <i onClick={() => dispatch(addCart(item))} className={`${styles.countAdd} fas fa-plus`}></i>
                       </div>
                     </div>
-                    <div className={styles.itemPrice}>{toPrice(item.price)}</div>
+                    <div className={styles.itemPrice}>{centsToPrice(item.price)}</div>
                   </div>
                 </CSSTransition>
               ))}
             </TransitionGroup>
-            <div className={styles.total}>Subtotal: {toPrice(cartItems.map(item => item.price*item.count).reduce((x, y) => x+y))}</div>
+            <div className={styles.total}>Subtotal: {centsToPrice(getSubtotal(cartItems))}</div>
             <div className={styles.checkout}>
-              <Link className={styles.checkoutButton} to="/checkout">Checkout</Link>
+              <Link className={styles.checkoutButton} to="/checkout" onClick={() => handleClick()}>Checkout</Link>
             </div>
           </div>
         </Fade> :

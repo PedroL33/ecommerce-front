@@ -54,7 +54,7 @@ function ResultsDisplay() {
             <div className={styles.orderSelectContainer}>
               <label className={styles.orderLabel}>Sort by: </label>
               <select key={results} onChange={(e)=>handleChange(e)} className={styles.orderSelect}>
-                <option disabled selected value hidden>  </option>
+                <option disabled defaultValue="" value hidden>  </option>
                 <option disabled value>&nbsp;&nbsp;Alphabetical</option>
                 <option value="a-z">A-Z</option>
                 <option value="z-a">Z-A</option>

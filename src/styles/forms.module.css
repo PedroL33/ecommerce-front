@@ -1,0 +1,115 @@
+/* Contact form */
+
+.contactContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.formInputContainer {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.formInputContainer input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.formInputContainer input:focus {
+  border: 3px solid dodgerblue;
+}
+
+.formError {
+  background: rgb(255, 164, 164);
+}
+
+.errorNotif {
+  position: absolute;
+  width: 150px;
+  font-size: 12px;
+  bottom: -10px;
+  left: 10px;
+  color: rgb(253, 133, 133)
+
+}
+
+.addressRow {
+  display: flex;
+  justify-content: space-around;
+  max-width: 500px;
+  width: 90%;
+  margin: 10px 0 20px 0;
+  padding: 20px 14px;
+}
+
+.addressRow div {
+  width: 100px;
+}
+
+.autocompleteDropdownContainer {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  z-index: 2;
+  width: 480px;
+}
+
+.suggestionItem {
+  padding: 20px 10px;
+  font-size: 20px;
+  background: white;
+  border: 1px solid grey;
+  border-top: none;
+}
+
+.suggestionItem:hover {
+  cursor: pointer;
+  background: rgb(214, 214, 214);
+}
+
+.formLabel {
+  width: 550px;
+  font-size: 30px;
+  font-weight: 300;
+  padding: 30px;
+}
+
+.submitButton {
+  background: navy;
+  border: none;
+  font-size: 24px;
+  color: white;
+  padding: 20px 20px;
+  border-radius: 10px;
+}
+
+.submitButton:hover {
+  background: black;
+}
+
+
+@media screen and (max-width: 800px) {
+  .formInputContainer {
+    width: 90%;
+  }
+  .formLabel {
+    width: 95%;
+  }
+  .addressRow div {
+    width: 70px;
+  }
+
+  .autocompleteDropdownContainer {
+    width: 95%;
+  }
+}

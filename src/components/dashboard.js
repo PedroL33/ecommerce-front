@@ -7,6 +7,7 @@ import FrontPage from './frontPage/frontPage';
 import ResultsDisplay from './animatedResults/resultsDisplay';
 import ProductDetail from './productDetail';
 import Notification from './notification';
+import StripeContainer from './stripe/stripeContainer';
 
 function Dashboard() {
 
@@ -35,6 +36,8 @@ function Dashboard() {
         <Route path="/category/:querry" component={ResultsDisplay}></Route>
         
         <Route path="/item/:id" component={ProductDetail}></Route>
+
+        <Route path="/checkout" component={StripeContainer}></Route>
       </Switch>
     </Router>
   )

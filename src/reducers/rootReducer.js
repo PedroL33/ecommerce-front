@@ -9,6 +9,7 @@ import cart from './cart';
 import notification from './notification';
 import showNotification from './showNotification';
 import showAccount from './showAccount';
+import checkoutInfo from './checkoutInfo';
 
 const rootReducer = combineReducers({
   products,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   cart,
   notification,
   showNotification, 
-  showAccount
+  showAccount,
+  checkoutInfo,
 });
 
 export default rootReducer;

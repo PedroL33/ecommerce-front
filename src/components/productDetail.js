@@ -6,7 +6,7 @@ import Loader from './loader';
 import styles from '../styles/productDetail.module.css';
 import Fade from 'react-reveal/Fade';
 import PurchaseButtons from './purchaseButtons';
-import toPrice from '../functions/toPrice';
+import { centsToPrice } from '../functions/priceHelpers';
 
 function ProductDetail() {
 
@@ -33,7 +33,7 @@ function ProductDetail() {
             </div>
             <div className={styles.itemInfo}>
               <div className={styles.name}>{product.name}</div>
-              <div className={styles.price}>{toPrice(product.price)}</div>
+              <div className={styles.price}>{centsToPrice(product.price)}</div>
               <PurchaseButtons product={product}></PurchaseButtons>
               <div className={styles.description}>{product.description}</div>
             </div>
