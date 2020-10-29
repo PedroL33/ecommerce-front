@@ -48,6 +48,7 @@ function ResultsDisplay() {
       </div>
       {
         results[0] === "loading" ? <Loader height="400px" dotSize="large" /> : 
+        results.error ? <div className={styles.error}>{results.error}</div>:
         <div className={styles.results}>
           {
             results.length > 2 && 

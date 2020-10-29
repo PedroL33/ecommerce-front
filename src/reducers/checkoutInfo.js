@@ -6,6 +6,8 @@ const checkoutInfo = (state={}, action) => {
       return {...state, "shipping": action.payload}
     case "SET_ORDER":
       return {...state, "order": action.payload}
+    case "CLEAR_CHECKOUT":
+      return {};
     default:
       return state;
   }

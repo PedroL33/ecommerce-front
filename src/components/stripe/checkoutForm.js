@@ -5,16 +5,16 @@ import PaymentForm from './paymentForm';
 import ShippingForm from './shippingForm';
 import styles from '../../styles/checkoutForm.module.css';
 import PriceInfo from './priceInfo';
-import { getTotal, centsToPrice, getSubtotal } from '../../functions/priceHelpers';
+import StepTracker from './stepTracker';
+import { getTotal } from '../../functions/priceHelpers';
 import { useSelector } from 'react-redux';
+import ResPriceInfo from './resPriceInfo';
 
 function CheckoutForm() {
 
   const [step, setStep] = useState(1);
-  const [total, setTotal] = useState({});
-  const cart = useSelector(state => state.cart)
   const checkoutInfo = useSelector(state => state.checkoutInfo)
-  const [showResCart, setShowResCart] = useState(false);
+  const [total, setTotal] = useState({});
 
   useEffect(() => {
     if(checkoutInfo.contact && checkoutInfo.contact.address) {
@@ -28,21 +28,9 @@ function CheckoutForm() {
     <div>
       {!checkoutInfo.order ? <div className={styles.emptyCart}><div>Your cart is empty.</div></div> :
       <div className={styles.container}>
-        <div className={styles.resPriceInfo}>
-          <div className={styles.orderSummary} onClick={()=>setShowResCart(!showResCart)}>
-            <div className={styles.toggle}>
-              { !showResCart ? "Show order summary" : "Hide order Summary" }
-              <i className={showResCart ? "fas fa-chevron-up" : "fas fa-chevron-down"}></i>
-            </div>
-            <div className={styles.cartTotal}>
-              {total.total ? centsToPrice(total.total) : centsToPrice(getSubtotal(cart))}
-            </div>
-          </div>
-          <CSSTransition in={showResCart} timeout={300} classNames="resCartInfo" unmountOnExit>
-            <PriceInfo total={total} />
-          </CSSTransition>
-        </div>
+        <ResPriceInfo total={total} checkoutInfo={checkoutInfo} />
         <div className={styles.formContainer}>
+          <StepTracker step={step} setStep={setStep} />
           <SwitchTransition mode="out-in">
             <CSSTransition key={step} classNames="checkoutForm" timeout={300}>
               {
@@ -54,7 +42,7 @@ function CheckoutForm() {
           </SwitchTransition>
         </div>
         <div className={styles.priceInfo}>
-          <PriceInfo total={total} />
+          <PriceInfo total={total} checkoutInfo={checkoutInfo}/>
         </div>
       </div>
       }

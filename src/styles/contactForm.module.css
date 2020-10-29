@@ -5,28 +5,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 .formInputContainer {
   width: 500px;
-  height: 50px;
   display: flex;
   justify-content: center;
   position: relative;
 }
 
 .formInputContainer input {
+  font-size: 18px;
+  display: block;
+  padding: 15px;
+  box-shadow: rgba(39, 39, 73, 0.149) 0px 5px 5px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  border-radius: 4px;
+  background: white;
   width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid grey;
+  border: none;
 }
 
 .formInputContainer input:focus {
-  border: 3px solid dodgerblue;
+  background: rgb(182, 219, 255);
 }
 
 .formError {
@@ -37,10 +38,10 @@
   position: absolute;
   width: 150px;
   font-size: 12px;
-  bottom: -10px;
+  bottom: -20px;
   left: 10px;
-  color: rgb(253, 133, 133)
-
+  color: rgb(253, 133, 133);
+  z-index: 2;
 }
 
 .addressRow {
@@ -58,9 +59,9 @@
 
 .autocompleteDropdownContainer {
   position: absolute;
-  top: 40px;
+  top: 65px;
   left: 10px;
-  z-index: 2;
+  z-index: 3;
   width: 480px;
 }
 
@@ -85,16 +86,17 @@
 }
 
 .submitButton {
-  background: navy;
+  background:  #a0d2eb;
   border: none;
-  font-size: 24px;
+  font-size: 16px;
   color: white;
-  padding: 20px 20px;
+  padding: 10px 20px;
   border-radius: 10px;
 }
 
 .submitButton:hover {
-  background: black;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 
@@ -106,7 +108,7 @@
     width: 95%;
   }
   .addressRow div {
-    width: 70px;
+    width: 50px;
   }
 
   .autocompleteDropdownContainer {

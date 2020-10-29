@@ -1,0 +1,12 @@
+{
+  "uspsPriority": {
+    "name": "USPS Priority Mail",
+    "price": 500,
+    "duration": "2-4 business days."
+  },
+  "uspsOvernight": {
+    "name": "USPS Overnight Guarantee",
+    "price": 2500,
+    "duration": "1 business day."
+  }
+}

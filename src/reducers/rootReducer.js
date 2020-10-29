@@ -10,6 +10,7 @@ import notification from './notification';
 import showNotification from './showNotification';
 import showAccount from './showAccount';
 import checkoutInfo from './checkoutInfo';
+import paymentStatus from './paymentStatus';
 
 const rootReducer = combineReducers({
   products,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   showNotification, 
   showAccount,
   checkoutInfo,
+  paymentStatus
 });
 
 export default rootReducer;

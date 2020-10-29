@@ -1,17 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styles from '../../styles/priceInfo.module.css';
 import { centsToPrice, getSubtotal } from '../../functions/priceHelpers';
 
 function PriceInfo(props) {
 
-  const cart = useSelector(state => state.cart)
-
   return (
     <div className={styles.container}>
       <div className={styles.cartItemContainer}>
-        {cart.map(item => 
-          <div className={styles.cartItem}>
+        {props.checkoutInfo.order.map(item => 
+          <div key={item._id} className={styles.cartItem}>
             <div className={styles.itemDetails}>
               <div className={styles.itemImage} style={{backgroundImage: item.image ? item.image : `url(${window.location.origin}/images/noImage.png)`}}></div>
               <div className={styles.itemCount}>{item.count}</div>
@@ -26,11 +23,11 @@ function PriceInfo(props) {
       <div className={styles.priceContainer}>
         <div className={styles.priceItem}>
           <div className={styles.itemLabel}>Subtotal:</div>
-          <div className={styles.itemValue}>{ centsToPrice(getSubtotal(cart)) }</div>
+          <div className={styles.itemValue}>{ centsToPrice(getSubtotal(props.checkoutInfo.order)) }</div>
         </div>
         <div className={styles.priceItem}>
           <div className={styles.itemLabel}>Shipping:</div>
-          { props.total.shipping ? <div className={styles.itemValue}>{props.total.shipping}</div> : <div className={styles.noValue}>{"Calculated at shipping step."}</div> }
+          { props.total.shipping ? <div className={styles.itemValue}>{centsToPrice(props.total.shipping)}</div> : <div className={styles.noValue}>{"Calculated at shipping step."}</div> }
         </div>
         <div className={styles.priceItem}>
           <div className={styles.itemLabel}>Tax: </div>

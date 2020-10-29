@@ -1,11 +1,12 @@
 .container {
   background:  #a0d2eb;
-  padding: 50px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .cartItemContainer {
-  height: 300px;
-  width: 70%;
+  max-height: 300px;
+  max-width: 500px;
   overflow: auto;
   display: flex;
   flex-direction: column; 
@@ -55,6 +56,10 @@
   font-weight: 800;
 }
 
+.priceContainer {
+  padding-bottom: 50px;
+}
+
 .priceItem {
   display: flex;
   width: 500px;
@@ -77,9 +82,62 @@
   font-weight: 300;
 }
 
+.resPriceInfo {
+  display: none;
+}
+
+.orderSummary {
+  display: flex;
+  padding: 40px 0;
+  justify-content: space-around;
+  background: #a0d2eb;
+  font-weight: 300;
+  font-size: 20px;
+  transition: opacity 300ms ease-in-out;
+}
+
+.orderSummary:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.orderSummary i {
+  padding: 5px;
+}
+
+.toggle {
+  font-size: 14px;
+  color: rgb(82, 82, 82);
+}
+
+:global(.resCartInfo-enter) {
+  max-height: 0;
+  overflow: hidden;
+}
+
+:global(.resCartInfo-enter-active) {
+  max-height: 800px;
+  transition: all 300ms ease-in-out;
+}
+
+:global(.resCartInfo-exit) {
+  max-height: 800px;
+  overflow: hidden;
+}
+
+:global(.resCartInfo-exit-active) {
+  max-height: 0;
+  transition: all 300ms ease-in-out;
+}
+
 @media screen and (max-width: 1200px) {
   .container {
     width: 100%;
+  }
+
+  .resPriceInfo {
+    display: block;
+    background: #a0d2eb;
   }
 }
 

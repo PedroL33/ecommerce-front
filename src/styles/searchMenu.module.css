@@ -1,11 +1,12 @@
 .container {
   left: 0;
   position: absolute;
-  width: 100%;
+  width: calc(100% - 4px);
   top: 100px;
   height: 200px;
   background: #a0d2eb;
   z-index: 2;
+  border: 2px solid #494d5f;
 }
 
 .categoryContainer {

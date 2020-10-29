@@ -2,7 +2,7 @@ export function centsToPrice(cents) {
   if(cents%100 === 0) {
     return `$${cents/100}.00`
   }else {
-    return `$${Math.round(cents/100)}.${cents%100}`
+    return `$${Math.round(cents/100)}.${Math.round(Math.round((cents%100) * 100) / 100)}`
   }
 }
 
@@ -40,6 +40,6 @@ export async function getTotal(checkoutInfo) {
       }
     }
   }
-  total.total = Object.values(total).reduce((x,y) => x+y)
+  if(Object.keys(total).length!==0) total.total = Object.values(total).reduce((x,y) => x+y)
   return total;
 }

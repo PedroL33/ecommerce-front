@@ -3,7 +3,7 @@ import PlacesAutocomplete, {
   geocodeByAddress
 } from 'react-places-autocomplete';
 import { useDispatch } from 'react-redux';
-import styles from '../../styles/forms.module.css';
+import styles from '../../styles/contactForm.module.css';
 import { setContact } from '../../actions';
 
 function ContactForm(props) {
@@ -117,23 +117,23 @@ function ContactForm(props) {
         )}
       </PlacesAutocomplete>
       <div className={styles.formInputContainer}>
-        <input type="text" placeHolder="Apt. Suite ect..."></input>
+        <input type="text" placeholder="Apt. Suite ect..."></input>
       </div>
       <div className={styles.formInputContainer}>
-        <input className={errors.city && !city.length && styles.formError} type="text" value={city} onChange={(e) => setCity(e.target.value)} placeHolder="City"></input>
+        <input className={errors.city && !city.length && styles.formError} type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City"></input>
         {errors.city && <span className={styles.errorNotif}>{errors.city}</span>}
       </div>
       <div className={styles.addressRow}>
         <div className={styles.formInputContainer}>
-          <input className={errors.st && !st.length && styles.formError} type="text" placeHolder="State" value={st} onChange={(e) => setSt(e.target.value)}></input>
+          <input className={errors.st && !st.length && styles.formError} type="text" placeholder="State" value={st} onChange={(e) => setSt(e.target.value)}></input>
           {errors.st && <span className={styles.errorNotif}>{errors.st}</span>}
         </div>
         <div className={styles.formInputContainer}>
-          <input className={errors.country && !country.length && styles.formError} type="text" placeHolder="Country" value={country} onChange={(e) => setCountry(e.target.value)}></input>
+          <input className={errors.country && !country.length && styles.formError} type="text" placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)}></input>
           {errors.country && <span className={styles.errorNotif}>{errors.country}</span>}
         </div>
         <div className={styles.formInputContainer}>
-          <input className={errors.zip && !zip.length && styles.formError} type="text" placeHolder="Zipcode" value={zip} onChange={(e) => setZip(e.target.value)}></input>
+          <input className={errors.zip && !zip.length && styles.formError} type="text" placeholder="Zipcode" value={zip} onChange={(e) => setZip(e.target.value)}></input>
           {errors.zip && <span className={styles.errorNotif}>{errors.zip}</span>}
         </div>
       </div>

@@ -8,6 +8,8 @@ import ResultsDisplay from './animatedResults/resultsDisplay';
 import ProductDetail from './productDetail';
 import Notification from './notification';
 import StripeContainer from './stripe/stripeContainer';
+import Thankyou from './thankyou';
+import Login from './login';
 
 function Dashboard() {
 
@@ -31,6 +33,8 @@ function Dashboard() {
       <Switch>
         <Route exact path="/" component={FrontPage}></Route>
 
+        <Route path="/login" component={Login}></Route> 
+
         <Route path="/search/:querry" component={ResultsDisplay}></Route>
 
         <Route path="/category/:querry" component={ResultsDisplay}></Route>
@@ -38,6 +42,8 @@ function Dashboard() {
         <Route path="/item/:id" component={ProductDetail}></Route>
 
         <Route path="/checkout" component={StripeContainer}></Route>
+
+        <Route path="/thankyou/:orderInfo" component={Thankyou}></Route>
       </Switch>
     </Router>
   )

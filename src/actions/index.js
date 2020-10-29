@@ -165,6 +165,12 @@ export function setCart(cart) {
   }
 }
 
+export function clearCart() {
+  return {
+    type: "CLEAR_CART"
+  }
+}
+
 // Notifications
 
 export function addCartNotification(product, message) {
@@ -217,7 +223,7 @@ export function setContact(info) {
 }
 
 export function setShipping(info) {
-  return{
+  return {
     type:'SET_SHIPPING',
     payload: info
   }
@@ -227,6 +233,40 @@ export function setOrder(info) {
   return{
     type:'SET_ORDER',
     payload: info
+  }
+}
+
+export function clearCheckout() {
+  return {
+    type: "CLEAR_CHECKOUT"
+  }
+}
+
+// payment status
+
+export function paymentRequest() {
+  return {
+    type: "PAYMENT_REQUEST",
+  }
+}
+
+export function paymentSuccess(details) {
+  return {
+    type: "PAYMENT_SUCCESS",
+    payload: details
+  }
+}
+
+export function paymentError(details) {
+  return {
+    type: "PAYMENT_ERROR",
+    payload: details
+  }
+}
+
+export function paymentClear() {
+  return {
+    type: "PAYMENT_CLEAR"
   }
 }
 
@@ -271,7 +311,7 @@ export function loadResults(type, filter) {
 }
 
 export function loadProductById(id) {
-  return function(dispatch, getState) {
+  return function(dispatch) {
     dispatch(singleProductRequest());
     fetch(`http://localhost:3000/products/${id}`, {
       method: "GET"
@@ -281,5 +321,29 @@ export function loadProductById(id) {
       setTimeout(() => dispatch(singleProductSuccess(product)), 1000);
     })
     .catch(err => dispatch(singleProductError(err)), 1000);
+  }
+}
+
+export function makePayment(amount, token, order) {
+  return function(dispatch) {
+    dispatch(paymentRequest());
+    fetch('http://localhost:3000/stripe/charge', {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        amount: amount,
+        token: token,
+        order: order
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(!data.success) {
+        dispatch(paymentError(data))
+      }else {
+        dispatch(paymentSuccess(data))
+      }
+    })
+    .catch(err => dispatch(paymentError(err)));
   }
 }
