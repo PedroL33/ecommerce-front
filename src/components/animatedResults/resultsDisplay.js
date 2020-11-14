@@ -22,7 +22,7 @@ function ResultsDisplay() {
     return () => {
       dispatch(clearResults())
     }
-  }, [querry])
+  }, [querry, dispatch, type])
 
   function handleChange(e) {
     switch(e.target.value) {
@@ -33,10 +33,12 @@ function ResultsDisplay() {
         dispatch(sortResults("name", false));
         break;
       case "high":
-        dispatch(sortResults("price", true));
+        dispatch(sortResults("price", false));
         break;
       case "low":
-        dispatch(sortResults("price", false));
+        dispatch(sortResults("price", true));
+        break;
+      default:
         break;
     }  
   }
@@ -44,18 +46,18 @@ function ResultsDisplay() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {type==="category" ? categories[querry].description : results.length===0 ? `We couldn't find anything related to '${querry}'.` : results[0] !=="loading" ? `We found ${results.length} items related to '${querry}'`: null}
+        {type==="category" && categories[querry] ? categories[querry].description : results.length===0 ? `We couldn't find anything related to '${querry}'.` : results[0] !=="loading" ? `We found ${results.length} items related to '${querry}'`: null}
       </div>
       {
-        results[0] === "loading" ? <Loader height="400px" dotSize="large" /> : 
+        results[0] === "loading" ? <Loader background="#e5eaf5" height="400px" dotSize="large" /> : 
         results.error ? <div className={styles.error}>{results.error}</div>:
         <div className={styles.results}>
           {
             results.length > 2 && 
             <div className={styles.orderSelectContainer}>
               <label className={styles.orderLabel}>Sort by: </label>
-              <select key={results} onChange={(e)=>handleChange(e)} className={styles.orderSelect}>
-                <option disabled defaultValue="" value hidden>  </option>
+              <select defaultValue="Select" key={results} onChange={(e)=>handleChange(e)} className={styles.orderSelect}>
+                <option disabled value="Select">Select</option>
                 <option disabled value>&nbsp;&nbsp;Alphabetical</option>
                 <option value="a-z">A-Z</option>
                 <option value="z-a">Z-A</option>
@@ -65,12 +67,12 @@ function ResultsDisplay() {
               </select>
             </div>
           }
-          {
-            <AnimatedResults>
-              {results.map((item) => 
+          {  
+            results.length ? <AnimatedResults>
+              { results.map((item) => 
                 <Link key={item._id} className={styles.result} ref={createRef()} to={`/item/${item._id}`}>
                   <Fade>
-                    <img className={styles.resultImage} src={item.image ? item.image: window.location.origin + "/images/noImage.png"}></img>
+                    <div className={styles.resultImage} style={{backgroundImage: `url(${item.image ? item.image: window.location.origin + "/images/noImage.png"})`}}></div>
                     <div className={styles.resultDetails}>
                       <div className={styles.resultTitle}>{item.name}</div>
                       <div>{item.price / 100}$</div>
@@ -79,7 +81,7 @@ function ResultsDisplay() {
                   </Fade>
                 </Link>
               )}
-            </AnimatedResults>
+            </AnimatedResults> : <div>Server could not be reached.</div>
           }
         </div>
       }

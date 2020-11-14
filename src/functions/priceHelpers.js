@@ -2,7 +2,7 @@ export function centsToPrice(cents) {
   if(cents%100 === 0) {
     return `$${cents/100}.00`
   }else {
-    return `$${Math.round(cents/100)}.${Math.round(Math.round((cents%100) * 100) / 100)}`
+    return `$${(Math.floor(cents/100) + (Math.round((Math.round((cents%100) * 100) / 100)) /100)).toFixed(2)}`
   }
 }
 

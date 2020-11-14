@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 function Thankyou() {
 
-  const { orderInfo } = useParams();
+  const { orderInfo, orderId } = useParams();
   const [order, setOrder] = useState({})
   const [total, setTotal] = useState({});
 
@@ -26,7 +26,7 @@ function Thankyou() {
         error: "There's nothing here."
       })
     }
-  }, [])
+  }, [orderInfo])
 
   useEffect(() => {
     getTotal(order).then(total => {
@@ -47,6 +47,7 @@ function Thankyou() {
         <div className={styles.thankyouContainer}>
           <div className={styles.header}>
             <div className={styles.thankyou}>Thank you for your order.</div>
+            <div className={styles.message}>Your order id is {JSON.parse(decodeURIComponent(orderId))}.</div>
             <div className={styles.message}>Tracking details and more information will be sent to {order.contact.email} within the business day.</div>
             <div className={styles.deals}>
               Consider <Link className={styles.signupLink} to="/signup">Signing Up</Link> to recieve information on sales and other promotional deals.

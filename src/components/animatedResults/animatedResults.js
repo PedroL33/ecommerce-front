@@ -43,7 +43,7 @@ const AnimatedResults = function( {children} ) {
         }
       })
     }
-  }, [boundingBox, prevBoundingBox, children])
+  }, [boundingBox, prevBoundingBox, children, prevYOffset, yOffset])
   
   return children;
 

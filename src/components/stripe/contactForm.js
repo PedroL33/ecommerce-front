@@ -83,10 +83,7 @@ function ContactForm(props) {
         value={street}
         onChange={(x) => setStreet(x)}
         onSelect={handleSelect}
-        searchOptions={{bounds: new window.google.maps.LatLngBounds(
-          new window.google.maps.LatLng(24.7433195,-124.7844079),
-          new window.google.maps.LatLng(49.3457868, -66.9513812)
-        )}}
+        searchOptions={{componentRestrictions: {country: 'us'}}}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div className={styles.formInputContainer}>
@@ -96,16 +93,15 @@ function ContactForm(props) {
               })}
             />
             <div className={styles.autocompleteDropdownContainer}>
-              {loading && <div>Loading...</div>}
-              {suggestions.filter(item => (item.types.includes('premise') || item.types.includes('street_address'))).map(suggestion => {
+              {loading && <div className={styles.suggestionItem}>Loading...</div>}
+              {suggestions.filter(item => (item.types.includes('premise') || item.types.includes('street_address'))).map((suggestion, index) => {
                 const className = styles.suggestionItem;
-                const key = suggestion.formatted_address
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className
                     })}
-                    key={key}
+                    key={index}
                   >
                     <span>{suggestion.description}</span>
                   </div>

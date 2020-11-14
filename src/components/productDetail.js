@@ -19,7 +19,7 @@ function ProductDetail() {
     return ()=>{
       dispatch(singleProductClear())
     }
-  }, [id])
+  }, [id, dispatch])
 
   return (
     <div className={styles.container}>
@@ -32,9 +32,15 @@ function ProductDetail() {
               <div className={styles.itemImage} style={{backgroundImage: `url(${product.image ? product.image : window.location.origin +"/images/noImage.png"}`}}></div>
             </div>
             <div className={styles.itemInfo}>
-              <div className={styles.name}>{product.name}</div>
-              <div className={styles.price}>{centsToPrice(product.price)}</div>
-              <PurchaseButtons product={product}></PurchaseButtons>
+              <div className={styles.itemRow}>
+                <div className={styles.rowLeft}>
+                  <div className={styles.name}>{product.name}</div>
+                  <div className={styles.price}>{centsToPrice(product.price)}</div>
+                </div>
+                <div className={styles.rowRight}>
+                  <PurchaseButtons product={product}></PurchaseButtons>
+                </div>
+              </div>
               <div className={styles.description}>{product.description}</div>
             </div>
           </div>

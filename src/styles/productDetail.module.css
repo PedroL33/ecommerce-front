@@ -13,11 +13,29 @@
 }
 
 .itemInfo {
-  width: 400px;
+  width: 500px;
   padding: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.itemRow {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  flex-grow: grow;
+}
+
+.rowLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+}
+
+.rowRight {
+  width: 70%;
 }
 
 .imageContainer {
@@ -36,21 +54,23 @@
 .name {
   font-size: 30px;
   padding: 10px;
+  text-align: center;
 }
 
 .price {
   font-size: 24px;
   padding: 20px;
+  text-align: center;
 }
 
 .description {
   font-size: 16px;
   text-indent: 25px;
   line-height: 25px;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   .itemInfo {
     margin: auto;
     width: 80%;
@@ -61,6 +81,11 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+  }
+
+
+  .rowLeft, .rowRight {
+    width: 50%;
   }
 
   .itemImage {

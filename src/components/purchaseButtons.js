@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../styles/purchaseButtons.module.css';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { addCart, addCartNotification, showNotification } from '../actions';
 import Loader from './loader';  
 

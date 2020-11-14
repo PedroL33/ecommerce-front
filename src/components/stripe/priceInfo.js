@@ -10,7 +10,7 @@ function PriceInfo(props) {
         {props.checkoutInfo.order.map(item => 
           <div key={item._id} className={styles.cartItem}>
             <div className={styles.itemDetails}>
-              <div className={styles.itemImage} style={{backgroundImage: item.image ? item.image : `url(${window.location.origin}/images/noImage.png)`}}></div>
+              <div className={styles.itemImage} style={{backgroundImage: item.image ? `url(${item.image})` : `url(${window.location.origin}/images/noImage.png)`}}></div>
               <div className={styles.itemCount}>{item.count}</div>
               <div className={styles.itemName}>{item.name}</div>
             </div>

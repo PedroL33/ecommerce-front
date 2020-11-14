@@ -6,6 +6,8 @@ const products = (state = [], action) => {
       return ["loading"]
     case "PRODUCTS_ERROR":
       return action.payload
+    case "CLEAR_PRODUCTS":
+      return [];
     default:
       return state;
   }

@@ -59,23 +59,27 @@
 
 .autocompleteDropdownContainer {
   position: absolute;
-  top: 65px;
-  left: 10px;
+  top: 55px;
+  left: -1px;
   z-index: 3;
-  width: 480px;
+  width: 498px;
+  border: 1px solid rgb(216, 216, 216);
+}
+
+.autocompleteDropdownContainer:empty {
+  border: none;
 }
 
 .suggestionItem {
   padding: 20px 10px;
-  font-size: 20px;
+  font-size: 16px;
   background: white;
-  border: 1px solid grey;
-  border-top: none;
 }
 
 .suggestionItem:hover {
   cursor: pointer;
-  background: rgb(214, 214, 214);
+  background: dodgerblue;
+  color: white;
 }
 
 .formLabel {

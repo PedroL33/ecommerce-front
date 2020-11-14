@@ -1,0 +1,177 @@
+.container {
+  overflow: hidden;
+}
+
+.header {
+  min-height: calc(100vh - 100px);
+  background: #d0bdf4;
+  display: flex;
+}
+
+.greeting, .deal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.deal {
+  width: 40%; 
+  transform: skewX(-30deg);
+  background: #a0d2eb;
+}
+
+.greeting {
+  background:#e5eaf5;
+  width: 60%;
+  transform: skewX(200deg);
+}
+
+.msgContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: skewX(30deg);
+}
+
+.dealMsg, .greetingMsg {
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.dealMsg {  
+  width: 400px;
+  font-size: 36px;
+  text-align: right;
+  font-style: italic;
+}
+
+.greetingMsg {
+  width: 500px;
+  transform: skewX(-200deg);
+  font-size: 36px;
+  font-weight: 200;
+}
+
+.signupButton {
+  font-size: 24px;
+  padding: 10px 30px;
+  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  border: none;
+  border-radius: 10px;
+  background:  #8458b3;
+  color: white;
+}
+
+.signupButton:hover {
+  cursor: pointer;
+  background:  #9664cc;
+}
+
+.categoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+}
+
+.category {
+  width: 33.333%;
+  padding-top: 33.333%;
+  background: grey;
+  background-position: center;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.categoryContent {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 200ms ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category:hover .categoryContent {
+  opacity: 1;
+  background: rgba(199, 199, 199, 0.5);
+}
+
+.categoryLink {
+  color: rgb(255, 255, 255);
+  width: 15%;
+  height: 15%;
+  background: #8458b3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-weight: 200;
+  font-size: 24px;
+  opacity: 0.9;
+}
+
+.categoryLink:hover {
+  opacity: 1; 
+}
+
+@media screen and (max-width: 800px) {
+  .category {
+    width: 100%;
+    padding-top: 100%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .deal, .greeting {
+    width: 100%;
+    flex-grow: 1;
+  }
+  .deal {
+    margin-left: 25px;
+  }
+  .deal {
+    transform: skewX(45deg) 
+  }
+
+  .msgContainer {
+    transform: skewX(-45deg) 
+  }
+
+  .greeting {
+    transform: skewX(-45deg) 
+  }
+
+  .greetingMsg {
+    transform: skewX(45deg) 
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dealMsg {
+    font-size: 20px;
+    width: 300px;
+  }
+
+  .greetingMsg {
+    font-size: 24px;
+    width: 300px;
+  }
+
+  .signupButton {
+    font-size: 16px;
+    padding: 7px 21px;
+  }
+}

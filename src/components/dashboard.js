@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCart } from '../actions';
 import Nav from './nav';
@@ -10,11 +10,31 @@ import Notification from './notification';
 import StripeContainer from './stripe/stripeContainer';
 import Thankyou from './thankyou';
 import Login from './login';
+import AdminDashboard from './adminDashborad/adminDashboard';
+import { checkAuth } from '../functions/authHelpers';
+import Footer from './footer';
+import Signup from './signup';
 
 function Dashboard() {
 
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
+
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+      checkAuth()
+        ? <Component {...props} />
+        : <Redirect to='/login' />
+    )} />
+  )
+
+  const PublicRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+      !checkAuth()
+      ? <Component {...props} />
+      : <Redirect to='/user' />
+    )} />
+  )
 
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
@@ -33,7 +53,9 @@ function Dashboard() {
       <Switch>
         <Route exact path="/" component={FrontPage}></Route>
 
-        <Route path="/login" component={Login}></Route> 
+        <PublicRoute path="/login" component={Login}></PublicRoute> 
+
+        <PrivateRoute path="/user" component={AdminDashboard}></PrivateRoute>
 
         <Route path="/search/:querry" component={ResultsDisplay}></Route>
 
@@ -43,8 +65,13 @@ function Dashboard() {
 
         <Route path="/checkout" component={StripeContainer}></Route>
 
-        <Route path="/thankyou/:orderInfo" component={Thankyou}></Route>
+        <Route path="/thankyou/:orderInfo/:orderId" component={Thankyou}></Route>
+
+        <Route path="/signup" component={Signup}></Route>
+
+        <Redirect from="*" to="/" />
       </Switch>
+      <Footer />
     </Router>
   )
 }

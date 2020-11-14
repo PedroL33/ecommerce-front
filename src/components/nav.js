@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { showMenu, showCart, showAccount, hideAccount } from '../actions';
 import { CSSTransition } from "react-transition-group";
 import styled from 'styled-components';
+import { checkAuth } from '../functions/authHelpers';
 
 const AccountLinks = styled.div`
   background:  #494d5f;
@@ -30,7 +31,6 @@ function Nav() {
   const menu = useSelector(state => state.showMenu);
   const cart = useSelector(state => state.cart);
   const account = useSelector(state => state.showAccount);
-
   const shopButtonRef = useRef(null);
   const cartButtonRef = useRef(null);
   const accountButtonRef = useRef(null);
@@ -47,6 +47,10 @@ function Nav() {
       window.removeEventListener('click', handleOutsideClick)
     }
   })
+
+  function logout() {
+    localStorage.removeItem('authentication');
+  }
 
   return(
     <div className={styles.container}>
@@ -66,10 +70,17 @@ function Nav() {
           <div className={styles.accountButton} ref={accountButtonRef} onClick={()=>dispatch(showAccount())}>
             <i className="fas fa-user-alt"></i>
           </div>
-          <AccountLinks show={account}>
-            <Link to="/Login" className={styles.accountLink}>Login</Link>
-            <Link to="/Signup" className={styles.accountLink}>Signup</Link>
-          </AccountLinks>
+          {!checkAuth() ? 
+            <AccountLinks show={account}>
+              <Link to="/Login" className={styles.accountLink}>Login</Link>
+              <Link to="/Signup" className={styles.accountLink}>Signup</Link>
+            </AccountLinks>:
+            <AccountLinks show={account}>
+              <Link to="/user" className={styles.accountLink}>Home</Link>
+              <Link to="/" className={styles.accountLink} onClick={logout}>Logout</Link>
+            </AccountLinks>
+          }
+        
         </div>
         {currentLocation.pathname !== "/checkout" && 
           <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>

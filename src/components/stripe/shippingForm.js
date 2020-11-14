@@ -15,7 +15,7 @@ function ShippingForm(props) {
     if(checkoutInfo.shipping) {
       setMethod(checkoutInfo.shipping);
     }
-  }, [])
+  }, [checkoutInfo.shipping])
 
   function handleClick() {
     props.setStep(3);

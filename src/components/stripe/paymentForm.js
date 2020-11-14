@@ -21,22 +21,22 @@ function PaymentForm(props) {
   useEffect(() => {
     getTotal(checkoutInfo)
     .then(total => setTotal(total))
-  }, [])
+  }, [checkoutInfo])
 
   useEffect(() => {
     return () => {
       dispatch(paymentClear())
     }
-  }, [])
+  }, [checkoutInfo, dispatch])
 
   useEffect(() => {
     if(paymentStatus.success) {
       localStorage.removeItem("cart")
       dispatch(clearCart())
-      history.push(`/thankyou/${encodeURIComponent(JSON.stringify(checkoutInfo))}`);
+      history.push(`/thankyou/${encodeURIComponent(JSON.stringify(checkoutInfo))}/${encodeURIComponent(JSON.stringify(paymentStatus.orderId))}`);
       dispatch(clearCheckout());
     }
-  }, [paymentStatus])
+  }, [paymentStatus, checkoutInfo, dispatch, history])
 
   function handleChange(e) {
     e.complete ? setComplete(true) : setComplete(false);

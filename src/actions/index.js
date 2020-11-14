@@ -1,24 +1,3 @@
-// All Products
-export function loadProductsSuccess(response) {
-  return {
-    type: "PRODUCTS_SUCCESS",
-    payload: response
-  }
-}
-
-export function loadProductsRequest() {
-  return {
-    type: "PRODUCTS_REQUEST",
-  }
-}
-
-export function loadProductsError(error) {
-  return {
-    type: "PRODUCTS_ERROR",
-    payload: error
-  }
-}
-
 // Filtered products for searchbar
 export function searchProductsSuccess(response) {
   return {
@@ -270,22 +249,38 @@ export function paymentClear() {
   }
 }
 
-export function loadProducts() {
-  return function(dispatch, getState) {
-    dispatch(loadProductsRequest())
-    fetch('http://localhost:3000/products', {
-      method: "GET"
-    })
-    .then(res => res.json())
-    .then(products => dispatch(loadProductsSuccess(products)))
-    .catch(err => dispatch(loadProductsError(err)))
+// Authentication
+
+export function setLoginErrors(errors) {
+  return {
+    type: "SET_LOGIN_ERRORS",
+    payload: errors
+  }
+}
+
+export function clearLoginErrors() {
+  return {
+    type: "CLEAR_LOGIN_ERRORS"
+  }
+}
+
+export function setSignupErrors(errors) {
+  return {
+    type: "SET_LOGIN_ERRORS",
+    payload: errors
+  }
+}
+
+export function clearSignupErrors() {
+  return {
+    type: "CLEAR_LOGIN_ERRORS"
   }
 }
 
 export function loadSearchProducts(type, filter) {
-  return function(dispatch, getState) {
+  return function(dispatch) {
     dispatch(searchProductsRequest())
-    fetch(`http://localhost:3000/products/${type}/${filter}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${type}/${filter}`, {
       method: "GET"
     })
     .then(res => res.json())
@@ -297,9 +292,9 @@ export function loadSearchProducts(type, filter) {
 }
 
 export function loadResults(type, filter) {
-  return function(dispatch, getState) {
+  return function(dispatch) {
     dispatch(resultsRequest())
-    fetch(`http://localhost:3000/products/${type}/${filter}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${type}/${filter}`, {
       method: "GET"
     })
     .then(res => res.json())
@@ -313,7 +308,7 @@ export function loadResults(type, filter) {
 export function loadProductById(id) {
   return function(dispatch) {
     dispatch(singleProductRequest());
-    fetch(`http://localhost:3000/products/${id}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${id}`, {
       method: "GET"
     })
     .then(res => res.json())
@@ -327,7 +322,7 @@ export function loadProductById(id) {
 export function makePayment(amount, token, order) {
   return function(dispatch) {
     dispatch(paymentRequest());
-    fetch('http://localhost:3000/stripe/charge', {
+    fetch('https://mysterious-crag-36502.herokuapp.com/stripe/charge', {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -345,5 +340,30 @@ export function makePayment(amount, token, order) {
       }
     })
     .catch(err => dispatch(paymentError(err)));
+  }
+}
+
+export function login(username, password, history) {
+  return function(dispatch) {
+    fetch('https://mysterious-crag-36502.herokuapp.com/login', {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.token) {
+        localStorage.setItem("authentication", data.token)
+        history.push('/user')
+      }else {
+        dispatch(setLoginErrors(data.msg));
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 }

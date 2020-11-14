@@ -15,7 +15,7 @@ function SearchMenu(props) {
   const searchInputRef = useRef(null);
   const shopMenuRef = useRef(null)
   const [searchQuerry, setSearchQuerry] = useState("");
-  const debouncedSearchQuerry = useDebounce(searchQuerry, 500);
+  const debouncedSearchQuerry = useDebounce(searchQuerry);
 
   useEffect(() => {
 
@@ -42,7 +42,7 @@ function SearchMenu(props) {
       window.removeEventListener('click', handleOutsideClick);
       search.removeEventListener('keyup', handleEnterPress)
     }
-  })
+  }, [props, dispatch, history, menu, searchQuerry])
 
   useEffect(() => {
     if(!menu) {
@@ -56,7 +56,7 @@ function SearchMenu(props) {
     }else if(debouncedSearchQuerry.length > 1) {
       dispatch(loadSearchProducts("search", debouncedSearchQuerry))
     }
-  }, [debouncedSearchQuerry])
+  }, [debouncedSearchQuerry, dispatch])
 
   function handleClick(e, querry) {
     if(querry.length===0) {
@@ -85,9 +85,8 @@ function SearchMenu(props) {
           results.length===0 && debouncedSearchQuerry.length > 1 && searchQuerry.length > 0 ? 
             <div className={styles.noResult}>No matching products.</div>:
           results.length > 0 ? 
-            results.slice(0, 5).map(item => 
-            <Link onClick={(e)=> handleClick(e, "none")} className={styles.result} to={`/search/${item.name}`}>
-              <img src={item.image ? item.image : window.location.origin + "/images/noImage.png"} className={styles.resultImage}></img>
+            results.slice(0, 5).map((item, index) => 
+            <Link key={index} onClick={(e)=> handleClick(e, "none")} className={styles.result} to={`/search/${item.name}`}>
               <div className={styles.resultName}>{item.name}</div>
             </Link>)
           : null
