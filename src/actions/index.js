@@ -180,9 +180,9 @@ export function hideNotification() {
 
 // Account buttons
 
-export function showAccount() {
+export function toggleAccount() {
   return {
-    type: "SHOW_ACCOUNT"
+    type: "TOGGLE_ACCOUNT"
   }
 }
 

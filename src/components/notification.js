@@ -7,10 +7,10 @@ import styles from '../styles/notification.module.css';
 const Container = styled.div`
   position: fixed;
   height: 100px;
-  width: 300px;
+  width: 250px;
   bottom: ${props => props.top ? "25px": "-150px"};
   right: 0px;
-  transition: bottom   700ms ease-in-out;
+  transition: bottom 700ms ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;

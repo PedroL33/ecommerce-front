@@ -4,7 +4,7 @@ import styles from '../styles/nav.module.css';
 import Cart from './cart';
 import SearchMenu from './searchmenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { showMenu, showCart, showAccount, hideAccount } from '../actions';
+import { showMenu, showCart, toggleAccount, hideAccount } from '../actions';
 import { CSSTransition } from "react-transition-group";
 import styled from 'styled-components';
 import { checkAuth } from '../functions/authHelpers';
@@ -12,10 +12,10 @@ import { checkAuth } from '../functions/authHelpers';
 const AccountLinks = styled.div`
   background:  #494d5f;
   height: ${props => props.show ? "64px" : "0"};
-  opacity: ${props => props.show ? "1" : "0"};
+  transform: ${props => props.show ? "scale(1)": "scale(0)"};
   position: absolute;
   transition: all .5s ease;
-  top: 70px;
+  top: 60px;
   width: 100px;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@ function Nav() {
       </Link>
       <div className={styles.nav}>
         <div className={styles.account}>
-          <div className={styles.accountButton} ref={accountButtonRef} onClick={()=>dispatch(showAccount())}>
+          <div className={styles.accountButton} ref={accountButtonRef} onClick={()=>dispatch(toggleAccount())}>
             <i className="fas fa-user-alt"></i>
           </div>
           {!checkAuth() ? 

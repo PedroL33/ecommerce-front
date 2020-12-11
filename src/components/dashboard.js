@@ -14,6 +14,7 @@ import AdminDashboard from './adminDashborad/adminDashboard';
 import { checkAuth } from '../functions/authHelpers';
 import Footer from './footer';
 import Signup from './signup';
+import ScrollTop from './scrollTop';
 
 function Dashboard() {
 
@@ -48,6 +49,7 @@ function Dashboard() {
 
   return(
     <Router>
+      <ScrollTop />
       <Nav />
       <Notification />
       <Switch>

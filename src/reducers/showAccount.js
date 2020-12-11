@@ -1,7 +1,7 @@
 const showAccount = (state=false, action) => {
   switch(action.type) {
-    case "SHOW_ACCOUNT":
-      return true;
+    case "TOGGLE_ACCOUNT":
+      return !state;
     case "HIDE_ACCOUNT":
       return false;
     default:
