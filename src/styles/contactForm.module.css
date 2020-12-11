@@ -40,7 +40,7 @@
   width: 150px;
   font-size: 12px;
   bottom: -20px;
-  left: 10px;
+  left: 0px;
   color: rgb(253, 133, 133);
   z-index: 2;
 }
@@ -113,7 +113,7 @@
     width: 95%;
   }
   .addressRow div {
-    width: 50px;
+    width: 70px;
   }
 
   .autocompleteDropdownContainer {
