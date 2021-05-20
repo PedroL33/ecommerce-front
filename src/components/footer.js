@@ -14,7 +14,7 @@ function Footer() {
         </div>
         <div className={styles.subscribe}>
           <div className={styles.subscribeMsg}>
-            Consider subscribing to be notified of sales and recieve coupons!
+            Subscribe!
           </div>
           <form className={styles.subscribeForm}>
             <input className={styles.subscribeInput} type="text" placeholder="email"></input>

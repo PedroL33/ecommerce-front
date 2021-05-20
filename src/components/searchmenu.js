@@ -81,7 +81,7 @@ function SearchMenu(props) {
         </Link>
         <div className={styles.resultsContainer}>
           {results[0]==="loading" ? 
-            <Loader height="100px" dotSize="small" background="##a0d2eb" />: 
+            <Loader height="100px" dotSize="small" background="#dce1e3" />: 
           results.length===0 && debouncedSearchQuerry.length > 1 && searchQuerry.length > 0 ? 
             <div className={styles.noResult}>No matching products.</div>:
           results.length > 0 ? 

@@ -33,10 +33,7 @@ function ProductModal(props) {
   }, [props])
 
   function isActive() {
-    if(name !== props.item.name || category !== props.item.category || parseInt(price) !== props.item.price || description !== props.item.description || image) {
-      return true
-    } 
-    return false;
+    return name !== props.item.name || category !== props.item.category || parseInt(price) !== props.item.price || description !== props.item.description || image;
   }
 
   async function handleClick() {

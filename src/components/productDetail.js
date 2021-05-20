@@ -24,7 +24,7 @@ function ProductDetail() {
   return (
     <div className={styles.container}>
       {
-        product.status==="loading" ? <Loader height="600px" dotSize="large" /> : 
+        product.status==="loading" ? <Loader background="#fceed1" height="600px" dotSize="large" /> : 
         product.error ? <div className={styles.error}>There was an error loading products.</div>:
         <Fade>
           <div className={styles.itemContainer}>

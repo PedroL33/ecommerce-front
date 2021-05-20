@@ -1,12 +1,13 @@
 .container {
   height: 100%; 
   display: flex;
+  padding-top: 100px;
 }
 
 .emptyCart {
   width: 100%;
   height: calc(100vh - 100px);
-  background: #a0d2eb;
+  background: #fceed1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +17,7 @@
 .priceInfo {
   width: 50%;
   min-height: calc(100vh - 100px);
-  background:  #a0d2eb;
+  background:  #fceed1;
 }
 
 .formContainer {

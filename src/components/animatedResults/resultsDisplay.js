@@ -49,7 +49,7 @@ function ResultsDisplay() {
         {type==="category" && categories[querry] ? categories[querry].description : results.length===0 ? `We couldn't find anything related to '${querry}'.` : results[0] !=="loading" ? `We found ${results.length} items related to '${querry}'`: null}
       </div>
       {
-        results[0] === "loading" ? <Loader background="#e5eaf5" height="400px" dotSize="large" /> : 
+        results[0] === "loading" ? <Loader background="white" height="400px" dotSize="large" /> : 
         results.error ? <div className={styles.error}>{results.error}</div>:
         <div className={styles.results}>
           {

@@ -1,6 +1,6 @@
 .container {
-  background: #494d5f;
-  color: #e5eaf5;
+  background: #5c5f58;
+  color: #fceed1;
 }
 
 .row {
@@ -41,7 +41,6 @@
   display: flex;
   justify-content: center;
   height: 50px;
-  border: 1px solid #a0d2eb;;
   margin: 20px auto 0 auto;
 }
 
@@ -53,7 +52,7 @@
 
 .subscribeButton {
   border: none; 
-  background: #a0d2eb;
+  background: #cd5554;
   color: white;
   font-size: 24px;
   padding: 0 10px;

@@ -1,72 +1,65 @@
 .container {
   overflow: hidden;
+  padding-top: 100px;
 }
 
 .header {
-  min-height: calc(100vh - 100px);
-  background: #d0bdf4;
+  width: 100%;
+  height: calc(95vh - 300px);
+  background: #cd5554;
   display: flex;
-}
-
-.greeting, .deal {
-  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  position: relative;
 }
 
-.deal {
-  width: 40%; 
-  transform: skewX(-30deg);
-  background: #a0d2eb;
+.title {
+  margin-top: 150px;
+  padding: 30px 100px;
+  border: 3px solid #fceed1;
+  border-radius: 10px;
+  font-size: 56px;
+  color: #fceed1;
+}
+
+.desc {
+  font-size: 32px;
+  padding: 10px;
+  color: #fceed1;
+}
+
+.action {
+  margin: 10px;
+  padding: 10px 20px;
+  background: #fceed1;
+  border-radius: 5px;
+  color: #cd5554;
+  font-size: 24px;
+  transition: all 300ms ease;
+}
+
+.action:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.header svg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -300px;
+  height: 300px;
+  width: 100%;
+  z-index: 1;
 }
 
 .greeting {
-  background:#e5eaf5;
-  width: 60%;
-  transform: skewX(200deg);
-}
-
-.msgContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transform: skewX(30deg);
-}
-
-.dealMsg, .greetingMsg {
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-.dealMsg {  
-  width: 400px;
   font-size: 36px;
-  text-align: right;
-  font-style: italic;
-}
+  padding: 400px 0 200px 0;
+  text-align: center;
+  background: #fceed1;
 
-.greetingMsg {
-  width: 500px;
-  transform: skewX(-200deg);
-  font-size: 36px;
-  font-weight: 200;
-}
-
-.signupButton {
-  font-size: 24px;
-  padding: 10px 30px;
-  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
-  border: none;
-  border-radius: 10px;
-  background:  #8458b3;
-  color: white;
-}
-
-.signupButton:hover {
-  cursor: pointer;
-  background:  #9664cc;
 }
 
 .categoryContainer {
@@ -79,7 +72,6 @@
 .category {
   width: 33.333%;
   padding-top: 33.333%;
-  background: grey;
   background-position: center;
   background-size: 100% 100%;
   position: relative;
@@ -107,7 +99,7 @@
   color: rgb(255, 255, 255);
   width: 15%;
   height: 15%;
-  background: #8458b3;
+  background: #cd5554;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -116,11 +108,12 @@
   text-align: center;
   font-weight: 200;
   font-size: 24px;
-  opacity: 0.9;
+  transform: scale(1);
+  transition: all 300ms ease;
 }
 
 .categoryLink:hover {
-  opacity: 1; 
+  transform: scale(1.2);
 }
 
 @media screen and (max-width: 800px) {

@@ -4,11 +4,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  background: #494d5f;
-  color: #e5eaf5;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  background: #5c5f58;
+  color: #dce1e3;
   font-size: 20px;
   z-index: 2;
+  box-shadow: 1px 1px 1px #fceed1;
 }
 
 a {
@@ -16,12 +19,17 @@ a {
   text-decoration: none;
 }
 
-.shop, .nav {
+.nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
+  width: 100%;
   padding: 0 20px;
+}
+
+.right {
+  display: flex;
 }
 
 .account, .cartButton, .shopLink {
@@ -50,18 +58,10 @@ a {
 }
 
 .logo {
-  position: absolute;
-  width: 150px;
-  left: 50%;
   text-align: center;
-  margin-left: -75px;
   color: #e5eaf5;
   transition: .3s ease;
-  font-size: 36px;
-}
-
-.logo:hover {
-  color: #a0d2eb;
+  font-size: 24px;
 }
 
 .cartCount {

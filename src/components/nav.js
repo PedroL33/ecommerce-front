@@ -55,39 +55,40 @@ function Nav() {
   return(
     <div className={styles.container}>
       <div className={styles.shop}>
-        <div className={styles.shopLink} ref={shopButtonRef} onClick={()=> dispatch(showMenu())}>
-          <i className="fas fa-search"></i>
-        </div>
         <CSSTransition in={menu} mountOnEnter unmountOnExit classNames='shopMenu' timeout={500} >
           <SearchMenu button={shopButtonRef} />
         </CSSTransition>
       </div>
-      <Link to="/" className={styles.logo}>
-        <i className="fas fa-store"></i>
-      </Link>
       <div className={styles.nav}>
-        <div className={styles.account}>
-          <div className={styles.accountButton} ref={accountButtonRef} onClick={()=>dispatch(toggleAccount())}>
-            <i className="fas fa-user-alt"></i>
+        <Link to="/" className={styles.logo}>
+          E-commerce
+        </Link>
+        <div className={styles.right}>
+          <div className={styles.account}>
+            <div className={styles.accountButton} ref={accountButtonRef} onClick={()=>dispatch(toggleAccount())}>
+              <i className="fas fa-user-alt"></i>
+            </div>
+            {!checkAuth() ? 
+              <AccountLinks show={account}>
+                <Link to="/Login" className={styles.accountLink}>Login</Link>
+                <Link to="/Signup" className={styles.accountLink}>Signup</Link>
+              </AccountLinks>:
+              <AccountLinks show={account}>
+                <Link to="/user" className={styles.accountLink}>Home</Link>
+                <Link to="/" className={styles.accountLink} onClick={logout}>Logout</Link>
+              </AccountLinks>
+            }
           </div>
-          {!checkAuth() ? 
-            <AccountLinks show={account}>
-              <Link to="/Login" className={styles.accountLink}>Login</Link>
-              <Link to="/Signup" className={styles.accountLink}>Signup</Link>
-            </AccountLinks>:
-            <AccountLinks show={account}>
-              <Link to="/user" className={styles.accountLink}>Home</Link>
-              <Link to="/" className={styles.accountLink} onClick={logout}>Logout</Link>
-            </AccountLinks>
-          }
-        
+          <div className={styles.shopLink} ref={shopButtonRef} onClick={()=> dispatch(showMenu())}>
+            <i className="fas fa-search"></i>
+          </div>
+          {currentLocation.pathname !== "/checkout" && 
+            <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
+              <i className="fas fa-shopping-cart"></i>  
+              {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.count).reduce((x,y) => x+y)}</div>}
+            </div>  
+          } 
         </div>
-        {currentLocation.pathname !== "/checkout" && 
-          <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
-            <i className="fas fa-shopping-cart"></i>  
-            {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.count).reduce((x,y) => x+y)}</div>}
-          </div>  
-        } 
       </div>
       <CSSTransition in={displayCart} mountOnEnter unmountOnExit classNames='cart' timeout={300} >
         <Cart button={cartButtonRef} />

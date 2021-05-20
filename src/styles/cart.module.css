@@ -5,10 +5,10 @@
   opacity: 1;
   position: fixed;
   z-index: 5;
-  background: #a0d2eb;
+  background: #cd5554;
   width: 300px;
   overflow: hidden;
-  color: #494d5f;
+  color: #fceed1;
 }
 
 .content {

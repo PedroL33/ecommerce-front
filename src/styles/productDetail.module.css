@@ -1,5 +1,6 @@
 .container {
-  background: #d0bdf4;
+  padding-top: 100px;
+  background: #fceed1;
   min-height: 600px;
   display: flex;
   align-items: center;
@@ -22,7 +23,6 @@
 
 .itemRow {
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   flex-grow: grow;
 }

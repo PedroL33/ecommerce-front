@@ -5,10 +5,10 @@
 
 .button {
   padding: 10px 15px;
-  background: linear-gradient(180deg, rgba(208,189,244,1) 0%, rgba(160,210,235,1) 0%, rgba(229,234,245,1) 100%); 
-  color: #494d5f;
+  background: #cd5554; 
+  color: #dce1e3;
   border-radius: 10px;
-  border: 1px solid #e5eaf5;
+  /* border: 1px solid #e5eaf5; */
   font-size: 16px;
   text-align: center;
   line-height: 25px;

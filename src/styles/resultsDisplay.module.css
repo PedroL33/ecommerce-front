@@ -4,22 +4,23 @@
   align-items: center;
   justify-content: center;
   font-size: 36px;
-  background: #e5eaf5;
+  background: white;
   text-align: center;
-  padding: 20px;
+  padding-top: 100px;
 }
 
 .results {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background: #e5eaf5;
+  background: white;
   padding-bottom: 100px;
 }
 
 .result {
   margin: 50px 30px;
-  background: #494d5f;
+  background: #faeed6;
+  color: #5c5f58;
   padding: 20px;
   transition: background 300ms ease;
   box-shadow: rgba(67, 67, 78, 0.11) 0px 10px 15px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;

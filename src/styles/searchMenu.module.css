@@ -4,8 +4,8 @@
   width: calc(100% - 2px);
   top: 100px;
   height: 200px;
-  background: #494d5f;
-  color: #e5eaf5;
+  background: #dce1e3;
+  color: #5c5f58;
   z-index: 2;
 }
 
@@ -16,6 +16,10 @@
   margin: auto;
   padding: 40px;
   justify-content: space-around;
+}
+
+.categoryContainer a {
+  color: #494d5f;
 }
 
 .searchbarContainer {
