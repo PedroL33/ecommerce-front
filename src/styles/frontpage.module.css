@@ -21,12 +21,14 @@
   border-radius: 10px;
   font-size: 56px;
   color: #fceed1;
+  z-index: 2;
 }
 
 .desc {
   font-size: 32px;
   padding: 10px;
   color: #fceed1;
+  z-index: 2;
 }
 
 .action {
@@ -37,6 +39,7 @@
   color: #cd5554;
   font-size: 24px;
   transition: all 300ms ease;
+  z-index: 2;
 }
 
 .action:hover {
@@ -128,6 +131,19 @@
     flex-direction: column;
   }
 
+  .title {
+    font-size: 32px;
+    padding: 20px 60px;
+  }
+
+  .desc {
+    font-size: 18px;
+  }
+
+  .action {
+    font-size: 20px;
+  }
+
   .deal, .greeting {
     width: 100%;
     flex-grow: 1;
@@ -135,24 +151,10 @@
   .deal {
     margin-left: 25px;
   }
-  .deal {
-    transform: skewX(45deg) 
-  }
-
-  .msgContainer {
-    transform: skewX(-45deg) 
-  }
-
-  .greeting {
-    transform: skewX(-45deg) 
-  }
-
-  .greetingMsg {
-    transform: skewX(45deg) 
-  }
 }
 
 @media screen and (max-width: 600px) {
+
   .dealMsg {
     font-size: 20px;
     width: 300px;

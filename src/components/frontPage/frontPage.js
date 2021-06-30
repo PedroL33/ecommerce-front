@@ -13,7 +13,6 @@ function FrontPage() {
       </div>
       <div className={styles.greeting}>
         <div>Check out what we have!</div>
-        <div>(Items are fake so don't buy anything.)</div>
       </div>
       <div className={styles.categoryContainer}>
         <div className={styles.category} style={{backgroundImage: `url(${window.location.origin + '/images/things.jpg'})`}}>
