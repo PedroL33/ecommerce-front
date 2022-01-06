@@ -14,6 +14,7 @@ import paymentStatus from './paymentStatus';
 import loginErrors from './loginErrors';
 import signupErrors from './signupErrors';
 import activeOrders from './activeOrders';
+import activeOrderItems from './activeOrderItems';
 
 const rootReducer = combineReducers({
   products,
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   loginErrors,
   signupErrors,
   activeOrders, 
+  activeOrderItems
 });
 
 export default rootReducer;

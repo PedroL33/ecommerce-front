@@ -20,7 +20,7 @@
   width: 100%;
   background:rgb(233, 233, 233);
   min-height: calc(100vh - 100px);
-  padding-bottom: 50px;
+  padding: 50px 0;
 }
 
 .tabs {

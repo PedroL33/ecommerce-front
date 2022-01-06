@@ -59,9 +59,9 @@ function Dashboard() {
 
         <PrivateRoute path="/user" component={AdminDashboard}></PrivateRoute>
 
-        <Route path="/search/:querry" component={ResultsDisplay}></Route>
+        <Route path="/search/:value" component={ResultsDisplay}></Route>
 
-        <Route path="/category/:querry" component={ResultsDisplay}></Route>
+        <Route path="/category/:value" component={ResultsDisplay}></Route>
         
         <Route path="/item/:id" component={ProductDetail}></Route>
 

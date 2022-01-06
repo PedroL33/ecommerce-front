@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getActiveOrders } from '../../actions/adminActions';
-import { useHistory } from 'react-router-dom';
+import { getActiveOrders } from '../../actions/apiCalls/orders';
 import styles from '../../styles/orderDisplay.module.css';
 import moment from 'moment';
 import OrderModal from './orderModal';
@@ -9,13 +8,12 @@ import OrderModal from './orderModal';
 function OrderDisplay() {
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const orders = useSelector(state => state.activeOrders);
   const [showModal, setShowModal] = useState(-1)
 
   useEffect(() => {
-    dispatch(getActiveOrders(history))
-  }, [dispatch, history])
+    dispatch(getActiveOrders())
+  }, [dispatch])
 
   return (
     <div className={styles.container}>
@@ -26,8 +24,8 @@ function OrderDisplay() {
       </div>
       {orders[0] !== "loading" && orders.length ? orders.map((order, index) => (
         <div className={styles.order} key={index}>
-          <div className={styles.orderItem}>{order._id}</div>
-          <div className={styles.orderItem}>{moment(order.date).fromNow()}</div>
+          <div className={styles.orderItem}>{order.id}</div>
+          <div className={styles.orderItem}>{moment(order.ordered_at).fromNow()}</div>
           <div className={styles.orderItem}><i className={`fas fa-info-circle ${styles.moreInfo}`} onClick={(e) => setShowModal(index)}></i></div>
           {showModal===index && <OrderModal setShowModal={setShowModal} order={order} />}
         </div>

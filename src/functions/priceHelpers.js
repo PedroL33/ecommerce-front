@@ -6,9 +6,9 @@ export function centsToPrice(cents) {
   }
 }
 
-export function getSubtotal(cart) {
-  if(cart.length) {
-    return cart.map(item => item.price * item.count).reduce((a,b) => a+b)
+export function getSubtotal(items) {
+  if(items.length) {
+    return items.map(item => item.price * item.quantity).reduce((a,b) => a+b)
   }else {
     return 0;
   }
@@ -27,16 +27,20 @@ export function getTax(zip) {
   })
 }
 
-export async function getTotal(checkoutInfo) {
+const getShipping = (orderDetails) => {
+  return orderDetails.shipping === 'USPS Priority Mail' ? 500: 2500;
+} 
+
+export async function getTotal(items, details) {
   let total = {};
-  if(checkoutInfo.order) {
-    total.subtotal = getSubtotal(checkoutInfo.order)
-    if(checkoutInfo.contact) {
-      const zip = checkoutInfo.contact.address.split(",")[4]
+  if(items.length) {
+    total.subtotal = getSubtotal(items)
+    if(details.shipping_address) {
+      const zip = details.shipping_address.split(",")[4]
       const rate = await getTax(zip.trim())
       total.tax = rate*total.subtotal;
-      if(checkoutInfo.shipping) {
-        total.shipping = checkoutInfo.shipping.price + (checkoutInfo.shipping.price * rate)
+      if(details.shipping) {
+        total.shipping = getShipping(details) + (getShipping(details) * rate)
       }
     }
   }

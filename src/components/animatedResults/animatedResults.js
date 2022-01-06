@@ -30,7 +30,6 @@ const AnimatedResults = function( {children} ) {
         const lastBox = boundingBox[child.key];
         const changeX = firstBox.left - lastBox.left;
         const changeY = firstBox.top - lastBox.top;
-
         if(changeX !== 0 || changeY !==0) {
           requestAnimationFrame(() => {
             domNode.style.transform = `translateX(${changeX}px) translateY(${changeY - (yOffset-prevYOffset)}px)`;

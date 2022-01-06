@@ -2,7 +2,8 @@ import React, { useEffect, createRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import { loadResults, clearResults, sortResults } from '../../actions';
+import { clearResults, sortResults } from '../../actions';
+import { loadResults } from '../../actions/apiCalls/products';
 import categories from '../../constants/categories.json';
 import styles from '../../styles/resultsDisplay.module.css';
 import AnimatedResults from './animatedResults';
@@ -14,15 +15,15 @@ function ResultsDisplay() {
 
   const dispatch = useDispatch();
   const results = useSelector(state => state.results);
-  const {querry} = useParams();
+  const { value } = useParams();
   const type = useLocation().pathname.split("/")[1];
 
   useEffect(() => {
-    dispatch(loadResults(type, querry))
+    dispatch(loadResults(type, value))
     return () => {
       dispatch(clearResults())
     }
-  }, [querry, dispatch, type])
+  }, [value, dispatch, type])
 
   function handleChange(e) {
     switch(e.target.value) {
@@ -46,7 +47,7 @@ function ResultsDisplay() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {type==="category" && categories[querry] ? categories[querry].description : results.length===0 ? `We couldn't find anything related to '${querry}'.` : results[0] !=="loading" ? `We found ${results.length} items related to '${querry}'`: null}
+        {type==="category" && categories[value] ? categories[value].description : results.length===0 ? `We couldn't find anything related to '${value}'.` : results[0] !=="loading" ? `We found ${results.length} items related to '${value}'`: null}
       </div>
       {
         results[0] === "loading" ? <Loader background="white" height="400px" dotSize="large" /> : 
@@ -70,7 +71,7 @@ function ResultsDisplay() {
           {  
             results.length ? <AnimatedResults>
               { results.map((item) => 
-                <Link key={item._id} className={styles.result} ref={createRef()} to={`/item/${item._id}`}>
+                <Link key={item.id} className={styles.result} ref={createRef()} to={`/item/${item.id}`}>
                   <Fade>
                     <div className={styles.resultImage} style={{backgroundImage: `url(${item.image ? item.image: window.location.origin + "/images/noImage.png"})`}}></div>
                     <div className={styles.resultDetails}>

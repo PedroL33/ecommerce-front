@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { loadProductById, singleProductClear } from '../actions';
+import { singleProductClear } from '../actions';
+import { loadProductById } from '../actions/apiCalls/products';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './loader';

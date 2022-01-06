@@ -44,30 +44,31 @@ export function clearProducts() {
   }
 }
 
-export function getActiveOrders(history) {
-  return function(dispatch) {
-    dispatch(activeOrdersRequest()) 
-    fetch("https://mysterious-crag-36502.herokuapp.com/orders/active", {
-      method: "get",
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem("authentication")}`
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.error) {
-        dispatch(activeOrdersError([data]))
-        history.push('/login')
-      }else {
-        dispatch(activeOrdersSuccess(data))
-      }
-    })
-    .catch(err => {
-      dispatch(activeOrdersError(err));
-    })
+export function activeOrderItemsRequest() {
+  return {
+    type: "ACTIVE_ORDER_ITEMS_REQUEST"
   }
 }
 
+export function activeOrderItemsSuccess(response) {
+  return {
+    type: "ACTIVE_ORDER_ITEMS_SUCCESS",
+    payload: response
+  }
+}
+
+export function activeOrderItemsError() {
+  return {
+    type: "ACTIVE_ORDER_ITEMS_ERROR"
+  }
+}
+
+export function clearActiveOrderItems() {
+  return {
+    type: "CLEAR_ACTIVE_ORDER_ITEMS"
+  }
+}
+ 
 export function loadProducts() {
   return function(dispatch) {
     dispatch(loadProductsRequest())

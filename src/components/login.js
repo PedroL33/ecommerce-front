@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { login, clearLoginErrors } from '../actions';
+import { clearLoginErrors } from '../actions';
+import { login } from '../actions/apiCalls/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styles from '../styles/login.module.css';

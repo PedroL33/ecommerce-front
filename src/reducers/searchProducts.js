@@ -5,6 +5,7 @@ const searchProducts = (state=[], action) => {
     case "SEARCH_PRODUCTS_ERROR":
       return action.payload
     case "SEARCH_PRODUCTS_SUCCESS":
+      console.log(action.payload)
       return action.payload
     case "SEARCH_PRODUCTS_CLEAR":
       return [];

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchProductsClear, loadSearchProducts, hideMenu } from '../actions';
+import { searchProductsClear, hideMenu } from '../actions';
+import { loadSearchProducts } from '../actions/apiCalls/products';
 import styles from '../styles/searchMenu.module.css';
 import useDebounce from '../functions/debounce';
 import Loader from './loader';
@@ -14,8 +15,8 @@ function SearchMenu(props) {
   const menu = useSelector(state => state.showMenu);
   const searchInputRef = useRef(null);
   const shopMenuRef = useRef(null)
-  const [searchQuerry, setSearchQuerry] = useState("");
-  const debouncedSearchQuerry = useDebounce(searchQuerry);
+  const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearchQuery = useDebounce(searchQuery);
 
   useEffect(() => {
 
@@ -29,11 +30,11 @@ function SearchMenu(props) {
     }
 
     function handleEnterPress(e) {
-      if(e.keyCode===13 && searchQuerry.length !== 0) {
+      if(e.keyCode===13 && searchQuery.length !== 0) {
         e.preventDefault();
         dispatch(hideMenu());
         dispatch(searchProductsClear())
-        history.push(`/search/${searchQuerry}`)
+        history.push(`/search/${searchQuery}`)
       }
     }
     search.addEventListener('keyup', handleEnterPress)
@@ -42,7 +43,7 @@ function SearchMenu(props) {
       window.removeEventListener('click', handleOutsideClick);
       search.removeEventListener('keyup', handleEnterPress)
     }
-  }, [props, dispatch, history, menu, searchQuerry])
+  }, [props, dispatch, history, menu, searchQuery])
 
   useEffect(() => {
     if(!menu) {
@@ -51,15 +52,15 @@ function SearchMenu(props) {
   }, [menu])
 
   useEffect(() => {
-    if(debouncedSearchQuerry.length <= 1) {
+    if(debouncedSearchQuery.length <= 1) {
       dispatch(searchProductsClear())
-    }else if(debouncedSearchQuerry.length > 1) {
-      dispatch(loadSearchProducts("search", debouncedSearchQuerry))
+    }else if(debouncedSearchQuery.length > 1) {
+      dispatch(loadSearchProducts(debouncedSearchQuery))
     }
-  }, [debouncedSearchQuerry, dispatch])
+  }, [debouncedSearchQuery, dispatch])
 
-  function handleClick(e, querry) {
-    if(querry.length===0) {
+  function handleClick(e, query) {
+    if(query.length===0) {
       e.preventDefault()
     }else {
       dispatch(searchProductsClear());
@@ -75,14 +76,14 @@ function SearchMenu(props) {
         <Link onClick={(e)=> handleClick(e, "none")} to="/category/gadgets">Gadgets</Link>
       </ul>
       <div className={styles.searchbarContainer}>
-        <input className={styles.searchbar} placeholder="search..." type="text" ref={searchInputRef} onChange={(e)=>setSearchQuerry(e.target.value)} /> 
-        <Link to={ `/search/${searchQuerry}`} onClick={(e) => handleClick(e, searchQuerry)}>
+        <input className={styles.searchbar} placeholder="search..." type="text" ref={searchInputRef} onChange={(e)=>setSearchQuery(e.target.value)} /> 
+        <Link to={ `/search/${searchQuery}`} onClick={(e) => handleClick(e, searchQuery)}>
           <i className={styles.searchIcon +" fas fa-search"}></i>
         </Link>
         <div className={styles.resultsContainer}>
           {results[0]==="loading" ? 
             <Loader height="100px" dotSize="small" background="#dce1e3" />: 
-          results.length===0 && debouncedSearchQuerry.length > 1 && searchQuerry.length > 0 ? 
+          results.length===0 && debouncedSearchQuery.length > 1 && searchQuery.length > 0 ? 
             <div className={styles.noResult}>No matching products.</div>:
           results.length > 0 ? 
             results.slice(0, 5).map((item, index) => 
@@ -92,7 +93,7 @@ function SearchMenu(props) {
           : null
           }
           {results.length > 0 && results[0] !== "loading" ? <div className={styles.seeAllContainer}>
-            <Link className={styles.seeAll} onClick={(e)=> handleClick(e, "none")} to={`/search/${debouncedSearchQuerry}`}>See all results. </Link>  
+            <Link className={styles.seeAll} onClick={(e)=> handleClick(e, "none")} to={`/search/${debouncedSearchQuery}`}>See all results. </Link>  
           </div>: null}
         </div>
       </div>

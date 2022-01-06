@@ -277,48 +277,6 @@ export function clearSignupErrors() {
   }
 }
 
-export function loadSearchProducts(type, filter) {
-  return function(dispatch) {
-    dispatch(searchProductsRequest())
-    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${type}/${filter}`, {
-      method: "GET"
-    })
-    .then(res => res.json())
-    .then(products => {
-      setTimeout(() => dispatch(searchProductsSuccess(products)), 500)
-    })
-    .catch(err => dispatch(searchProductsError([err])))
-  }
-}
-
-export function loadResults(type, filter) {
-  return function(dispatch) {
-    dispatch(resultsRequest())
-    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${type}/${filter}`, {
-      method: "GET"
-    })
-    .then(res => res.json())
-    .then(products => {
-      setTimeout(() => dispatch(resultsSuccess(products)), 1000)
-    })
-    .catch(err => dispatch(resultsError(err)))
-  }
-}
-
-export function loadProductById(id) {
-  return function(dispatch) {
-    dispatch(singleProductRequest());
-    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${id}`, {
-      method: "GET"
-    })
-    .then(res => res.json())
-    .then(product => {
-      setTimeout(() => dispatch(singleProductSuccess(product)), 1000);
-    })
-    .catch(err => dispatch(singleProductError(err)), 1000);
-  }
-}
-
 export function makePayment(amount, token, order) {
   return function(dispatch) {
     dispatch(paymentRequest());
@@ -340,30 +298,5 @@ export function makePayment(amount, token, order) {
       }
     })
     .catch(err => dispatch(paymentError(err)));
-  }
-}
-
-export function login(username, password, history) {
-  return function(dispatch) {
-    fetch('https://mysterious-crag-36502.herokuapp.com/login', {
-      method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.token) {
-        localStorage.setItem("authentication", data.token)
-        history.push('/user')
-      }else {
-        dispatch(setLoginErrors(data.msg));
-      }
-    })
-    .catch(err => {
-      console.log(err)
-    })
   }
 }
