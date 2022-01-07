@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from '../../styles/adminModals.module.css';
 import { useDispatch } from 'react-redux';
-import { updateProducts, uploadPhoto } from '../../actions/adminActions';
+import { updateProducts, uploadPhoto, loadAllProducts } from '../../actions/apiCalls/products';
 
 function ProductModal(props) {
 
@@ -10,11 +10,10 @@ function ProductModal(props) {
   const [name, setName] = useState(props.item.name);
   const [category, setCategory] = useState(props.item.category);
   const [price, setPrice] = useState(props.item.price);
+  const [stock, setStock] = useState(props.item.stock);
   const [description, setDescription] = useState(props.item.description);
   const [image, setImage] = useState(null)
   const [imgUrl, setImgUrl] = useState("");
-  const [remove, setRemove] = useState([]);
-  const [add, setAdd] = useState("");
 
   useEffect(() => {
 
@@ -32,24 +31,36 @@ function ProductModal(props) {
     }
   }, [props])
 
-  function isActive() {
-    return name !== props.item.name || category !== props.item.category || parseInt(price) !== props.item.price || description !== props.item.description || image;
+  function updateProductIsActive() {
+    return name !== props.item.name ||
+    category !== props.item.category ||
+    parseInt(price) !== props.item.price ||
+    description !== props.item.description ||
+    stock !== props.item.stock
+  }
+
+  function updatePhotoIsActive() {
+    return image
   }
 
   async function handleClick() {
-    const newProd = {
-      name: name,
-      category: category,
-      price: price,
-      description: description
+    if(updateProductIsActive()) {
+      const newProd = {
+        name,
+        category,
+        price,
+        description,
+        stock
+      }
+      dispatch(updateProducts(props.item.id, newProd))
     }
-    props.setShowModal(-1);
-    if(image) {
+    if(updatePhotoIsActive()) {
       let fd = new FormData();
       fd.append("image", image[0])
-      await dispatch(uploadPhoto(props.item._id, fd))
+      await dispatch(uploadPhoto(props.item.id, fd))
     }
-    dispatch(updateProducts(props.item._id, newProd))
+    props.setShowModal(-1);
+    dispatch(loadAllProducts());
   }
 
   function handleChange(e) {
@@ -65,32 +76,21 @@ function ProductModal(props) {
     setImage(null)
   }
 
-  function addCategory(item) {
-    setCategory([...category, item])
-    setAdd("");
-  }
-
-  function removeCategory(items) {
-    setCategory(category.filter(item => !items.includes(item)))
-    setRemove([])
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.modal} ref={modalRef}>
         <div className={styles.modalHeader}>
-          {props.item._id}
+          Item ID: {props.item.id}
         </div>
-        <div className={styles.modalItem}>
-          <div className={styles.modalImage} style={{backgroundImage: `url(${imgUrl ? imgUrl : props.item.image ? props.item.image : window.location.origin+"/images/noImage.png" })`}}>
-            <div className={styles.imgUpload}>
+        <div className={styles.modalImageContainer}>
+          <img className={styles.modalImage} src={`${imgUrl ? imgUrl : props.item.image ? props.item.image : window.location.origin+"/images/noImage.png"}`} />
+          <div className={styles.imgUpload}>
               <label>
                 <input type="file" onChange={handleChange}></input>
                 <div className={styles.uploadButton}><i class="fas fa-plus"></i></div>
               </label>
               <button className={styles.uploadButton} disabled={imgUrl ? false: true} onClick={(e) => clearImg(e)}><i class="fas fa-times"></i></button>
             </div>  
-          </div>
         </div>
         <div className={styles.row}>
           <div className={styles.modalItem}>
@@ -102,19 +102,14 @@ function ProductModal(props) {
             <input className={styles.modalInput} type="number" min="0" value={price} onChange={(e) => setPrice(e.target.value)} />
           </div>
         </div>
-        <div className={styles.modalItem}>
-          <label className={styles.modalLabel}>Category: </label>
-          <div className={styles.categoryContainer}>
-            {category.map((item, index) => (
-              <div key={index} className={remove.includes(item) ? `${styles.category} ${styles.active}`: styles.category} onClick={() => remove.includes(item) ? setRemove(remove.filter(remove => remove !== item)) : setRemove([...remove, item])}>{item}</div>
-            ))}
-            <input onChange={(e) => setAdd(e.target.value)} placeholder="..." value={add} className={styles.categoryInp} type="text"></input>
-            <button className={styles.catButton} disabled={add.length ? false : true} onClick={() => addCategory(add)}>
-              <i className="fas fa-plus"></i>
-            </button>
-            <button className={styles.catButton} disabled={remove.length ? false : true} onClick={() => removeCategory(remove)}>
-              <i className="fas fa-minus"></i>
-            </button>
+        <div className={styles.row}>
+          <div className={styles.modalItem}>
+            <label className={styles.modalLabel}>Stock: </label>
+            <input className={styles.modalInput} type="number" min="0" value={stock} onChange={(e) => setStock(e.target.value)} />
+          </div>
+          <div className={styles.modalItem}>
+            <label className={styles.modalLabel}>Category: </label>
+            <input className={styles.modalInput} type="text" value={category} onChange={(e) => setCategory(e.target.value)}/>
           </div>
         </div>
         <div className={styles.modalItem}>
@@ -122,7 +117,7 @@ function ProductModal(props) {
           <textarea className={styles.modalTextarea} value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
         <div className={styles.submitContainer}>
-          <button className={styles.modalSubmit} disabled={isActive() ? false: true} onClick={handleClick}>Submit</button>
+          <button className={styles.modalSubmit} disabled={updateProductIsActive() || updatePhotoIsActive() ? false: true} onClick={handleClick}>Submit</button>
         </div>
       </div>
     </div>

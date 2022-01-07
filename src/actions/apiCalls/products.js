@@ -1,4 +1,5 @@
 import * as actions from '../';
+import * as adminActions from '../adminActions';
 
 export function loadSearchProducts(value) {
   return function(dispatch) {
@@ -39,5 +40,50 @@ export function loadProductById(id) {
       setTimeout(() => dispatch(actions.singleProductSuccess(product)), 1000);
     })
     .catch(err => dispatch(actions.singleProductError(err)), 1000);
+  }
+}
+
+export function loadAllProducts() {
+  return function(dispatch) {
+    dispatch(adminActions.loadProductsRequest())
+    fetch('http://localhost:3000/products', {
+      method: "GET"
+    })
+    .then(res => res.json())
+    .then(products => {
+      dispatch(adminActions.loadProductsSuccess(products))
+    })
+    .catch(err => dispatch(adminActions.loadProductsError(err)))
+  }
+}
+
+export function updateProducts(id, newProduct) {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/products/${id}`, {
+      method: "PUT", 
+      headers: {
+        'Authorization': `Bearer: ${localStorage.getItem("authentication")}`,
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(
+        newProduct
+      )
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+}
+
+
+export function uploadPhoto(id, image) {
+  return async function(dispatch) {
+    await fetch(`http://localhost:3000/products/uploadPhoto/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer: ${localStorage.getItem("authentication")}`,
+      },
+      body: image
+    })
   }
 }

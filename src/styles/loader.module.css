@@ -6,15 +6,13 @@
 }
 
 .container div {
-  background: #a0d2eb;
+  background: #494d5f;
 }
 
 .container div:nth-child(2) {
   animation-delay: .2s;
-  background: #8458b3;
 }
 
 .container div:nth-child(3) {
   animation-delay: .4s;
-  background: #494d5f;
 }

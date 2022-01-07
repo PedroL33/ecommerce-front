@@ -7,7 +7,6 @@
   left: 0;
   z-index: 100;
   display: flex;
-  overflow: auto;
 }
 
 .row {
@@ -15,20 +14,27 @@
 }
 
 .modal {
-  width: 600px;
-  height: 900px;
+  width: 900px;
+  height: 90vh;
   margin: auto;
   background: rgb(223, 223, 223);
   color:  #494d5f;
   overflow: auto;
   display: flex;
   flex-direction: column;
+  border-radius:15px;
+}
+
+.modalImageContainer {
+  width:auto;
+  margin: auto;
+  position: relative;
 }
 
 .modalImage {
-  width: 200px;
-  height: 200px;
-  background-size: auto 100%;
+  max-width: 300px;
+  height: auto;
+  background-size: 100% auto;
   background-position: center;
   margin: auto;
   position: relative;
@@ -44,16 +50,18 @@
 .modalItem {
   padding: 10px 30px;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .modalLabel {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 500;
 }
 
 .modalInput, .modalTextarea {
   border: none;
-  background: rgb(223, 223, 223); 
+  background: rgb(241, 241, 241); 
   padding: 5px;
   width: calc(100% - 10px);
   font-size: 18px;
@@ -66,13 +74,13 @@
 }
 
 .modalTextarea {
-  height: 250px;
+  min-height: 100px;
   font-size: 14px;
 }
 
 .modalInfo {
   display: inline;
-  font-weight: 800;
+  font-weight: 200;
 }
 
 .modalClose {
@@ -113,37 +121,6 @@
   cursor: pointer;
 }
 
-.categoryContainer {
-  display: flex;
-  align-items: center;
-}
-
-.categoryInp {
-  border: none;
-  background: rgb(223, 223, 223);
-  width: 50px;
-  padding: 0 10px;
-  margin: 0 10px;
-  font-size: 16px;
-}
-
-.category {
-  background: rgb(255, 255, 255);
-  padding: 5px;
-  margin: 5px 5px 0 5px;
-  border-radius: 5px;
-  border: 1px solid white;
-  box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
-}
-
-.category.active {
-  border: 1px solid red;
-}
-
-.category:hover {
-  cursor: pointer;
-}
-
 .imgUpload {
   position: absolute;
   top: 5px;
@@ -151,41 +128,38 @@
   display: flex;
 }
 
-.uploadButton, .catButton {
+.uploadButton {
   border: none;
-  background: rgb(255, 255, 255);
   margin: 5px;
   padding: 0;
-  background: #a0d2eb;
+  background: rgb(255, 255, 255, 0.01);
   border-radius: 5px;
-  box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
 }
 
-.uploadButton i, .catButton i {
+.uploadButton i {
   font-size: 16px;
   height: 20px;
   width: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8458b3;
+  color: green;
 }
 
-.uploadButton:disabled, .catButton:disabled {
-  background: rgb(245, 245, 245);
-  opacity: 0.8; 
+.uploadButton:disabled {
+  background: rgb(245, 245, 245, 0.01);
   cursor: auto;
 }
 
-.uploadButton:disabled i, .catButton:disabled i {
+.uploadButton:disabled i{
   color: grey;
 }
 
-.uploadButton:disabled:hover, .catButton:disabled:hover {
+.uploadButton:disabled:hover {
   cursor: auto;
 }
 
-.uploadButton:hover, .catButton:hover {
+.uploadButton:hover {
   cursor: pointer;
   opacity: 0.8;
 }
@@ -203,7 +177,7 @@ input[type="file"] {
   text-indent: 20px;
   background: #a0d2eb;
   font-size: 20px;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 @media screen and (max-width: 800px) {

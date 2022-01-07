@@ -6,13 +6,14 @@
 }
 
 .cartItemContainer {
-  max-height: 300px;
-  max-width: 500px;
+  max-height: 100%;
+  max-width: 100%;
   overflow: auto;
   display: flex;
   flex-direction: column; 
   align-items: center;
   margin: 50px auto;
+  padding:  25px 25px 0 25px;
 }
 
 .cartItem {
@@ -26,6 +27,7 @@
 
 .itemDetails {
   display: flex;
+  flex-direction: column;
   position: relative;
   align-items: center;
 }
@@ -53,7 +55,8 @@
 
 .itemName {
   text-align: center;
-  padding: 10px;
+  padding-top: 10px;
+  font-size: 14px;
   font-weight: 800;
 }
 

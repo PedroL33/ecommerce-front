@@ -4,6 +4,7 @@ import { getActiveOrders } from '../../actions/apiCalls/orders';
 import styles from '../../styles/orderDisplay.module.css';
 import moment from 'moment';
 import OrderModal from './orderModal';
+import Loader from '../loader';
 
 function OrderDisplay() {
 
@@ -22,14 +23,18 @@ function OrderDisplay() {
         <div className={styles.headerItem}>Placed</div>
         <div className={styles.headerItem}></div>
       </div>
-      {orders[0] !== "loading" && orders.length ? orders.map((order, index) => (
-        <div className={styles.order} key={index}>
-          <div className={styles.orderItem}>{order.id}</div>
-          <div className={styles.orderItem}>{moment(order.ordered_at).fromNow()}</div>
-          <div className={styles.orderItem}><i className={`fas fa-info-circle ${styles.moreInfo}`} onClick={(e) => setShowModal(index)}></i></div>
-          {showModal===index && <OrderModal setShowModal={setShowModal} order={order} />}
-        </div>
-      )): <div className={styles.emptyMessage}>Currently no active orders.</div>}
+      {
+        orders[0] === "loading" ? <Loader height="100%" background="#a0d2eb"/>:
+        orders[0] !== "loading" && orders.length ? orders.map((order, index) => (
+          <div className={styles.order} key={index}>
+            <div className={styles.orderItem}>{order.id}</div>
+            <div className={styles.orderItem}>{moment(order.ordered_at).fromNow()}</div>
+            <div className={styles.orderItem}><i className={`fas fa-info-circle ${styles.moreInfo}`} onClick={(e) => setShowModal(index)}></i></div>
+            {showModal===index && <OrderModal setShowModal={setShowModal} order={order} />}
+          </div>
+        )): 
+        <div className={styles.emptyMessage}>Currently no active orders.</div>
+      }
     </div>
   )
 }

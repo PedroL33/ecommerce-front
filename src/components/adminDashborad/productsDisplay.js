@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadProducts, clearProducts } from '../../actions/adminActions';
+import { clearProducts } from '../../actions/adminActions';
+import { loadAllProducts } from '../../actions/apiCalls/products';
 import styles from '../../styles/productDisplay.module.css';
 import ProductModal from './productModal';
 import { centsToPrice } from '../../functions/priceHelpers';
+import Loader from '../loader';
 
 function ProductDisplay() {
 
@@ -12,7 +14,7 @@ function ProductDisplay() {
   const [showModal, setShowModal] = useState(-1);
 
   useEffect(() => {
-    dispatch(loadProducts())
+    dispatch(loadAllProducts())
     return () => {
       dispatch(clearProducts())
     }
@@ -21,6 +23,7 @@ function ProductDisplay() {
   return (
     <div className={styles.container}>
       {
+        products[0]=='loading' ? <Loader height="100%" background="#a0d2eb"/> :
         products[0]!=="loading" && products.length ? products.map((item, index) => (
           <div className={styles.item} key={item.name}>
             <div className={styles.itemTitle}>
