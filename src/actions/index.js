@@ -116,31 +116,23 @@ export function hideCart() {
   }
 }
 
-export function addCart(product) {
+export function getCartRequest() {
   return {
-    type: "ADD_CART", 
-    payload: product
+    type: "GET_CART_REQUEST"
   }
 }
 
-export function removeCart(product) {
+export function getCartSuccess(cart) {
   return {
-    type: "REMOVE_CART",
-    payload: product
-  }
-}
-
-export function removeAllCart(product) {
-  return {
-    type: "REMOVE_ALL_CART",
-    payload: product
-  }
-}
-
-export function setCart(cart) {
-  return {
-    type: "SET_CART", 
+    type: "GET_CART_SUCCESS",
     payload: cart
+  }
+}
+
+export function getCartError(error) {
+  return {
+    type: "GET_CART_ERROR",
+    payload: error
   }
 }
 

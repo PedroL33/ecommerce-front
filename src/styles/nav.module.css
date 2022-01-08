@@ -74,9 +74,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #a0d2eb;
+  background: #cd5554;
   border-radius: 50%;
-  color: #494d5f;
+  color: #fceed1;
 }
 
 :global(.shopMenu-enter) {

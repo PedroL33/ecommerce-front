@@ -20,7 +20,7 @@
   font-size: 24px;
   border-bottom: 1px solid white;
   font-weight: 800;
-  color: white;
+  color: #fceed1;
   position: relative;
 }
 
@@ -37,7 +37,7 @@
   top: 15px;
   right: 15px;
   font-size: 16px;
-  color: rgb(158, 68, 68);
+  color: #fceed1;
 }
 
 .removeAll:hover {
@@ -84,7 +84,7 @@
 
 .itemsContainer {
   overflow: auto;
-  max-height: 60%;
+  height: 60%;
 }
 
 .total {
@@ -100,15 +100,17 @@
 }
 
 .checkoutButton {
-  background: linear-gradient(to bottom right, #b0db7d 40%, #99dbb4 100%);
+  background-color: #5c5f58;
+  box-shadow: 0 0 5px #5c5f58;
   padding: 15px 30px;
   font-size: 20px;  
   border-radius: 10px;
-  color: #494d5f;
+  color: #fceed1;
+  opacity: 0.9;
 }
 
 .checkoutButton:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .isEmpty {
@@ -119,22 +121,13 @@
 }
 
 .countAdd, .countRemove {
-  color: #494d5f;
-  padding: 7px;
-  font-size: 12px;
-  transition: color 300ms ease;
-  background: white;
-  border-radius: 5px;
+  color: #fceed1;
+  font-size: 14px;
+  background: #cd5554;
 }
 
-.countAdd:hover {
-  color: green;
+.countAdd:hover, .countRemove:hover {
   cursor: pointer;
-}
-
-.countRemove:hover {
-  cursor: pointer;
-  color: red;
 }
 
 :global(.cart-enter) {

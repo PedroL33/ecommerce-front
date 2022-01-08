@@ -85,7 +85,7 @@ function Nav() {
           {currentLocation.pathname !== "/checkout" && 
             <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
               <i className="fas fa-shopping-cart"></i>  
-              {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.count).reduce((x,y) => x+y)}</div>}
+              {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.quantity).reduce((x,y) => x+y)}</div>}
             </div>  
           } 
         </div>

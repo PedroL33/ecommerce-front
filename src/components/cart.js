@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../styles/cart.module.css';
-import { hideCart, removeAllCart, addCart, removeCart, setOrder } from '../actions';
+import { hideCart, setOrder } from '../actions';
+import { updateCartItem, deleteCartItem } from '../actions/apiCalls/cart';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { centsToPrice, getSubtotal } from '../functions/priceHelpers';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
+import Loader from './loader';
 
 function Cart(props) {
 
@@ -17,7 +19,12 @@ function Cart(props) {
   useEffect(() => {
     function handleOutsideClick(e) {
       if(e.defaultPrevented) return;
-      if(cartRef.current && !cartRef.current.contains(e.target) && showCart && props.button.current && !props.button.current.contains(e.target)) {
+      if(cartRef.current &&
+        !cartRef.current.contains(e.target) &&
+        showCart && 
+        props.button.current && 
+        !props.button.current.contains(e.target)
+        ) {
         dispatch(hideCart());
       }
     }
@@ -32,6 +39,22 @@ function Cart(props) {
     dispatch(hideCart());
   }
 
+  function removeItem(id, quantity) {
+    if(quantity === 1) {
+      dispatch(deleteCartItem(id));
+    }else {
+      dispatch(updateCartItem(id, quantity-1));
+    }
+  }
+
+  function addItem(id, quantity) {
+    dispatch(updateCartItem(id, quantity+1));
+  }
+
+  function removeAll(id) {
+    dispatch(deleteCartItem(id));
+  }
+
   return(
     <div className={styles.container} ref={cartRef}>
       {
@@ -39,21 +62,21 @@ function Cart(props) {
         <Fade>
           <div className={styles.content}>
             <div className={styles.header}>
-              Your cart{` (${cartItems.map(item => item.count).reduce((x,y) => x+y)})`}
+              Your cart {` (${cartItems.map(item => item.quantity).reduce((x,y) => x+y)})`}
               <i onClick={() => dispatch(hideCart())} className={`${styles.closeCart} fas fa-times`}></i>
             </div>
             <TransitionGroup className={styles.itemsContainer}>
               {cartItems.map(item => (
-                <CSSTransition key={item._id} timeout={500} classNames={"cartItem"}>
+                <CSSTransition key={item.id} timeout={500} classNames={"cartItem"}>
                   <div className={styles.itemDetail}>
-                    <i onClick={() => dispatch(removeAllCart(item))} className={`${styles.removeAll} fas fa-minus`}></i>
+                    <i onClick={() => removeAll(item.id)} className={`${styles.removeAll} fas fa-minus`}></i>
                     <div className={styles.itemImage} style={{backgroundImage: `url(${item.image ? item.image: window.location.origin + "/images/noImage.png"})`}}></div>
                     <div className={styles.nameAndCount}>
                       <div className={styles.itemName}>{item.name}</div>
                       <div className={styles.itemCount}>
-                        <i onClick={() => dispatch(removeCart(item))} className={`${styles.countRemove} fas fa-minus`}></i>
-                        <div>{item.count}</div>
-                        <i onClick={() => dispatch(addCart(item))} className={`${styles.countAdd} fas fa-plus`}></i>
+                        <i onClick={() => removeItem(item.id, item.quantity)} className={`${styles.countRemove} fas fa-minus`}></i>
+                        <div>{item.quantity}</div>
+                        <i onClick={() => addItem(item.id, item.quantity)} className={`${styles.countAdd} fas fa-plus`}></i>
                       </div>
                     </div>
                     <div className={styles.itemPrice}>{centsToPrice(item.price)}</div>

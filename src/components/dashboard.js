@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { setCart } from '../actions';
+import { useDispatch } from 'react-redux';
+import { getCart, createCart } from '../actions/apiCalls/cart';
 import Nav from './nav';
 import FrontPage from './frontPage/frontPage';
 import ResultsDisplay from './animatedResults/resultsDisplay';
@@ -18,7 +18,6 @@ import ScrollTop from './scrollTop';
 
 function Dashboard() {
 
-  const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -38,12 +37,11 @@ function Dashboard() {
   )
 
   useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
-    if(storedCart) {
-      const oldCart = JSON.parse(storedCart);
-      if(oldCart.length > cart.length) {
-        dispatch(setCart(oldCart))
-      }
+    const cartToken = localStorage.getItem('cartToken');
+    if(cartToken) {
+      dispatch(getCart(cartToken))
+    }else {
+      dispatch(createCart())
     }
   })
 

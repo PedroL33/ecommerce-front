@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
 import styles from '../styles/purchaseButtons.module.css';
-import { useDispatch } from 'react-redux';
-import { addCart, addCartNotification, showNotification } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCartItem, updateCartItem } from '../actions/apiCalls/cart';
+import { showCart } from '../actions';
 import Loader from './loader';  
 
 function PurchaseButtons(props) {
 
   const dispatch = useDispatch();
   const [disableButtons, setDisableButtons] = useState(false);
+  const cart = useSelector(state => state.cart)
 
   function handleClick(e) {
     e.preventDefault();
-    dispatch(addCart(props.product))
     setDisableButtons(true)
+    let cartItem = cart.filter(item => item.id === props.product.id);
+    if(cartItem.length) {
+      console.log(cartItem)
+      dispatch(updateCartItem(props.product.id, cartItem[0].quantity+1))
+    }else {
+      dispatch(createCartItem(props.product.name, 1))
+    }
+    dispatch(showCart());
     setTimeout(() => {
-      dispatch(addCartNotification(props.product, `${props.product.name} added to your cart!`))
-      dispatch(showNotification());
-      setDisableButtons(false)
+      setDisableButtons(false);
     }, 700);
   }
 
