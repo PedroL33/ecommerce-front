@@ -4,6 +4,7 @@
   position: relative;
   padding-top: 50px;
   box-sizing: border-box;
+  color: #fceed1;
 }
 
 .header, .order {
@@ -24,11 +25,17 @@
   position: absolute;
   width: 100%; 
   top: 0; 
-  background: #abe0fa;
+  background: #cd5554;
 }
 
 .order {
   height: 50px;
+  transition: 300ms ease;
+}
+
+.order:hover {
+  background: #fceed1;
+  color: #cd5554;
 }
 
 .emptyMessage {

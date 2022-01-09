@@ -25,12 +25,14 @@ function Loader(props) {
   const width = props.dotSize === "large" ? "20px" : props.dotSize === "small" ? "8px" : "16px";
 
   const background = props.background ? props.background : "#d0bdf4";
+  
+  const dotColor = props.dotColor ? props.dotColor: "#494d5f";
 
   return (
     <div style={{height: `${props.height}`, background: `${background}`}} className={styles.container}>
-      <Dot width={width}></Dot>
-      <Dot width={width}></Dot>
-      <Dot width={width}></Dot>
+      <Dot width={width} style={{background: dotColor}}></Dot>
+      <Dot width={width} style={{background: dotColor}}></Dot>
+      <Dot width={width} style={{background: dotColor}}></Dot>
     </div>
   )
 }

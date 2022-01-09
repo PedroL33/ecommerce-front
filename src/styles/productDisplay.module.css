@@ -1,6 +1,7 @@
 .container {
   overflow-y: auto;
   height: 100%;
+  color: #fceed1;
 }
 
 .item {
@@ -14,7 +15,8 @@
 }
 
 .item:hover {
-  background: #abe3ff;
+  background: #fceed1;
+  color: #cd5554;
 }
 
 .itemImage {

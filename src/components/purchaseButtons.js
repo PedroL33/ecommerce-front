@@ -30,7 +30,7 @@ function PurchaseButtons(props) {
   return (
     <div className={styles.itemButtons}>
       <div className={styles.button} onClick={(e)=> handleClick(e)}>
-        {disableButtons ? <Loader dotSize="small" height="25px" background="rgba(0,0,0,0.01)" /> : "Add to cart"}
+        {disableButtons ? <Loader dotSize="small" height="25px" dotColor="#fceed1" background="rgba(0,0,0,0.01)" /> : "Add to cart"}
       </div>
     </div>
   )

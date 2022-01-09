@@ -23,7 +23,7 @@ function ProductDisplay() {
   return (
     <div className={styles.container}>
       {
-        products[0]=='loading' ? <Loader height="100%" background="#a0d2eb"/> :
+        products[0]=='loading' ? <Loader height="100%" background="#cd5554" dotColor="#fceed1"/> :
         products[0]!=="loading" && products.length ? products.map((item, index) => (
           <div className={styles.item} key={item.name}>
             <div className={styles.itemTitle}>

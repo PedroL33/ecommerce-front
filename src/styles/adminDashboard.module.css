@@ -36,12 +36,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #a0d2eb;
+  background: #cd5554;
   width: 150px;
   font-weight: 300;
   border: 3px solid rgb(233, 233, 233);
   font-size: 20px;
-  color: #494d5f;
+  color: #fceed1;
   border-bottom: none;
   border-radius: 15px 15px 0 0;
   opacity: 0.8;
@@ -55,7 +55,7 @@
 .content {
   width: 800px;
   margin: auto;
-  background: #a0d2eb;
+  background: #cd5554;
   padding: 50px;
   height: 500px;
   min-height: 500px;

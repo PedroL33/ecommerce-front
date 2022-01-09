@@ -22,9 +22,6 @@ function Footer() {
           </form>
         </div>
       </div>
-      <div className={styles.bottom}>
-        © Peter Lee 
-      </div>
     </div>
   )
 }

@@ -49,11 +49,12 @@
   top: 10px;
   right: 10px;
   transition: color 300ms ease;
+  opacity: 0.9;
 }
 
 .closeCart:hover {
   cursor: pointer;
-  color: red;
+  opacity: 1;
 }
 
 .itemImage {

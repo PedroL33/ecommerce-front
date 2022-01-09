@@ -50,7 +50,7 @@ function ResultsDisplay() {
         {type==="category" && categories[value] ? categories[value].description : results.length===0 ? `We couldn't find anything related to '${value}'.` : results[0] !=="loading" ? `We found ${results.length} items related to '${value}'`: null}
       </div>
       {
-        results[0] === "loading" ? <Loader background="white" height="400px" dotSize="large" /> : 
+        results[0] === "loading" ? <Loader background="white" height="400px" dotSize="large" dotColor="#cd5554" /> : 
         results.error ? <div className={styles.error}>{results.error}</div>:
         <div className={styles.results}>
           {

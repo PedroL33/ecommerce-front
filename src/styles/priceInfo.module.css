@@ -1,5 +1,5 @@
 .container {
-  background:  #fceed1;
+  background:  #cd5554;
   width: 100%;
   box-sizing: border-box;
   padding-top: 20px;
@@ -36,15 +36,15 @@
   position: absolute;
   left: 60px;
   top: -10px;
-  background: #8458b3;
-  width: 20px;
-  height: 20px;
-  color: white;
+  background: #fceed1;
+  color: #cd5554;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .itemImage {
@@ -89,7 +89,7 @@
 .resPriceInfo {
   display: none;
 }
-
+/* 
 .orderSummary {
   display: flex;
   padding: 40px 0;
@@ -98,7 +98,7 @@
   font-weight: 300;
   font-size: 20px;
   transition: opacity 300ms ease-in-out;
-}
+} */
 
 .orderSummary:hover {
   cursor: pointer;
