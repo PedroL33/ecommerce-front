@@ -24,7 +24,7 @@ const AccountLinks = styled.div`
   z-index: 10;
 `
 
-function Nav() {
+function Nav(props) {
 
   const dispatch = useDispatch();
   const displayCart = useSelector(state => state.showCart);
@@ -91,7 +91,7 @@ function Nav() {
         </div>
       </div>
       <CSSTransition in={displayCart} mountOnEnter unmountOnExit classNames='cart' timeout={300} >
-        <Cart button={cartButtonRef} />
+        <Cart button={cartButtonRef} notificationRef={props.notificationRef} />
       </CSSTransition>
     </div>
   )

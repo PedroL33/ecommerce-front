@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearProducts } from '../../actions/adminActions';
-import { loadAllProducts } from '../../actions/apiCalls/products';
 import styles from '../../styles/productDisplay.module.css';
 import ProductModal from './productModal';
 import { centsToPrice } from '../../functions/priceHelpers';
@@ -9,16 +7,8 @@ import Loader from '../loader';
 
 function ProductDisplay() {
 
-  const dispatch = useDispatch();
   const products = useSelector(state => state.products);
   const [showModal, setShowModal] = useState(-1);
-
-  useEffect(() => {
-    dispatch(loadAllProducts())
-    return () => {
-      dispatch(clearProducts())
-    }
-  }, [dispatch])
 
   return (
     <div className={styles.container}>

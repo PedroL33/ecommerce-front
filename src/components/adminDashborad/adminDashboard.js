@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OrderDisplay from './orderDisplay';
 import ProductDisplay from './productsDisplay';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import { clearProducts } from '../../actions/adminActions';
+import { loadAllProducts } from '../../actions/apiCalls/products';
 import styles from '../../styles/adminDashboard.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function AdminDashboard() {
 
+  const dispatch = useDispatch();
   const [tab, setTab] = useState("orders");
   const orders = useSelector(state => state.activeOrders);
+
+  useEffect(() => {
+    dispatch(loadAllProducts())
+    return () => {
+      dispatch(clearProducts())
+    }
+  }, [dispatch])
 
   return (
     <div className={styles.container}>

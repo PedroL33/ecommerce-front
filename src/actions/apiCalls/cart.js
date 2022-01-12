@@ -1,4 +1,5 @@
 import * as actions from '../';
+import { handleErrors } from './utils';
 
 export function getCart() {
   return function(dispatch) {
@@ -8,12 +9,13 @@ export function getCart() {
         'Authorization': `Bearer: ${localStorage.getItem('cartToken')}`
       }
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(data => {
       dispatch(actions.getCartSuccess(data))
     })
     .catch(err => {
       console.log(err)
+      dispatch(actions.setNotification(err.message, "error"));
     })
   }
 }
@@ -23,13 +25,13 @@ export function createCart() {
     fetch("http://localhost:3000/carts", {
       method: "POST"
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(data => {
       localStorage.setItem('cartToken', data.token);
       dispatch(getCart(data.token));
     })
     .catch(err => {
-      console.log(err)
+      dispatch(actions.setNotification(err.message, "error"));
     })
   }
 }
@@ -47,12 +49,12 @@ export function createCartItem(product, quantity) {
         product
       })
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(data => {
       dispatch(getCart(localStorage.getItem('cartToken')));
     })
     .catch(err => {
-      console.log(err)
+      dispatch(actions.setNotification(err.message, "error"))
     })
   }
 }
@@ -70,12 +72,12 @@ export function updateCartItem(product_id, quantity) {
         product_id
       })
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(data => {
       dispatch(getCart(localStorage.getItem('cartToken')));
     })
     .catch(err => {
-      console.log(err)
+      dispatch(actions.setNotification(err.message, 'error'));
     })
   }
 }
@@ -92,12 +94,12 @@ export function deleteCartItem(product_id) {
         product_id
       })
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(data => {
       dispatch(getCart(localStorage.getItem('cartToken')));
     })
     .catch(err => {
-      console.log(err)
+      dispatch(actions.setNotification(err.message, 'error'));
     })
   }
 }

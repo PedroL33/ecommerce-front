@@ -7,7 +7,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { centsToPrice, getSubtotal } from '../functions/priceHelpers';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
-import Loader from './loader';
 
 function Cart(props) {
 
@@ -23,7 +22,8 @@ function Cart(props) {
         !cartRef.current.contains(e.target) &&
         showCart && 
         props.button.current && 
-        !props.button.current.contains(e.target)
+        !props.button.current.contains(e.target) &&
+        !props.notificationRef.current.contains(e.target)
         ) {
         dispatch(hideCart());
       }
@@ -43,12 +43,12 @@ function Cart(props) {
     if(quantity === 1) {
       dispatch(deleteCartItem(id));
     }else {
-      dispatch(updateCartItem(id, quantity-1));
+      dispatch(updateCartItem(id, -1));
     }
   }
 
-  function addItem(id, quantity) {
-    dispatch(updateCartItem(id, quantity+1));
+  function addItem(id) {
+    dispatch(updateCartItem(id, 1));
   }
 
   function removeAll(id) {
@@ -74,7 +74,7 @@ function Cart(props) {
                     <div className={styles.nameAndCount}>
                       <div className={styles.itemName}>{item.name}</div>
                       <div className={styles.itemCount}>
-                        <i onClick={() => removeItem(item.id, item.quantity)} className={`${styles.countRemove} fas fa-minus`}></i>
+                        <i onClick={() => removeItem(item.id)} className={`${styles.countRemove} fas fa-minus`}></i>
                         <div>{item.quantity}</div>
                         <i onClick={() => addItem(item.id, item.quantity)} className={`${styles.countAdd} fas fa-plus`}></i>
                       </div>

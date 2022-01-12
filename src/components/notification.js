@@ -1,14 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearNotification, hideNotification, showCart } from '../actions';
+import { clearNotification } from '../actions';
 import styles from '../styles/notification.module.css';
 
 const Container = styled.div`
   position: fixed;
   height: 100px;
   width: 250px;
-  bottom: ${props => props.top ? "25px": "-150px"};
+  bottom: ${props => props.show ? "25px": "-150px"};
   right: 0px;
   transition: bottom 700ms ease-in-out;
   display: flex;
@@ -22,39 +22,19 @@ const Container = styled.div`
   opacity: 0.9;
 `
 
-function Notification() {
+function Notification(props) {
 
   const dispatch = useDispatch();
-  const notificationRef = useRef(null);
   const notification = useSelector(state => state.notification);
-  const showNotif = useSelector(state => state.showNotification)
 
-  useEffect(() => {
-    function handleOutsideClick(e) {
-      if(!notificationRef.current.contains(e.target) && notification.msg) {
-        dispatch(hideNotification())
-        if(e.defaultPrevented) return
-        setTimeout(() => dispatch(clearNotification()), 700);
-      }
-    }
-
-    window.addEventListener('click', handleOutsideClick);
-
-    return () => {
-      window.removeEventListener('click', handleOutsideClick);
-    }
-  })
-
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(showCart());
-    dispatch(hideNotification());
+  const handleClick = () => {
+    dispatch(clearNotification());
   }
 
   return (
-    <Container className={styles.container} top={showNotif} onClick={(e) => handleClick(e)}>
-      <div className={styles.message} ref={notificationRef}>
-        {notification.msg}
+    <Container className={styles.container} show={props.show} onClick={() => handleClick()}>
+      <div className={styles.message} ref={props.notificationRef}>
+        {notification.message}
       </div>
     </Container>
   )

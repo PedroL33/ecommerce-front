@@ -4,8 +4,6 @@ const activeOrders = (state=[], action) => {
       return ["loading"];
     case "ACTIVE_ORDERS_SUCCESS":
       return action.payload;
-    case "ACTIVE_ORDERS_ERROR":
-      return action.payload;
     default:
       return state;
   }

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCart, createCart } from '../actions/apiCalls/cart';
+import { clearNotification } from '../actions';
 import Nav from './nav';
 import FrontPage from './frontPage/frontPage';
 import ResultsDisplay from './animatedResults/resultsDisplay';
@@ -19,6 +20,9 @@ import ScrollTop from './scrollTop';
 function Dashboard() {
 
   const dispatch = useDispatch();
+  const [showNotification, setShowNotification] = useState(false);
+  const notification = useSelector(state => state.notification);
+  const notificationRef = useRef(null);
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
@@ -43,13 +47,24 @@ function Dashboard() {
     }else {
       dispatch(createCart())
     }
-  })
+  }, [])
+
+  useEffect(() => {
+    if(notification.message) {
+      setShowNotification(true);
+      setTimeout(() => {
+        dispatch(clearNotification())
+      }, 3000)
+    }else {
+      setShowNotification(false);
+    }
+  }, [notification])
 
   return(
     <Router>
       <ScrollTop />
-      <Nav />
-      <Notification />
+      <Nav notificationRef={notificationRef} />
+      <Notification notificationRef={notificationRef} show={showNotification} setShow={setShowNotification}/>
       <Switch>
         <Route exact path="/" component={FrontPage}></Route>
 

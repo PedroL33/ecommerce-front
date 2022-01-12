@@ -4,13 +4,6 @@ export function activeOrdersRequest() {
   }
 }
 
-export function activeOrdersError(error) {
-  return {
-    type: "ACTIVE_ORDERS_ERROR",
-    payload: error
-  }
-}
-
 export function activeOrdersSuccess(orders) {
   return {
     type: "ACTIVE_ORDERS_SUCCESS",
@@ -31,13 +24,6 @@ export function loadProductsRequest() {
   }
 }
 
-export function loadProductsError(error) {
-  return {
-    type: "PRODUCTS_ERROR",
-    payload: error
-  }
-}
-
 export function clearProducts() {
   return {
     type: "CLEAR_PRODUCTS"
@@ -54,12 +40,6 @@ export function activeOrderItemsSuccess(response) {
   return {
     type: "ACTIVE_ORDER_ITEMS_SUCCESS",
     payload: response
-  }
-}
-
-export function activeOrderItemsError() {
-  return {
-    type: "ACTIVE_ORDER_ITEMS_ERROR"
   }
 }
 

@@ -12,13 +12,6 @@ export function searchProductsRequest() {
   }
 }
 
-export function searchProductsError(error) {
-  return {
-    type: "SEARCH_PRODUCTS_ERROR",
-    payload: error
-  }
-}
-
 export function searchProductsClear() {
   return {
     type: "SEARCH_PRODUCTS_CLEAR"
@@ -37,13 +30,6 @@ export function resultsSuccess(products) {
   return {
     type: "RESULTS_SUCCESS",
     payload: products
-  }
-}
-
-export function resultsError(error) {
-  return {
-    type: "RESULTS_ERROR",
-    payload: error
   }
 }
 
@@ -73,13 +59,6 @@ export function singleProductSuccess(product) {
   return {
     type: "SINGLE_PRODUCT_SUCCESS",
     payload: product
-  }
-}
-
-export function singleProductError(error) {
-  return {
-    type: "SINGLE_PRODUCT_ERROR",
-    payload: error
   }
 }
 
@@ -129,13 +108,6 @@ export function getCartSuccess(cart) {
   }
 }
 
-export function getCartError(error) {
-  return {
-    type: "GET_CART_ERROR",
-    payload: error
-  }
-}
-
 export function clearCart() {
   return {
     type: "CLEAR_CART"
@@ -144,29 +116,17 @@ export function clearCart() {
 
 // Notifications
 
-export function addCartNotification(product, message) {
+export function setNotification(message, status) {
   return {
-    type: "ADD_CART_NOTIFICATION",
-    payload: product, 
-    message: message
+    type: "SET_NOTIFICATION",
+    payload: message, 
+    status: status
   }
 }
 
 export function clearNotification() {
   return {
     type: "CLEAR_NOTIFICATION"
-  }
-}
-
-export function showNotification() {
-  return {
-    type: "SHOW_NOTIFICATION"
-  }
-}
-
-export function hideNotification() {
-  return {
-    type: "HIDE_NOTIFICATION"
   }
 }
 

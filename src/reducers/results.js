@@ -4,8 +4,6 @@ const results = (state=[], action) => {
       return ["loading"];
     case "RESULTS_SUCCESS":
       return action.payload;
-    case "RESULTS_ERROR":
-      return action.payload
     case "CLEAR_RESULTS":
       return [];
     case "SORT_RESULTS":

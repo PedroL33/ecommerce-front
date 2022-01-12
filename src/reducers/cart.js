@@ -4,8 +4,6 @@ const cart = (state=[], action) => {
       return ["loading"];
     case "GET_CART_SUCCESS":
       return action.payload;
-    case "GET_CART_ERROR":
-      return action.payload;
     case "CLEAR_CART":
       return [];
     default:

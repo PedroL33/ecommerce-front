@@ -1,5 +1,6 @@
 import * as actions from '../';
 import * as adminActions from '../adminActions';
+import { handleErrors } from './utils';
 
 export function loadSearchProducts(value) {
   return function(dispatch) {
@@ -7,11 +8,11 @@ export function loadSearchProducts(value) {
     fetch(`http://localhost:3000/products/search/${value}`, {
       method: "GET"
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(products => {
-      setTimeout(() => dispatch(actions.searchProductsSuccess(products)), 500)
+      dispatch(actions.searchProductsSuccess(products))
     })
-    .catch(err => dispatch(actions.searchProductsError([err])))
+    .catch(err => dispatch(actions.setNotification(err.message, "error")))
   }
 }
 
@@ -21,11 +22,11 @@ export function loadResults(type, value) {
     fetch(`http://localhost:3000/products/${type}/${value}`, {
       method: "GET"
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(products => {
-      setTimeout(() => dispatch(actions.resultsSuccess(products)), 1000)
+      dispatch(actions.resultsSuccess(products))
     })
-    .catch(err => dispatch(actions.resultsError(err)))
+    .catch(err => dispatch(actions.setNotification(err.message, "error")))
   }
 }
 
@@ -35,11 +36,11 @@ export function loadProductById(id) {
     fetch(`http://localhost:3000/products/${id}`, {
       method: "GET"
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(product => {
-      setTimeout(() => dispatch(actions.singleProductSuccess(product)), 1000);
+      dispatch(actions.singleProductSuccess(product));
     })
-    .catch(err => dispatch(actions.singleProductError(err)), 1000);
+    .catch(err => dispatch(actions.setNotification(err.message, "error")));
   }
 }
 
@@ -49,11 +50,11 @@ export function loadAllProducts() {
     fetch('http://localhost:3000/products', {
       method: "GET"
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(products => {
       dispatch(adminActions.loadProductsSuccess(products))
     })
-    .catch(err => dispatch(adminActions.loadProductsError(err)))
+    .catch(err => dispatch(actions.setNotification(err.message, "error")))
   }
 }
 
@@ -69,8 +70,12 @@ export function updateProducts(id, newProduct) {
         newProduct
       )
     })
+    .then(res => handleErrors(res))
+    .then(data => {
+      dispatch(loadAllProducts());
+    })
     .catch(err => {
-      console.log(err)
+      dispatch(actions.setNotification(err.message, 'error'))
     })
   }
 }
@@ -85,5 +90,7 @@ export function uploadPhoto(id, image) {
       },
       body: image
     })
+    .then(res => handleErrors(res))
+    .catch(err => dispatch(actions.setNotification(err.message, 'error')))
   }
 }

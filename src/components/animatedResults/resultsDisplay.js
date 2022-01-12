@@ -51,7 +51,6 @@ function ResultsDisplay() {
       </div>
       {
         results[0] === "loading" ? <Loader background="white" height="400px" dotSize="large" dotColor="#cd5554" /> : 
-        results.error ? <div className={styles.error}>{results.error}</div>:
         <div className={styles.results}>
           {
             results.length > 2 && 
@@ -82,7 +81,7 @@ function ResultsDisplay() {
                   </Fade>
                 </Link>
               )}
-            </AnimatedResults> : <div>Server could not be reached.</div>
+            </AnimatedResults>: null
           }
         </div>
       }

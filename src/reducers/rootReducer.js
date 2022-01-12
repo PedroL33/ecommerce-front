@@ -7,7 +7,6 @@ import results from './results';
 import singleProduct from './singleProduct';
 import cart from './cart';
 import notification from './notification';
-import showNotification from './showNotification';
 import showAccount from './showAccount';
 import checkoutInfo from './checkoutInfo';
 import paymentStatus from './paymentStatus';
@@ -25,7 +24,6 @@ const rootReducer = combineReducers({
   singleProduct,
   cart,
   notification,
-  showNotification, 
   showAccount,
   checkoutInfo,
   paymentStatus,

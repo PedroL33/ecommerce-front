@@ -8,12 +8,13 @@
   background: #cd5554; 
   color: #fceed1;
   border-radius: 10px;
+  border: none;
   box-shadow: 0px 0px 5px #cd5554;
   font-size: 16px;
   text-align: center;
   line-height: 25px;
   transition: all 200ms ease;
-  width: 100px;
+  width: 125px;
   font-weight: 800px;
 }
 

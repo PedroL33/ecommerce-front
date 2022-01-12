@@ -14,9 +14,8 @@ function PurchaseButtons(props) {
   function handleClick(e) {
     e.preventDefault();
     setDisableButtons(true)
-    let cartItem = cart.filter(item => item.id === props.product.id);
+    const cartItem = cart.filter(item => item.id === props.product.id);
     if(cartItem.length) {
-      console.log(cartItem)
       dispatch(updateCartItem(props.product.id, cartItem[0].quantity+1))
     }else {
       dispatch(createCartItem(props.product.name, 1))
@@ -29,9 +28,9 @@ function PurchaseButtons(props) {
 
   return (
     <div className={styles.itemButtons}>
-      <div className={styles.button} onClick={(e)=> handleClick(e)}>
+      <button className={styles.button} onClick={(e)=> handleClick(e)} disabled={cart===undefined}>
         {disableButtons ? <Loader dotSize="small" height="25px" dotColor="#fceed1" background="rgba(0,0,0,0.01)" /> : "Add to cart"}
-      </div>
+      </button>
     </div>
   )
 }

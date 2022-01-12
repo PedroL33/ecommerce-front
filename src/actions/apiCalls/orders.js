@@ -1,43 +1,41 @@
-import * as actions from '../adminActions';
+import * as adminActions from '../adminActions';
+import * as actions from '../';
+import { handleErrors } from './utils';
 
 export function getActiveOrders() {
   return function(dispatch) {
-    dispatch(actions.activeOrdersRequest()) 
+    dispatch(adminActions.activeOrdersRequest()) 
     fetch("http://localhost:3000/orders/pending", {
       method: "GET",
       headers: {
         Authorization: `Bearer: ${localStorage.getItem("authentication")}`
       }
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(data => {
-      if(data.error) {
-        dispatch(actions.activeOrdersError([data]))
-      }else {
-        dispatch(actions.activeOrdersSuccess(data))
-      }
+        dispatch(adminActions.activeOrdersSuccess(data))
     })
     .catch(err => {
-      dispatch(actions.activeOrdersError(err));
+      dispatch(actions.setNotification(err.message, 'error'));
     })
   }
 }
 
 export function getActiveOrderItems(id) {
   return function(dispatch) {
-    dispatch(actions.activeOrderItemsRequest());
+    dispatch(adminActions.activeOrderItemsRequest());
     fetch(`http://localhost:3000/orders/items/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer: ${localStorage.getItem("authentication")}`
       }
     })
-    .then(res => res.json())
+    .then(res => handleErrors(res))
     .then(data => {
-      dispatch(actions.activeOrderItemsSuccess(data))
+      dispatch(adminActions.activeOrderItemsSuccess(data))
     })
     .catch(err => {
-      dispatch(actions.activeOrderItemsError(err))
+      dispatch(actions.setNotification(err.message, 'error'))
     })
   }
 }
