@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function ShippingForm(props) {
 
   const [method, setMethod] = useState({});
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const checkoutInfo = useSelector(state => state.checkoutInfo);
 
   useEffect(() => {
@@ -17,9 +17,9 @@ function ShippingForm(props) {
     }
   }, [checkoutInfo.shipping])
 
-  function handleClick() {
-    props.setStep(3);
-    dispatch(setShipping(method));
+  function handleClick(item) {
+    console.log(item)
+    props.setDetails({...props.details, shipping: item.name})
   }
 
   return (
@@ -28,7 +28,7 @@ function ShippingForm(props) {
       <div className={styles.methodsContainer}>
         {
           Object.values(shipping).map(item => 
-            <div key={item.name} className={method.name===item.name ? `${styles.methodContainer} ${styles.active}` : styles.methodContainer} onClick={() => setMethod(item)}>
+            <div key={item.name} className={props.details.shipping===item.name ? `${styles.methodContainer} ${styles.active}` : styles.methodContainer} onClick={() => handleClick(item)}>
               <div className={styles.itemInfo}>
                 <div className={styles.itemName}>{item.name}</div>
                 <div className={styles.itemDuration}>{item.duration}</div>
@@ -41,7 +41,7 @@ function ShippingForm(props) {
       </div>
       <div className={styles.buttonContainer}>
         <button className={styles.backButton} onClick={() => props.setStep(1)}>Back to Contact</button>
-        <button className={styles.nextButton} disabled={ method.name ? false: true} onClick={handleClick}>Continue to Payment</button>
+        <button className={styles.nextButton} disabled={ props.details.shipping ? false: true} onClick={() => props.setStep(3)}>Continue to Payment</button>
       </div>
     </div>
   )

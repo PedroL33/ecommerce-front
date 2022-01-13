@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart, createCart } from '../actions/apiCalls/cart';
@@ -53,7 +53,10 @@ function Dashboard() {
     if(notification.message) {
       setShowNotification(true);
       setTimeout(() => {
-        dispatch(clearNotification())
+        setShowNotification(false)
+        setTimeout(() => {
+          dispatch(clearNotification())
+        }, 700);
       }, 3000)
     }else {
       setShowNotification(false);

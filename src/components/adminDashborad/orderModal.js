@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styles from '../../styles/adminModals.module.css';
 import PriceInfo from '../stripe/priceInfo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getActiveOrders, getActiveOrderItems } from '../../actions/apiCalls/orders';
 import { completeOrder, clearActiveOrderItems } from '../../actions/adminActions';
+import { getTotal } from '../../functions/priceHelpers';
 import moment from 'moment';
 
 function OrderModal(props) {
@@ -11,6 +12,19 @@ function OrderModal(props) {
   const dispatch = useDispatch();
   const modalRef = useRef(null);
   const [tracking, setTracking] = useState("");
+  const activeOrderItems = useSelector(state => state.activeOrderItems);
+  const [total, setTotal] = useState({});
+
+  const getPriceInfo = useCallback(async () => {
+    if(activeOrderItems && props.order) {
+      const priceInfo = await getTotal(activeOrderItems, props.order);
+      setTotal(priceInfo)
+    }
+  }, [activeOrderItems, props.order])
+
+  useEffect(() => {
+    getPriceInfo();
+  }, [getPriceInfo, activeOrderItems])
 
   useEffect(() => {
 
@@ -81,7 +95,7 @@ function OrderModal(props) {
         </div>
         <div className={styles.modalItem}>
           <div className={styles.orderHeader}>Order:</div>
-          <PriceInfo orderId={props.order.id}/>
+          <PriceInfo total={total} items={activeOrderItems} details={props.order}/>
         </div>
         <div className={styles.modalItem}>
           <input className={styles.modalInput} onChange={(e)=> setTracking(e.target.value)} type="text" placeholder="Tracking number">

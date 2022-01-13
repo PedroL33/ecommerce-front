@@ -1,4 +1,4 @@
-const cart = (state=[], action) => {
+const cart = (state=null, action) => {
   switch(action.type) {
     case "GET_CART_REQUEST":
       return ["loading"];

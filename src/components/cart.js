@@ -39,7 +39,7 @@ function Cart(props) {
     dispatch(hideCart());
   }
 
-  function removeItem(id, quantity) {
+  async function removeItem(id, quantity) {
     if(quantity === 1) {
       dispatch(deleteCartItem(id));
     }else {
@@ -58,11 +58,11 @@ function Cart(props) {
   return(
     <div className={styles.container} ref={cartRef}>
       {
-        cartItems.length > 0 ?
+        cartItems && cartItems.length ?
         <Fade>
           <div className={styles.content}>
             <div className={styles.header}>
-              Your cart {` (${cartItems.map(item => item.quantity).reduce((x,y) => x+y)})`}
+              Your cart {` (${cartItems.map(item => item.quantity).reduce((x,y) => x+y, 0)})`}
               <i onClick={() => dispatch(hideCart())} className={`${styles.closeCart} fas fa-times`}></i>
             </div>
             <TransitionGroup className={styles.itemsContainer}>
@@ -74,9 +74,9 @@ function Cart(props) {
                     <div className={styles.nameAndCount}>
                       <div className={styles.itemName}>{item.name}</div>
                       <div className={styles.itemCount}>
-                        <i onClick={() => removeItem(item.id)} className={`${styles.countRemove} fas fa-minus`}></i>
+                        <i onClick={() => removeItem(item.id, item.quantity)} className={`${styles.countRemove} fas fa-minus`}></i>
                         <div>{item.quantity}</div>
-                        <i onClick={() => addItem(item.id, item.quantity)} className={`${styles.countAdd} fas fa-plus`}></i>
+                        <i onClick={() => addItem(item.id)} className={`${styles.countAdd} fas fa-plus`}></i>
                       </div>
                     </div>
                     <div className={styles.itemPrice}>{centsToPrice(item.price)}</div>
@@ -90,9 +90,11 @@ function Cart(props) {
             </div>
           </div>
         </Fade> :
-        <div className={styles.isEmpty}>
-          Your cart is empty.
-        </div>
+        <Fade>
+          <div className={styles.isEmpty}>
+            Your cart is empty.
+          </div>
+        </Fade>
       }
     </div>
   )

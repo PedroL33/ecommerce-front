@@ -39,7 +39,3 @@ export function getActiveOrderItems(id) {
     })
   }
 }
-
-export function getOrderDetails() {
-
-}

@@ -61,7 +61,7 @@ function ContactForm(props) {
       setErrors({...newErrors})
     }else {
       const data = {email: email, address: street+', '+city+', '+st+', '+country+', '+zip}
-      dispatch(setContact(data))
+      props.setDetails({...props.details, shipping_address: data.address, contact: data.email})
       localStorage.setItem("contact", JSON.stringify(data))
       props.setStep(2)
     } 

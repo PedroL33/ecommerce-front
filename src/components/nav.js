@@ -85,7 +85,7 @@ function Nav(props) {
           {currentLocation.pathname !== "/checkout" && 
             <div className={styles.cartButton} onClick={()=>dispatch(showCart())} ref={cartButtonRef}>
               <i className="fas fa-shopping-cart"></i>  
-              {cart.length > 0 && <div className={styles.cartCount}>{cart.map(item=>item.quantity).reduce((x,y) => x+y)}</div>}
+              {cart && cart.length ? <div className={styles.cartCount}>{cart.map(item=>item.quantity).reduce((x,y) => x+y, 0)}</div>: null}
             </div>  
           } 
         </div>

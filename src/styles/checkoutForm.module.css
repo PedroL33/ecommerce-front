@@ -1,5 +1,5 @@
 .container {
-  height: 100%; 
+  height: calc(100% - 100px); 
   display: flex;
   padding-top: 100px;
 }
@@ -16,12 +16,22 @@
 
 .priceInfo {
   width: 50%;
-  min-height: calc(100vh - 100px);
+  height: calc(100vh - 100px);
   background:  #fceed1;
+}
+
+.resPriceInfo {
+  display: none;
 }
 
 .formContainer {
   width: 50%;
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 :global(.checkoutForm-enter) {
@@ -51,6 +61,10 @@
   }
   .priceInfo {
     display: none;
+  }
+  .resPriceInfo {
+    display: block;
+    background: #fceed1;
   }
 }
 

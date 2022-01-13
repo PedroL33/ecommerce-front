@@ -7,7 +7,7 @@
   z-index: 5;
   background: #cd5554;
   width: 300px;
-  overflow: hidden;
+  overflow: auto;
   color: #fceed1;
 }
 
@@ -22,6 +22,7 @@
   font-weight: 800;
   color: #fceed1;
   position: relative;
+  box-sizing: border-box;
 }
 
 .itemDetail {
@@ -90,14 +91,17 @@
 
 .total {
   height: 15%;
-  padding: 0 20px;
+  padding: 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-end
+  justify-content: flex-end;
+  box-sizing: border-box;
 }
 
 .checkout {
   height: 15%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .checkoutButton {

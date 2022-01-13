@@ -24,7 +24,7 @@ function OrderDisplay() {
         <div className={styles.headerItem}></div>
       </div>
       {
-        orders[0] === "loading" ? <Loader height="100%" background="#cd5554"/>:
+        orders[0] === "loading" ? <Loader height="100%" background="#cd5554" dotColor="#fceed1" />:
         orders[0] !== "loading" && orders.length ? orders.map((order, index) => (
           <div className={styles.order} key={index}>
             <div className={styles.orderItem}>{order.id}</div>

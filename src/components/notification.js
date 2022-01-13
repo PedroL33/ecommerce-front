@@ -6,20 +6,17 @@ import styles from '../styles/notification.module.css';
 
 const Container = styled.div`
   position: fixed;
-  height: 100px;
-  width: 250px;
-  bottom: ${props => props.show ? "25px": "-150px"};
+  width: 300px;
+  bottom: ${props => props.show ? "0px": "-50px"};
   right: 0px;
   transition: bottom 700ms ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom right, #b0db7d 40%, #99dbb4 100%);
-  color: #494d5f;
-  margin: 20px;
-  border-radius: 20px;
+  background-color: ${props => props.status === "error" ? "#ED4F32": "#15CD72"};
+  color: white;
+  border-radius: 3px;
   z-index: 3;
-  opacity: 0.9;
 `
 
 function Notification(props) {
@@ -32,7 +29,7 @@ function Notification(props) {
   }
 
   return (
-    <Container className={styles.container} show={props.show} onClick={() => handleClick()}>
+    <Container className={styles.container} show={props.show} status={notification.status} onClick={() => handleClick()}>
       <div className={styles.message} ref={props.notificationRef}>
         {notification.message}
       </div>
