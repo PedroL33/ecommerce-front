@@ -4,10 +4,8 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { useDispatch } from 'react-redux';
 import styles from '../../styles/contactForm.module.css';
-import { setContact } from '../../actions';
 
 function ContactForm(props) {
-  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");

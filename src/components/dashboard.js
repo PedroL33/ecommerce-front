@@ -8,7 +8,7 @@ import FrontPage from './frontPage/frontPage';
 import ResultsDisplay from './animatedResults/resultsDisplay';
 import ProductDetail from './productDetail';
 import Notification from './notification';
-import StripeContainer from './stripe/stripeContainer';
+import CheckoutForm from './stripe/checkoutForm';
 import Thankyou from './thankyou';
 import Login from './login';
 import AdminDashboard from './adminDashborad/adminDashboard';
@@ -51,13 +51,18 @@ function Dashboard() {
 
   useEffect(() => {
     if(notification.message) {
-      setShowNotification(true);
-      setTimeout(() => {
-        setShowNotification(false)
+      if(notification.message === 'jwt expired') {
+        dispatch(createCart());
+        dispatch(clearNotification())
+      }else {
+        setShowNotification(true);
         setTimeout(() => {
-          dispatch(clearNotification())
-        }, 700);
-      }, 3000)
+          setShowNotification(false)
+          setTimeout(() => {
+            dispatch(clearNotification())
+          }, 700);
+        }, 3000)
+      }
     }else {
       setShowNotification(false);
     }
@@ -81,7 +86,7 @@ function Dashboard() {
         
         <Route path="/item/:id" component={ProductDetail}></Route>
 
-        <Route path="/checkout" component={StripeContainer}></Route>
+        <Route path="/checkout" component={CheckoutForm}></Route>
 
         <Route path="/thankyou/:orderInfo/:orderId" component={Thankyou}></Route>
 

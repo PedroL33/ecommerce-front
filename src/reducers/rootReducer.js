@@ -8,8 +8,6 @@ import singleProduct from './singleProduct';
 import cart from './cart';
 import notification from './notification';
 import showAccount from './showAccount';
-import checkoutInfo from './checkoutInfo';
-import paymentStatus from './paymentStatus';
 import loginErrors from './loginErrors';
 import signupErrors from './signupErrors';
 import activeOrders from './activeOrders';
@@ -25,12 +23,10 @@ const rootReducer = combineReducers({
   cart,
   notification,
   showAccount,
-  checkoutInfo,
-  paymentStatus,
   loginErrors,
   signupErrors,
   activeOrders, 
-  activeOrderItems
+  activeOrderItems,
 });
 
 export default rootReducer;

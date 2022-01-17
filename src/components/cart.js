@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../styles/cart.module.css';
-import { hideCart, setOrder } from '../actions';
+import { hideCart } from '../actions';
 import { updateCartItem, deleteCartItem } from '../actions/apiCalls/cart';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { centsToPrice, getSubtotal } from '../functions/priceHelpers';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
+import Loader from './loader';
 
 function Cart(props) {
 
@@ -34,11 +35,6 @@ function Cart(props) {
     }
   })
 
-  function handleClick() {
-    dispatch(setOrder(cartItems));
-    dispatch(hideCart());
-  }
-
   async function removeItem(id, quantity) {
     if(quantity === 1) {
       dispatch(deleteCartItem(id));
@@ -58,7 +54,14 @@ function Cart(props) {
   return(
     <div className={styles.container} ref={cartRef}>
       {
-        cartItems && cartItems.length ?
+        !cartItems ? 
+        <Loader background="white" height="calc(100vh - 100px)" dotSize="large" dotColor="#cd5554" />:
+        !cartItems.length ? 
+        <Fade>
+          <div className={styles.isEmpty}>
+            Your cart is empty.
+          </div>
+        </Fade>:
         <Fade>
           <div className={styles.content}>
             <div className={styles.header}>
@@ -86,13 +89,8 @@ function Cart(props) {
             </TransitionGroup>
             <div className={styles.total}>Subtotal: {centsToPrice(getSubtotal(cartItems))}</div>
             <div className={styles.checkout}>
-              <Link className={styles.checkoutButton} to="/checkout" onClick={() => handleClick()}>Checkout</Link>
+              <Link className={styles.checkoutButton} to="/checkout" onClick={() => dispatch(hideCart())}>Checkout</Link>
             </div>
-          </div>
-        </Fade> :
-        <Fade>
-          <div className={styles.isEmpty}>
-            Your cart is empty.
           </div>
         </Fade>
       }

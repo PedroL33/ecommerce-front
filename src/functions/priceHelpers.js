@@ -33,7 +33,7 @@ const getShipping = (orderDetails) => {
 
 export async function getTotal(items, details) {
   let total = {};
-  if(items.length) {
+  if(items) {
     total.subtotal = getSubtotal(items)
     if(details.shipping_address) {
       const zip = details.shipping_address.split(",")[4]

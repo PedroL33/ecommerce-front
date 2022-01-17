@@ -144,60 +144,10 @@ export function hideAccount() {
   }
 }
 
-// Checkout information
-
-export function setContact(info) {
-  return{
-    type: "SET_CONTACT",
-    payload: info
-  }
-}
-
-export function setShipping(info) {
-  return {
-    type:'SET_SHIPPING',
-    payload: info
-  }
-}
-
-export function setOrder(info) {
-  return{
-    type:'SET_ORDER',
-    payload: info
-  }
-}
 
 export function clearCheckout() {
   return {
     type: "CLEAR_CHECKOUT"
-  }
-}
-
-// payment status
-
-export function paymentRequest() {
-  return {
-    type: "PAYMENT_REQUEST",
-  }
-}
-
-export function paymentSuccess(details) {
-  return {
-    type: "PAYMENT_SUCCESS",
-    payload: details
-  }
-}
-
-export function paymentError(details) {
-  return {
-    type: "PAYMENT_ERROR",
-    payload: details
-  }
-}
-
-export function paymentClear() {
-  return {
-    type: "PAYMENT_CLEAR"
   }
 }
 
@@ -226,29 +176,5 @@ export function setSignupErrors(errors) {
 export function clearSignupErrors() {
   return {
     type: "CLEAR_LOGIN_ERRORS"
-  }
-}
-
-export function makePayment(amount, token, order) {
-  return function(dispatch) {
-    dispatch(paymentRequest());
-    fetch('https://mysterious-crag-36502.herokuapp.com/stripe/charge', {
-      method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        amount: amount,
-        token: token,
-        order: order
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(!data.success) {
-        dispatch(paymentError(data))
-      }else {
-        dispatch(paymentSuccess(data))
-      }
-    })
-    .catch(err => dispatch(paymentError(err)));
   }
 }

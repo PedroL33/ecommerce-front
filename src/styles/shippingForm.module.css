@@ -1,6 +1,6 @@
 .container {
-  width: 90%;
-  max-width: 600px;
+  width: 100%;
+  /* max-width: 600px; */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -9,7 +9,7 @@
 
 .header {
   font-size: 30px;
-  margin: 20px 0;
+  margin: 20px auto;
   font-weight: 300; 
 }
 
@@ -61,20 +61,21 @@
 }
 
 .buttonContainer {
-  width: 100%;
+  width: 50%;
+  margin: auto;
   display: flex;
   justify-content: space-around;
   padding: 30px 0;
-  box-sizing: border-box;
 }
 
 .backButton, .nextButton {
   background: #cd5554;
   border: none;
+  width: 120px;
   font-size: 16px;
   color: white;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .backButton:hover, .nextButton:hover {
@@ -89,6 +90,7 @@
 @media screen and (max-width: 800px) {
   .container {
     width: 300px;
+    margin: auto;
   }
 
   .header {
@@ -101,7 +103,7 @@
 
   .backButton, .nextButton {
     padding: 10px 20px;
-    font-size: 12px;
+    margin: 0 10px; 
   }
 }
 

@@ -1,60 +1,46 @@
-import React, {useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styles from '../../styles/paymentForm.module.css';
-import { makePayment, paymentClear, clearCart, clearCheckout } from '../../actions';
-import { getTotal, centsToPrice } from '../../functions/priceHelpers';
+import { clearCart, setNotification } from '../../actions';
+import { getClientSecret } from '../../actions/apiCalls/stripe';
+import { createCart } from '../../actions/apiCalls/cart';
 import Loader from '../loader';
-import { useHistory } from 'react-router-dom';
 
 function PaymentForm(props) {
 
-  const history = useHistory()
   const dispatch = useDispatch();
-  const [total, setTotal] = useState({})
+  const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const checkoutInfo = useSelector(state => state.checkoutInfo);
-  const [complete, setComplete] = useState(false);
-  const paymentStatus = useSelector(state => state.paymentStatus);
-
-  useEffect(() => {
-    getTotal(checkoutInfo)
-    .then(total => setTotal(total))
-  }, [checkoutInfo])
-
-  useEffect(() => {
-    return () => {
-      dispatch(paymentClear())
-    }
-  }, [checkoutInfo, dispatch])
-
-  useEffect(() => {
-    if(paymentStatus.success) {
-      localStorage.removeItem("cart")
-      dispatch(clearCart())
-      history.push(`/thankyou/${encodeURIComponent(JSON.stringify(checkoutInfo))}/${encodeURIComponent(JSON.stringify(paymentStatus.orderId))}`);
-      dispatch(clearCheckout());
-    }
-  }, [paymentStatus, checkoutInfo, dispatch, history])
+  const [isFilled, setIsFilled] = useState(false);
 
   function handleChange(e) {
-    e.complete ? setComplete(true) : setComplete(false);
+    e.complete ? setIsFilled(true) : setIsFilled(false);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement)
-    }) 
-
-    if(!error) {
-      const { id } = paymentMethod;
-      dispatch(makePayment(Math.round(total.total), id, checkoutInfo));
-      elements.getElement(CardElement).clear();
-    }else {
-      console.log(error)
+    setLoading(true);
+    const { client_secret } = await getClientSecret(props.details);
+    if(!client_secret) {
+      setLoading(false);
+      return;
+    }
+    const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(client_secret, {
+      payment_method: {
+        card: elements.getElement(CardElement),
+      }
+    })
+    if(stripeError) {
+      dispatch(setNotification(stripeError.message, 'error'));
+      setLoading(false);
+      return;
+    }
+    if(paymentIntent.status === 'succeeded') {
+      props.setComplete(true);
+      dispatch(createCart())
+      dispatch(clearCart())
     }
   }
 
@@ -68,16 +54,14 @@ function PaymentForm(props) {
       <label className={styles.header}>
         Enter your card information.
       </label>
-      <div className={styles.error}>
-        {paymentStatus.message === "Loading" ? <Loader dotSize="small" background="white" height="100px" /> : !paymentStatus.success ? <div>{paymentStatus.message}</div>: null}
-      </div>
       <form className={styles.formContainer} onSubmit={handleSubmit}>
         <CardElement 
           onChange={handleChange}
-          options={{
+          options={
+            {
             style: {
               base: {
-                fontSize: '18px',
+                fontSize: '24px',
                 color: '#424770',
                 '::placeholder': {
                   color: '#aab7c4',
@@ -87,11 +71,14 @@ function PaymentForm(props) {
                 color: '#9e2146',
               },
             },
-          }} 
+          }
+        } 
         />
         <div className={styles.buttonContainer}>
-          <button onClick={handleClick} className={styles.backButton}>Back to shipping</button>
-          <button className={styles.payButton} type="submit" disabled={total.total && complete ? false: true}>Pay {centsToPrice(Math.round(total.total))}</button>
+          <button onClick={handleClick} className={styles.backButton}>Shipping</button>
+          <button className={styles.payButton} type="submit" disabled={isFilled ? false: true}>
+            {loading ? <Loader dotSize="small" height="25px" dotColor="#fceed1" background="rgba(0,0,0,0.01)" />: "Pay"}
+          </button>
         </div>
       </form>
     </div>
