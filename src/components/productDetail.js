@@ -9,7 +9,7 @@ import Fade from 'react-reveal/Fade';
 import PurchaseButtons from './purchaseButtons';
 import { centsToPrice } from '../functions/priceHelpers';
 
-function ProductDetail() {
+function ProductDetail(props) {
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -39,7 +39,7 @@ function ProductDetail() {
                   <div className={styles.price}>{centsToPrice(product.price)}</div>
                 </div>
                 <div className={styles.rowRight}>
-                  <PurchaseButtons product={product}></PurchaseButtons>
+                  <PurchaseButtons product={product} {...props}></PurchaseButtons>
                 </div>
               </div>
               <div className={styles.description}>{product.description}</div>

@@ -3,7 +3,7 @@ import { handleErrors } from './utils';
 
 export function getCart() {
   return function(dispatch) {
-    fetch("http://localhost:3000/carts", {
+    fetch("https://mysterious-crag-36502.herokuapp.com/carts", {
       method: "GET",
       headers: {
         'Authorization': `Bearer: ${localStorage.getItem('cartToken')}`
@@ -22,7 +22,7 @@ export function getCart() {
 
 export function createCart() {
   return function(dispatch) {
-    fetch("http://localhost:3000/carts", {
+    fetch("https://mysterious-crag-36502.herokuapp.com/carts", {
       method: "POST"
     })
     .then(res => handleErrors(res))
@@ -38,7 +38,7 @@ export function createCart() {
 
 export function createCartItem(product, quantity) {
   return function(dispatch) {
-    fetch("http://localhost:3000/cart_items", {
+    fetch("https://mysterious-crag-36502.herokuapp.com/cart_items", {
       method: "POST",
       headers: {
         'Authorization': `Bearer: ${localStorage.getItem('cartToken')}`,
@@ -61,7 +61,7 @@ export function createCartItem(product, quantity) {
 
 export function updateCartItem(product_id, quantity) {
   return function(dispatch) {
-    fetch("http://localhost:3000/cart_items", {
+    fetch("https://mysterious-crag-36502.herokuapp.com/cart_items", {
       method: "PUT",
       headers: {
         'Authorization': `Bearer: ${localStorage.getItem('cartToken')}`,
@@ -84,7 +84,7 @@ export function updateCartItem(product_id, quantity) {
 
 export function deleteCartItem(product_id) {
   return function(dispatch) {
-    fetch('http://localhost:3000/cart_items', {
+    fetch('https://mysterious-crag-36502.herokuapp.com/cart_items', {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer: ${localStorage.getItem('cartToken')}`,

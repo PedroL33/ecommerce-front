@@ -5,7 +5,7 @@ import { handleErrors } from './utils';
 export function loadSearchProducts(value) {
   return function(dispatch) {
     dispatch(actions.searchProductsRequest())
-    fetch(`http://localhost:3000/products/search/${value}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/products/search/${value}`, {
       method: "GET"
     })
     .then(res => handleErrors(res))
@@ -19,7 +19,7 @@ export function loadSearchProducts(value) {
 export function loadResults(type, value) {
   return function(dispatch) {
     dispatch(actions.resultsRequest())
-    fetch(`http://localhost:3000/products/${type}/${value}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${type}/${value}`, {
       method: "GET"
     })
     .then(res => handleErrors(res))
@@ -33,7 +33,7 @@ export function loadResults(type, value) {
 export function loadProductById(id) {
   return function(dispatch) {
     dispatch(actions.singleProductRequest());
-    fetch(`http://localhost:3000/products/${id}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${id}`, {
       method: "GET"
     })
     .then(res => handleErrors(res))
@@ -47,7 +47,7 @@ export function loadProductById(id) {
 export function loadAllProducts() {
   return function(dispatch) {
     dispatch(adminActions.loadProductsRequest())
-    fetch('http://localhost:3000/products', {
+    fetch('https://mysterious-crag-36502.herokuapp.com/products', {
       method: "GET"
     })
     .then(res => handleErrors(res))
@@ -60,7 +60,7 @@ export function loadAllProducts() {
 
 export function updateProducts(id, newProduct) {
   return function(dispatch) {
-    fetch(`http://localhost:3000/products/${id}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/products/${id}`, {
       method: "PUT", 
       headers: {
         'Authorization': `Bearer: ${localStorage.getItem("authentication")}`,
@@ -83,7 +83,7 @@ export function updateProducts(id, newProduct) {
 
 export function uploadPhoto(id, image) {
   return async function(dispatch) {
-    await fetch(`http://localhost:3000/products/uploadPhoto/${id}`, {
+    await fetch(`https://mysterious-crag-36502.herokuapp.com/products/uploadPhoto/${id}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer: ${localStorage.getItem("authentication")}`,

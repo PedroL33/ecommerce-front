@@ -23,6 +23,7 @@ function Dashboard() {
   const [showNotification, setShowNotification] = useState(false);
   const notification = useSelector(state => state.notification);
   const notificationRef = useRef(null);
+  const [showCart, setShowCart] = useState(false);
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
@@ -71,7 +72,7 @@ function Dashboard() {
   return(
     <Router>
       <ScrollTop />
-      <Nav notificationRef={notificationRef} />
+      <Nav notificationRef={notificationRef} showCart={showCart} setShowCart={setShowCart} />
       <Notification notificationRef={notificationRef} show={showNotification} setShow={setShowNotification}/>
       <Switch>
         <Route exact path="/" component={FrontPage}></Route>
@@ -80,11 +81,11 @@ function Dashboard() {
 
         <PrivateRoute path="/user" component={AdminDashboard}></PrivateRoute>
 
-        <Route path="/search/:value" component={ResultsDisplay}></Route>
+        <Route path="/search/:value" render={() => <ResultsDisplay showCart={showCart} setShowCart={setShowCart}/>}></Route>
 
-        <Route path="/category/:value" component={ResultsDisplay}></Route>
+        <Route path="/category/:value" render={() => <ResultsDisplay showCart={showCart} setShowCart={setShowCart}/>}></Route>
         
-        <Route path="/item/:id" component={ProductDetail}></Route>
+        <Route path="/item/:id" render={() => <ProductDetail showCart={showCart} setShowCart={setShowCart} />}></Route>
 
         <Route path="/checkout" component={CheckoutForm}></Route>
 

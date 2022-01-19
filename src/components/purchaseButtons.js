@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/purchaseButtons.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCartItem, updateCartItem } from '../actions/apiCalls/cart';
-import { showCart } from '../actions';
 import Loader from './loader';  
 
 function PurchaseButtons(props) {
@@ -20,7 +19,7 @@ function PurchaseButtons(props) {
     }else {
       dispatch(createCartItem(props.product.name, 1))
     }
-    dispatch(showCart());
+    props.setShowCart(true)
     setTimeout(() => {
       setIsDisabled(false);
     }, 700);

@@ -68,33 +68,7 @@ export function singleProductClear() {
   }
 }
 
-// Shop menu
-
-export function showMenu() {
-  return {
-    type: "SHOW_MENU"
-  }
-}
-
-export function hideMenu() {
-  return {
-    type: "HIDE_MENU"
-  }
-}
-
 // Cart 
-export function showCart() {
-  return {
-    type: "SHOW_CART"
-  }
-}
-
-export function hideCart() {
-  return {
-    type: "HIDE_CART"
-  }
-}
-
 export function getCartRequest() {
   return {
     type: "GET_CART_REQUEST"
@@ -127,27 +101,6 @@ export function setNotification(message, status) {
 export function clearNotification() {
   return {
     type: "CLEAR_NOTIFICATION"
-  }
-}
-
-// Account buttons
-
-export function toggleAccount() {
-  return {
-    type: "TOGGLE_ACCOUNT"
-  }
-}
-
-export function hideAccount() {
-  return {
-    type: "HIDE_ACCOUNT"
-  }
-}
-
-
-export function clearCheckout() {
-  return {
-    type: "CLEAR_CHECKOUT"
   }
 }
 

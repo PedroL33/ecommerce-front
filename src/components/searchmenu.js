@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchProductsClear, hideMenu } from '../actions';
+import { searchProductsClear } from '../actions';
 import { loadSearchProducts } from '../actions/apiCalls/products';
 import styles from '../styles/searchMenu.module.css';
 import useDebounce from '../functions/debounce';
@@ -23,8 +23,8 @@ function SearchMenu(props) {
     const search = searchInputRef.current;
 
     function handleOutsideClick(e) {
-      if(shopMenuRef.current && !shopMenuRef.current.contains(e.target) && menu && !props.button.current.contains(e.target)) {
-        dispatch(hideMenu());
+      if(shopMenuRef.current && !shopMenuRef.current.contains(e.target) && props.showMenu && !props.button.current.contains(e.target)) {
+        props.setShowMenu(false);
         dispatch(searchProductsClear())
       }
     }
@@ -32,7 +32,7 @@ function SearchMenu(props) {
     function handleEnterPress(e) {
       if(e.keyCode===13 && searchQuery.length !== 0) {
         e.preventDefault();
-        dispatch(hideMenu());
+        props.setShowMenu(false);
         dispatch(searchProductsClear())
         history.push(`/search/${searchQuery}`)
       }
@@ -64,7 +64,7 @@ function SearchMenu(props) {
       e.preventDefault()
     }else {
       dispatch(searchProductsClear());
-      dispatch(hideMenu());
+      props.setShowMenu(false);
     }
   }
 

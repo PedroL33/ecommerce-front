@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from '../styles/cart.module.css';
-import { hideCart } from '../actions';
 import { updateCartItem, deleteCartItem } from '../actions/apiCalls/cart';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { centsToPrice, getSubtotal } from '../functions/priceHelpers';
@@ -13,7 +12,6 @@ function Cart(props) {
 
   const dispatch = useDispatch();
   const cartRef = useRef(null);
-  const showCart = useSelector(state => state.showCart);
   const cartItems = useSelector(state => state.cart);
 
   useEffect(() => {
@@ -21,12 +19,12 @@ function Cart(props) {
       if(e.defaultPrevented) return;
       if(cartRef.current &&
         !cartRef.current.contains(e.target) &&
-        showCart && 
+        props.showCart && 
         props.button.current && 
         !props.button.current.contains(e.target) &&
         !props.notificationRef.current.contains(e.target)
         ) {
-        dispatch(hideCart());
+        props.setShowCart(false);
       }
     }
     window.addEventListener('click', handleOutsideClick);
@@ -66,7 +64,7 @@ function Cart(props) {
           <div className={styles.content}>
             <div className={styles.header}>
               Your cart {` (${cartItems.map(item => item.quantity).reduce((x,y) => x+y, 0)})`}
-              <i onClick={() => dispatch(hideCart())} className={`${styles.closeCart} fas fa-times`}></i>
+              <i onClick={() => props.setShowCart(false)} className={`${styles.closeCart} fas fa-times`}></i>
             </div>
             <TransitionGroup className={styles.itemsContainer}>
               {cartItems.map(item => (
@@ -89,7 +87,7 @@ function Cart(props) {
             </TransitionGroup>
             <div className={styles.total}>Subtotal: {centsToPrice(getSubtotal(cartItems))}</div>
             <div className={styles.checkout}>
-              <Link className={styles.checkoutButton} to="/checkout" onClick={() => dispatch(hideCart())}>Checkout</Link>
+              <Link className={styles.checkoutButton} to="/checkout" onClick={() => props.setShowCart(false)}>Checkout</Link>
             </div>
           </div>
         </Fade>

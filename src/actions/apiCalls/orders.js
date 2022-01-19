@@ -5,7 +5,7 @@ import { handleErrors } from './utils';
 export function getActiveOrders() {
   return function(dispatch) {
     dispatch(adminActions.activeOrdersRequest()) 
-    fetch("http://localhost:3000/orders/pending", {
+    fetch("https://mysterious-crag-36502.herokuapp.com/orders/pending", {
       method: "GET",
       headers: {
         Authorization: `Bearer: ${localStorage.getItem("authentication")}`
@@ -24,7 +24,7 @@ export function getActiveOrders() {
 export function getActiveOrderItems(id) {
   return function(dispatch) {
     dispatch(adminActions.activeOrderItemsRequest());
-    fetch(`http://localhost:3000/orders/items/${id}`, {
+    fetch(`https://mysterious-crag-36502.herokuapp.com/orders/items/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer: ${localStorage.getItem("authentication")}`

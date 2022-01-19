@@ -2,7 +2,7 @@ import * as actions from '../';
 
 export function login(username, password, history) {
   return function(dispatch) {
-    fetch('http://localhost:3000/login', {
+    fetch('https://mysterious-crag-36502.herokuapp.com/login', {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
