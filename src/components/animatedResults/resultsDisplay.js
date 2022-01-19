@@ -8,7 +8,6 @@ import categories from '../../constants/categories.json';
 import styles from '../../styles/resultsDisplay.module.css';
 import AnimatedResults from './animatedResults';
 import Loader from '../loader';
-import Fade from 'react-reveal/Fade';
 import PurchaseButtons from '../purchaseButtons';
 
 function ResultsDisplay(props) {
@@ -72,14 +71,12 @@ function ResultsDisplay(props) {
               results.length ? <AnimatedResults>
                 { results.map((item) => 
                   <Link key={item.id} className={styles.result} ref={createRef()} to={`/item/${item.id}`}>
-                    <Fade>
-                      <div className={styles.resultImage} style={{backgroundImage: `url(${item.image ? item.image: window.location.origin + "/images/noImage.png"})`}}></div>
-                      <div className={styles.resultDetails}>
-                        <div className={styles.resultTitle}>{item.name}</div>
-                        <div>{item.price / 100}$</div>
-                      </div>
-                      <PurchaseButtons product={item} {...props}></PurchaseButtons>
-                    </Fade>
+                    <div className={styles.resultImage} style={{backgroundImage: `url(${item.image ? item.image: window.location.origin + "/images/noImage.png"})`}}></div>
+                    <div className={styles.resultDetails}>
+                      <div className={styles.resultTitle}>{item.name}</div>
+                      <div>{item.price / 100}$</div>
+                    </div>
+                    <PurchaseButtons product={item} {...props}></PurchaseButtons>
                   </Link>
                 )}
               </AnimatedResults>: null
