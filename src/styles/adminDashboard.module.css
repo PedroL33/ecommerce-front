@@ -20,7 +20,7 @@
   width: 100%;
   background:rgb(233, 233, 233);
   min-height: calc(100vh - 100px);
-  padding: 100px 0;
+  padding: 100px 0 0 0;
 }
 
 .tabs {
@@ -84,9 +84,30 @@
   border: 1px solid grey;
 }
 
+.logout {
+  position: absolute;
+  top: 150px;
+  right: 50px;
+  background: #cd5554;
+  color: #fceed1;
+  padding: 7px 21px;
+  font-size: 16px;
+  border-radius: 7px;
+  border: none;
+}
+
 @media screen and (max-width: 900px) {
   .content {
     width: 100%;
     padding: 50px 0;
+  }
+
+  .logout { 
+    top: 105px;
+    right: 5px;
+  }
+
+  .tab {
+    width: 50%;
   }
 }

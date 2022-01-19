@@ -15,10 +15,6 @@ function Nav(props) {
   const currentLocation = useLocation();
   const [showMenu, setShowMenu] = useState(false);
 
-  function logout() {
-    localStorage.removeItem('authentication');
-  }
-
   return(
     <div className={styles.container}>
       <div className={styles.shop}>
