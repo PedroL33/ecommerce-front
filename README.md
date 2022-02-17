@@ -1,68 +1,135 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+<h3 align="center">Ecommerce</h3>
+  <p align="center">
+    A skeleton for an online store.
+    <br />
+    <a href="https://github.com/pedrol33/ecommerce-front"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/pedrol33/ecommerce-front">Frontend Repo</a>
+    ·
+    <a href="https://github.com/pedrol33/ecommerce">Backend Repo</a>
+    ·
+    <a href="https://github.com/pedrol33/ecommerce/issues">Request Feature</a>
+    ·
+    <a href="https://young-savannah-92584.herokuapp.com/">Live Site</a>
+  </p>
+</div>
 
-## Available Scripts
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-In the project directory, you can run:
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- ABOUT THE PROJECT -->
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![Alt text](https://chatbucket11.s3.amazonaws.com/portfolio/1644963820828.png "Optional title")
 
-### `yarn test`
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Built With
 
-### `yarn build`
+* [React.js](https://reactjs.org/)
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+* [Postgres](https://www.postgresql.org/)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+<!-- GETTING STARTED -->
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Prerequisites
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Installation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/pedrol33/ecommerce.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run the test suite.
+```sh
+npm test
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- CONTRIBUTING -->
+## Contributing
 
-### Code Splitting
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-### Analyzing the Bundle Size
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
+## Reflection
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+This was a project designed to help me better understand how ecommerce websites opporate.  
+    
+My goal was to create an application that I could use someday if I wanted to sell something.  That meant I needed to include a payments system and be mindful of the security issues that may occur when dealing with transactions.  
 
-### Deployment
+I used the Stripe API for payment processing and thanks to their amazing documentation as well as some well written articles on ecommerce best practices, I was able to put together a solid foundation for an ecommerce site.  
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+As I grow as a developer I will continue to update and upgrade this projects as I learn about new things I can improve.
+    
 
-### `yarn build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+<!-- CONTACT -->
+## Contact
+
+Peter Lee - leepeter019@gmail.com
+
+Project Link: [https://github.com/pedrol33/ecommerce](https://github.com/pedrol33/ecommerce)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
